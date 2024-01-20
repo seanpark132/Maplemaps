@@ -5,15 +5,15 @@ import ArcaneRiver from "./pages/ArcaneRiver";
 import Grandis from "./pages/Grandis";
 
 function App() {
-	return (
-		<>
-			<Routes>
-				<Route index element={<RegionSelect />} />
-				<Route path="/arcane-river" element={<ArcaneRiver />} />
-				<Route path="/grandis" element={<Grandis />} />
-			</Routes>
-		</>
-	);
+  return (
+    <div className="flex flex-col items-center">
+      <Routes>
+        <Route index element={<RegionSelect />} />
+        <Route path="/arcane-river" element={<ArcaneRiver />} />
+        <Route path="/grandis" element={<Grandis />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
