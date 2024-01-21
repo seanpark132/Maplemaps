@@ -6,7 +6,7 @@ import Grandis from "./pages/Grandis";
 
 function App() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex h-screen flex-col items-center justify-center">
       <Routes>
         <Route index element={<RegionSelect />} />
         <Route path="/arcane-river" element={<ArcaneRiver />} />
