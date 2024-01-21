@@ -125,7 +125,10 @@ export default function ArcaneRiver() {
   return (
     <main>
       <h1>Select a map:</h1>
-      <div className="relative">
+      <div
+        className="relative"
+        onContextMenu={(event) => handleRightClick(event)}
+      >
         <img
           src={
             currentArea
@@ -149,4 +152,24 @@ export default function ArcaneRiver() {
       </div>
     </main>
   );
+
+  function handleRightClick(event: any) {
+    event.preventDefault();
+
+    if (
+      currentArea === "moonbridge" ||
+      currentArea === "labyrinth_of_suffering" ||
+      currentArea === "limina"
+    ) {
+      setSearchParams((prev) => {
+        prev.set("currentArea", "tenebris");
+        return prev;
+      });
+    } else if (currentArea !== "arcane_river") {
+      setSearchParams((prev) => {
+        prev.set("currentArea", "arcane_river");
+        return prev;
+      });
+    }
+  }
 }

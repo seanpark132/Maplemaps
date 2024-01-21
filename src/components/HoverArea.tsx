@@ -32,7 +32,8 @@ export default function HoverArea(props: Props) {
           left: `${props.dotLeft}px`,
           top: `${props.dotTop}px`,
         }}
-        src="/big_dot.webp"
+        alt="Area Dot"
+        src="/arcane_river_area_dot.webp"
       />
     </span>
   );
