@@ -5,6 +5,8 @@ type Props = {
   setSearchParams: ReturnType<typeof useSearchParams>[1];
   left: number;
   top: number;
+  dotLeft: number;
+  dotTop: number;
   name: string;
   parentArea: string;
 };
@@ -24,6 +26,14 @@ export default function HoverArea(props: Props) {
       onClick={handleClick}
     >
       <img alt={props.name} src={`/hover_images/${props.name}.webp`} />
+      <img
+        className="absolute"
+        style={{
+          left: `${props.dotLeft}px`,
+          top: `${props.dotTop}px`,
+        }}
+        src="/big_dot.webp"
+      />
     </span>
   );
 

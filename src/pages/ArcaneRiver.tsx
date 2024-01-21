@@ -1,6 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 import HoverArea from "../components/HoverArea";
-import BigDot from "../components/BigDot";
 
 export default function ArcaneRiver() {
   const [searchParams, setSearchParams] = useSearchParams({
@@ -16,18 +15,24 @@ export default function ArcaneRiver() {
     {
       left: 6,
       top: 5,
+      dotLeft: 94,
+      dotTop: 88,
       name: "vanishing_journey",
       parentArea: "arcane_river",
     },
     {
       left: 170,
       top: 14,
+      dotLeft: 56,
+      dotTop: 33,
       name: "reverse_city",
       parentArea: "arcane_river",
     },
     {
       left: 34,
       top: 254,
+      dotLeft: 91,
+      dotTop: 52,
 
       name: "chu_chu_island",
       parentArea: "arcane_river",
@@ -35,6 +40,8 @@ export default function ArcaneRiver() {
     {
       left: 25,
       top: 355,
+      dotLeft: 39,
+      dotTop: 24,
 
       name: "yum_yum_island",
       parentArea: "arcane_river",
@@ -42,6 +49,8 @@ export default function ArcaneRiver() {
     {
       left: 100,
       top: 122,
+      dotLeft: 91,
+      dotTop: 76,
 
       name: "lachelein",
       parentArea: "arcane_river",
@@ -49,6 +58,8 @@ export default function ArcaneRiver() {
     {
       left: 255,
       top: 71,
+      dotLeft: 81,
+      dotTop: 61,
 
       name: "arcana",
       parentArea: "arcane_river",
@@ -56,55 +67,59 @@ export default function ArcaneRiver() {
     {
       left: 238,
       top: 223,
-
+      dotLeft: 81,
+      dotTop: 97,
       name: "morass",
       parentArea: "arcane_river",
     },
     {
       left: 388,
       top: 168,
-
+      dotLeft: 104,
+      dotTop: 75,
       name: "esfera",
       parentArea: "arcane_river",
     },
     {
       left: 387,
       top: 280,
-
+      dotLeft: 86,
+      dotTop: 43,
       name: "sellas",
       parentArea: "arcane_river",
     },
     {
       left: 406,
       top: 20,
-
+      dotLeft: 87,
+      dotTop: 70,
       name: "tenebris",
       parentArea: "arcane_river",
     },
-    { left: 0, top: 6, name: "moonbridge", parentArea: "tenebris" },
+    {
+      left: 0,
+      top: 6,
+      dotLeft: 127,
+      dotTop: 173,
+      name: "moonbridge",
+      parentArea: "tenebris",
+    },
     {
       left: 210,
       top: 0,
+      dotLeft: 112,
+      dotTop: 205,
       name: "labyrinth_of_suffering",
       parentArea: "tenebris",
     },
-    { left: 333, top: 0, name: "limina", parentArea: "tenebris" },
-  ];
-
-  const bigDotData = [
-    { left: 100, top: 93, area: "arcane_river" },
-    { left: 226, top: 46, area: "arcane_river" },
-    { left: 126, top: 306, area: "arcane_river" },
-    { left: 64, top: 379, area: "arcane_river" },
-    { left: 191, top: 199, area: "arcane_river" },
-    { left: 336, top: 132, area: "arcane_river" },
-    { left: 319, top: 320, area: "arcane_river" },
-    { left: 492, top: 243, area: "arcane_river" },
-    { left: 473, top: 323, area: "arcane_river" },
-    { left: 493, top: 90, area: "arcane_river" },
-    { left: 127, top: 179, area: "tenebris" },
-    { left: 322, top: 205, area: "tenebris" },
-    { left: 453, top: 120, area: "tenebris" },
+    {
+      left: 333,
+      top: 0,
+      dotLeft: 120,
+      dotTop: 120,
+      name: "limina",
+      parentArea: "tenebris",
+    },
   ];
 
   return (
@@ -125,17 +140,10 @@ export default function ArcaneRiver() {
             setSearchParams={setSearchParams}
             left={data.left}
             top={data.top}
+            dotLeft={data.dotLeft}
+            dotTop={data.dotTop}
             name={data.name}
             parentArea={data.parentArea}
-          />
-        ))}
-        {bigDotData.map((data) => (
-          <BigDot
-            key={`${data.left}, ${data.top}`}
-            currentArea={currentArea}
-            left={data.left}
-            top={data.top}
-            area={data.area}
           />
         ))}
       </div>
