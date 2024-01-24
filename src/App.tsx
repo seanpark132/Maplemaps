@@ -1,18 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import RegionSelect from "./pages/RegionSelect";
-import ArcaneRiver from "./pages/ArcaneRiver";
-import Grandis from "./pages/Grandis";
+import WorldMap from "./pages/WorldMap";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
-      <Routes>
-        <Route index element={<RegionSelect />} />
-        <Route path="/arcane-river" element={<ArcaneRiver />} />
-        <Route path="/grandis" element={<Grandis />} />
-      </Routes>
-    </div>
+    <>
+      <Navbar />
+      <div className="flex flex-col items-center justify-center px-6 py-6">
+        <Routes>
+          <Route index element={<WorldMap />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
