@@ -28,10 +28,18 @@ export default function WorldMaps() {
   const linksArray = worldMapData?.raw.links;
   const mapsArray = worldMapData?.raw.maps;
 
+  const parentWorldData = ALL_WORLD_MAPS_DATA.find(
+    (worldMapData) => worldMapData.raw.worldMapName === parentWorld,
+  );
+  const parentParentWorld = parentWorldData?.raw.parentWorld;
+
   return (
     <main className="mt-8">
       <h1 className="mb-2">Select an area:</h1>
-      <div className="relative">
+      <div
+        className="relative"
+        onContextMenu={(event) => handleRightClick(event)}
+      >
         <img src={`/world_maps/${imageName}`} />
         {linksArray?.map((link) => (
           <LinkArea
@@ -50,4 +58,20 @@ export default function WorldMaps() {
       </div>
     </main>
   );
+
+  function handleRightClick(event: any) {
+    event.preventDefault();
+
+    if (parentWorld) {
+      setSearchParams((prev) => {
+        prev.set("worldMap", parentWorld);
+        if (parentParentWorld) {
+          prev.set("parentWorld", parentParentWorld);
+        } else {
+          prev.set("parentWorld", "");
+        }
+        return prev;
+      });
+    }
+  }
 }
