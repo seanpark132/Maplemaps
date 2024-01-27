@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import LinkArea from "../components/LinkArea";
+import MapDot from "../components/MapDot.tsx";
 import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps.ts";
 import RegionSelect from "../components/RegionSelect";
 
@@ -25,6 +26,7 @@ export default function WorldMaps() {
   );
 
   const linksArray = worldMapData?.raw.links;
+  const mapsArray = worldMapData?.raw.maps;
 
   return (
     <main className="mt-8">
@@ -34,12 +36,17 @@ export default function WorldMaps() {
         {linksArray?.map((link) => (
           <LinkArea
             worldMap={link.linksTo}
+            parentWorld={worldMap}
             base64ImgCode={link.linkImage.image}
             x={link.linkImage.origin.value.x}
             y={link.linkImage.origin.value.y}
             setSearchParams={setSearchParams}
           />
         ))}
+        {mapsArray?.map((map) => (
+          <MapDot x={map.spot.value.x} y={map.spot.value.y} />
+        ))}
+        {}
       </div>
     </main>
   );
