@@ -12,8 +12,8 @@ export default function RegionSelect(props: Props) {
         <button onClick={() => handleClick("WorldMap082", "")}>
           <img className="" src="/world_maps/None_WorldMap082.jpg" />
         </button>
-        <button onClick={() => handleClick("CGWorldMap", "GWorldMap")}>
-          <img src="/world_maps/GWorldMap_CGWorldMap.jpg" />
+        <button onClick={() => handleClick("GWorldMap", "")}>
+          <img src="/world_maps/None_GWorldMap.jpg" />
         </button>
         <button onClick={() => handleClick("WorldMap", "")}>
           <img className="" src="/world_maps/None_WorldMap.jpg" />

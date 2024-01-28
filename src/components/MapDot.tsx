@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ORIGIN_X, ORIGIN_Y } from "../GlobalVariables";
 
 type Props = { x: number; y: number; type: number };
 
@@ -11,11 +12,8 @@ export default function MapDot(props: Props) {
     setHalfImgHeight(image.height / 2);
   }
 
-  const ORIGIN_X = 320;
-  const ORIGIN_Y = 235;
-
-  const left = ORIGIN_X + props.x - halfImgWidth;
-  const top = ORIGIN_Y + props.y - halfImgHeight;
+  const left = ORIGIN_X + props.x - Math.ceil(halfImgWidth);
+  const top = ORIGIN_Y + props.y - Math.ceil(halfImgHeight);
 
   return (
     <img
