@@ -43,6 +43,7 @@ export default function WorldMaps() {
         <img src={`/world_maps/${imageName}`} />
         {linksArray?.map((link) => (
           <LinkArea
+            key={link.linksTo}
             worldMap={link.linksTo}
             base64ImgCode={link.linkImage.image}
             x={link.linkImage.origin.value.x}
@@ -51,7 +52,12 @@ export default function WorldMaps() {
           />
         ))}
         {mapsArray?.map((map) => (
-          <MapDot x={map.spot.value.x} y={map.spot.value.y} />
+          <MapDot
+            key={`${map.spot.value.x}${map.spot.value.y}${map.type}`}
+            x={map.spot.value.x}
+            y={map.spot.value.y}
+            type={map.type}
+          />
         ))}
       </div>
     </main>
