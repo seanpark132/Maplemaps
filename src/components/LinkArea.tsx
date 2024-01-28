@@ -1,6 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps";
-import { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS } from "../GlobalVariables";
+import {
+  ORIGIN_X,
+  ORIGIN_Y,
+  WORLD_MAP_OFFSETS,
+  LINK_AREA_Z_INDEX,
+} from "../GlobalVariables";
 
 type Props = {
   currentWorldMap: string;
@@ -14,7 +19,6 @@ type Props = {
 export default function LinkArea(props: Props) {
   let left = ORIGIN_X - props.x;
   let top = ORIGIN_Y - props.y;
-
   if (props.currentWorldMap in WORLD_MAP_OFFSETS) {
     left -=
       WORLD_MAP_OFFSETS[props.currentWorldMap as keyof typeof WORLD_MAP_OFFSETS]
@@ -35,6 +39,7 @@ export default function LinkArea(props: Props) {
       style={{
         left: `${left}px`,
         top: `${top}px`,
+        zIndex: `${LINK_AREA_Z_INDEX.includes(props.worldMap) && 9}`,
       }}
       onClick={handleClick}
     >

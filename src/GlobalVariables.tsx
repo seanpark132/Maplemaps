@@ -7,4 +7,6 @@ const WORLD_MAP_OFFSETS = {
   WorldMap290: { x: 4, y: 4 },
 };
 
-export { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS };
+const LINK_AREA_Z_INDEX = ["WorldMap030", "WorldMap170"];
+
+export { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS, LINK_AREA_Z_INDEX };

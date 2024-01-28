@@ -25,7 +25,7 @@ export default function MapDot(props: Props) {
   }
   return (
     <img
-      className="absolute"
+      className="absolute z-10"
       src={`/dots/${props.type}.png`}
       onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
       style={{
