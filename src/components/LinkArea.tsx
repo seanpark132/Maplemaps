@@ -1,8 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps";
-import { ORIGIN_X, ORIGIN_Y } from "../GlobalVariables";
+import { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS } from "../GlobalVariables";
 
 type Props = {
+  currentWorldMap: string;
   worldMap: string;
   base64ImgCode: string;
   x: number;
@@ -11,8 +12,17 @@ type Props = {
 };
 
 export default function LinkArea(props: Props) {
-  const left = ORIGIN_X - props.x;
-  const top = ORIGIN_Y - props.y;
+  let left = ORIGIN_X - props.x;
+  let top = ORIGIN_Y - props.y;
+
+  if (props.currentWorldMap in WORLD_MAP_OFFSETS) {
+    left -=
+      WORLD_MAP_OFFSETS[props.currentWorldMap as keyof typeof WORLD_MAP_OFFSETS]
+        .x;
+    top -=
+      WORLD_MAP_OFFSETS[props.currentWorldMap as keyof typeof WORLD_MAP_OFFSETS]
+        .y;
+  }
 
   const worldMapData = ALL_WORLD_MAPS_DATA.find(
     (worldMapData) => worldMapData.raw.worldMapName === props.worldMap,

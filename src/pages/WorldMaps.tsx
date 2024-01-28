@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
+import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps.ts";
 import LinkArea from "../components/LinkArea";
 import MapDot from "../components/MapDot.tsx";
-import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps.ts";
 import RegionSelect from "../components/RegionSelect";
 
 export default function WorldMaps() {
@@ -24,7 +24,6 @@ export default function WorldMaps() {
   );
   const linksArray = worldMapData?.raw.links;
   const mapsArray = worldMapData?.raw.maps;
-
   const parentWorldData = ALL_WORLD_MAPS_DATA.find(
     (worldMapData) => worldMapData.raw.worldMapName === parentWorld,
   );
@@ -41,6 +40,7 @@ export default function WorldMaps() {
         {linksArray?.map((link) => (
           <LinkArea
             key={link.linksTo}
+            currentWorldMap={worldMap}
             worldMap={link.linksTo}
             base64ImgCode={link.linkImage.image}
             x={link.linkImage.origin.value.x}
@@ -51,6 +51,7 @@ export default function WorldMaps() {
         {mapsArray?.map((map) => (
           <MapDot
             key={`${map.spot.value.x}${map.spot.value.y}${map.type}`}
+            currentWorldMap={worldMap}
             x={map.spot.value.x}
             y={map.spot.value.y}
             type={map.type}

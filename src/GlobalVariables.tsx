@@ -7,4 +7,4 @@ const WORLD_MAP_OFFSETS = {
   WorldMap290: { x: 4, y: 4 },
 };
 
-export { ORIGIN_X, ORIGIN_Y };
+export { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS };

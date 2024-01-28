@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ORIGIN_X, ORIGIN_Y } from "../GlobalVariables";
+import { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS } from "../GlobalVariables";
 
-type Props = { x: number; y: number; type: number };
+type Props = { currentWorldMap: string; x: number; y: number; type: number };
 
 export default function MapDot(props: Props) {
   const [halfImgWidth, setHalfImgWidth] = useState(0);
@@ -12,9 +12,17 @@ export default function MapDot(props: Props) {
     setHalfImgHeight(image.height / 2);
   }
 
-  const left = ORIGIN_X + props.x - Math.ceil(halfImgWidth);
-  const top = ORIGIN_Y + props.y - Math.ceil(halfImgHeight);
+  let left = ORIGIN_X + props.x - Math.ceil(halfImgWidth);
+  let top = ORIGIN_Y + props.y - Math.ceil(halfImgHeight);
 
+  if (props.currentWorldMap in WORLD_MAP_OFFSETS) {
+    left -=
+      WORLD_MAP_OFFSETS[props.currentWorldMap as keyof typeof WORLD_MAP_OFFSETS]
+        .x;
+    top -=
+      WORLD_MAP_OFFSETS[props.currentWorldMap as keyof typeof WORLD_MAP_OFFSETS]
+        .y;
+  }
   return (
     <img
       className="absolute"
