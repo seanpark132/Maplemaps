@@ -10,11 +10,9 @@ export default function WorldMaps() {
     parentWorld: "",
     map: "",
   });
-
   const worldMap = searchParams.get("worldMap");
   const parentWorld = searchParams.get("parentWorld");
   const map = searchParams.get("map");
-
   const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.jpg`;
 
   if (!worldMap) {
@@ -24,7 +22,6 @@ export default function WorldMaps() {
   const worldMapData = ALL_WORLD_MAPS_DATA.find(
     (worldMapData) => worldMapData.raw.worldMapName === worldMap,
   );
-
   const linksArray = worldMapData?.raw.links;
   const mapsArray = worldMapData?.raw.maps;
 
