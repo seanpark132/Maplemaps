@@ -12,7 +12,6 @@ export default function WorldMaps() {
   });
   const worldMap = searchParams.get("worldMap");
   const parentWorld = searchParams.get("parentWorld");
-  const map = searchParams.get("map");
   const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.jpg`;
 
   if (!worldMap) {
