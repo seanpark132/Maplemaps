@@ -13,7 +13,7 @@ export default function WorldMaps() {
   });
   const worldMap = searchParams.get("worldMap");
   const parentWorld = searchParams.get("parentWorld");
-  const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.jpg`;
+  const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.webp`;
 
   if (!worldMap) {
     return <RegionSelect setSearchParams={setSearchParams} />;
@@ -36,7 +36,12 @@ export default function WorldMaps() {
         className="relative"
         onContextMenu={(event) => handleRightClick(event)}
       >
-        <img src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/${imageName}`} />
+        <img
+          src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/${imageName}`}
+          width={640}
+          height={470}
+          alt={`World map image: ${worldMap}`}
+        />
         {linksArray?.map((link) => (
           <LinkArea
             key={link.linksTo}
