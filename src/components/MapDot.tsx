@@ -38,8 +38,6 @@ export default function MapDot(props: Props) {
         top: `${top}px`,
         visibility: `${halfImgWidth + halfImgHeight === 0 ? "hidden" : "visible"}`,
       }}
-      width={halfImgWidth ? 2 * halfImgWidth : ""}
-      height={halfImgHeight ? 2 * halfImgHeight : ""}
       alt="World Map Dot"
     />
   );
