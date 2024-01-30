@@ -40,6 +40,7 @@ export default function WorldMaps() {
           src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/${imageName}`}
           width={640}
           height={470}
+          alt={`World map image: ${worldMap}`}
         />
         {linksArray?.map((link) => (
           <LinkArea

@@ -16,6 +16,7 @@ export default function RegionSelect(props: Props) {
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap082.webp`}
             width={640}
             height={470}
+            alt="Arcane River Region"
           />
         </button>
         <button onClick={() => handleClick("GWorldMap", "")}>
@@ -23,6 +24,7 @@ export default function RegionSelect(props: Props) {
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_GWorldMap.webp`}
             width={640}
             height={470}
+            alt="Grandis Region"
           />
         </button>
         <button onClick={() => handleClick("WorldMap", "")}>
@@ -31,6 +33,7 @@ export default function RegionSelect(props: Props) {
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap.webp`}
             width={640}
             height={470}
+            alt="Maple World Region"
           />
         </button>
       </div>

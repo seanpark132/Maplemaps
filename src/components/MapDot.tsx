@@ -40,6 +40,7 @@ export default function MapDot(props: Props) {
       }}
       width={halfImgWidth ? 2 * halfImgWidth : ""}
       height={halfImgHeight ? 2 * halfImgHeight : ""}
+      alt="World Map Dot"
     />
   );
 }

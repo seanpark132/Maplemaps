@@ -43,7 +43,10 @@ export default function LinkArea(props: Props) {
       }}
       onClick={handleClick}
     >
-      <img src={`data:image/png;base64,${props.base64ImgCode} `} />
+      <img
+        src={`data:image/png;base64,${props.base64ImgCode} `}
+        alt={`${props.worldMap}`}
+      />
     </span>
   );
 
