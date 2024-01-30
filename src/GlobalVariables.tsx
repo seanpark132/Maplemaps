@@ -10,4 +10,13 @@ const WORLD_MAP_OFFSETS = {
 
 const LINK_AREA_Z_INDEX = ["WorldMap030", "WorldMap170"];
 
-export { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS, LINK_AREA_Z_INDEX };
+const GOOGLE_CLOUD_IMAGE_URL =
+  "https://storage.googleapis.com/maplemaps-2ab75.appspot.com";
+
+export {
+  ORIGIN_X,
+  ORIGIN_Y,
+  WORLD_MAP_OFFSETS,
+  LINK_AREA_Z_INDEX,
+  GOOGLE_CLOUD_IMAGE_URL,
+};

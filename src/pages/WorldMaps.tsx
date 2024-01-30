@@ -3,6 +3,7 @@ import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps.ts";
 import LinkArea from "../components/LinkArea";
 import MapDot from "../components/MapDot.tsx";
 import RegionSelect from "../components/RegionSelect";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables.tsx";
 
 export default function WorldMaps() {
   const [searchParams, setSearchParams] = useSearchParams({
@@ -35,7 +36,7 @@ export default function WorldMaps() {
         className="relative"
         onContextMenu={(event) => handleRightClick(event)}
       >
-        <img src={`/world_maps/${imageName}`} />
+        <img src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/${imageName}`} />
         {linksArray?.map((link) => (
           <LinkArea
             key={link.linksTo}

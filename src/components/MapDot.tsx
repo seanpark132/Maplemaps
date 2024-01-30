@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { ORIGIN_X, ORIGIN_Y, WORLD_MAP_OFFSETS } from "../GlobalVariables";
+import {
+  GOOGLE_CLOUD_IMAGE_URL,
+  ORIGIN_X,
+  ORIGIN_Y,
+  WORLD_MAP_OFFSETS,
+} from "../GlobalVariables";
 
 type Props = { currentWorldMap: string; x: number; y: number; type: number };
 
@@ -26,7 +31,7 @@ export default function MapDot(props: Props) {
   return (
     <img
       className="absolute z-10"
-      src={`/dots/${props.type}.png`}
+      src={`${GOOGLE_CLOUD_IMAGE_URL}/dots/${props.type}.png`}
       onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
       style={{
         left: `${left}px`,
