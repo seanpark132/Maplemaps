@@ -13,18 +13,18 @@ export default function RegionSelect(props: Props) {
         <button onClick={() => handleClick("WorldMap082", "")}>
           <img
             className=""
-            src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap082.jpg`}
+            src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap082.webp`}
           />
         </button>
         <button onClick={() => handleClick("GWorldMap", "")}>
           <img
-            src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_GWorldMap.jpg`}
+            src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_GWorldMap.webp`}
           />
         </button>
         <button onClick={() => handleClick("WorldMap", "")}>
           <img
             className=""
-            src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap.jpg`}
+            src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap.webp`}
           />
         </button>
       </div>

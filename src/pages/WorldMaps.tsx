@@ -13,7 +13,7 @@ export default function WorldMaps() {
   });
   const worldMap = searchParams.get("worldMap");
   const parentWorld = searchParams.get("parentWorld");
-  const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.jpg`;
+  const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.webp`;
 
   if (!worldMap) {
     return <RegionSelect setSearchParams={setSearchParams} />;
