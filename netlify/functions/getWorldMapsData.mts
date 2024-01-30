@@ -23,7 +23,7 @@ export default async function handler(req: Request, context: Context) {
     await client.connect();
     const db: Db = client.db(dbName);
     const coll = db.collection(worldMapsCollection!);
-    const results = coll.find();
+    const results = coll.find().toArray();
     return {
       statusCode: 200,
       body: JSON.stringify(results),
