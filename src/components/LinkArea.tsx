@@ -1,5 +1,4 @@
 import { useSearchParams } from "react-router-dom";
-import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps";
 import {
   ORIGIN_X,
   ORIGIN_Y,
@@ -8,6 +7,7 @@ import {
 } from "../GlobalVariables";
 
 type Props = {
+  allWorldMapsData: any[];
   currentWorldMap: string;
   worldMap: string;
   base64ImgCode: string;
@@ -28,7 +28,7 @@ export default function LinkArea(props: Props) {
         .y;
   }
 
-  const worldMapData = ALL_WORLD_MAPS_DATA.find(
+  const worldMapData = props.allWorldMapsData.find(
     (worldMapData) => worldMapData.raw.worldMapName === props.worldMap,
   );
   const parentWorld = worldMapData?.raw.parentWorld;

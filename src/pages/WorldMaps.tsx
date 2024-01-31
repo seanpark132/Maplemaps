@@ -1,11 +1,14 @@
 import { useSearchParams } from "react-router-dom";
-import { ALL_WORLD_MAPS_DATA } from "../data/AllWorldMaps.ts";
 import LinkArea from "../components/LinkArea";
 import MapDot from "../components/MapDot.tsx";
 import RegionSelect from "../components/RegionSelect";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables.tsx";
 
-export default function WorldMaps() {
+type Props = {
+  allWorldMapsData: any[];
+};
+
+export default function WorldMaps(props: Props) {
   const [searchParams, setSearchParams] = useSearchParams({
     worldMap: "",
     parentWorld: "",
@@ -19,12 +22,12 @@ export default function WorldMaps() {
     return <RegionSelect setSearchParams={setSearchParams} />;
   }
 
-  const worldMapData = ALL_WORLD_MAPS_DATA.find(
+  const worldMapData = props.allWorldMapsData.find(
     (worldMapData) => worldMapData.raw.worldMapName === worldMap,
   );
   const linksArray = worldMapData?.raw.links;
   const mapsArray = worldMapData?.raw.maps;
-  const parentWorldData = ALL_WORLD_MAPS_DATA.find(
+  const parentWorldData = props.allWorldMapsData.find(
     (worldMapData) => worldMapData.raw.worldMapName === parentWorld,
   );
   const parentParentWorld = parentWorldData?.raw.parentWorld;
@@ -42,9 +45,10 @@ export default function WorldMaps() {
           height={470}
           alt={`World map image: ${worldMap}`}
         />
-        {linksArray?.map((link) => (
+        {linksArray?.map((link: any) => (
           <LinkArea
             key={link.linksTo}
+            allWorldMapsData={props.allWorldMapsData}
             currentWorldMap={worldMap}
             worldMap={link.linksTo}
             base64ImgCode={link.linkImage.image}
@@ -53,7 +57,7 @@ export default function WorldMaps() {
             setSearchParams={setSearchParams}
           />
         ))}
-        {mapsArray?.map((map) => (
+        {mapsArray?.map((map: any) => (
           <MapDot
             key={`${map.spot.value.x}${map.spot.value.y}${map.type}`}
             currentWorldMap={worldMap}
