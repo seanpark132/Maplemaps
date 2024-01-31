@@ -7,8 +7,6 @@ export default async (req: Request, context: Context) => {
   const dbName = Netlify.env.get("MONGODB_DATABASE");
   const worldMapsCollection = Netlify.env.get("MONGODB_WORLD_MAPS_COLLECTION");
 
-  console.log("Pass 1");
-  console.log(uri);
   if (!uri) {
     throw new Error("The MONGODB_URI environment variable is not defined.");
   }
@@ -23,7 +21,7 @@ export default async (req: Request, context: Context) => {
     );
   }
   const client = new MongoClient(uri);
-  console.log("Pass 2");
+  console.log("Pass 1");
 
   try {
     await client.connect();
