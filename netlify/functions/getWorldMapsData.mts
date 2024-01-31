@@ -3,9 +3,9 @@ import type { Context } from "@netlify/functions";
 import "dotenv/config";
 
 export default async (req: Request, context: Context) => {
-  const uri = process.env.MONGODB_URI;
-  const dbName = process.env.MONGODB_DATABASE;
-  const worldMapsCollection = process.env.MONGODB_WORLD_MAPS_COLLECTION;
+  const uri = Netlify.env.get("MONGODB_URI");
+  const dbName = Netlify.env.get("MONGODB_DATABASE");
+  const worldMapsCollection = Netlify.env.get("MONGODB_WORLD_MAPS_COLLECTION");
   if (!uri) {
     throw new Error("The MONGODB_URI environment variable is not defined.");
   }
