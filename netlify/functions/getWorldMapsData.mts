@@ -24,8 +24,6 @@ export default async (req: Request, context: Context) => {
   console.log("Pass 1");
 
   try {
-    await client.connect();
-    console.log("Connected");
     const db: Db = client.db(dbName);
     const coll = db.collection(worldMapsCollection!);
     const cursor = coll.find();
