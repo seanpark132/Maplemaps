@@ -2,7 +2,7 @@ import { MongoClient, Db } from "mongodb";
 import type { Context } from "@netlify/functions";
 import "dotenv/config";
 
-export default async function handler(req: Request, context: Context) {
+export default async (req: Request, context: Context) => {
   const uri = process.env.MONGODB_URI;
   const dbName = process.env.MONGODB_DATABASE;
   const worldMapsCollection = process.env.MONGODB_WORLD_MAPS_COLLECTION;
@@ -28,13 +28,10 @@ export default async function handler(req: Request, context: Context) {
     const coll = db.collection(worldMapsCollection!);
     const cursor = coll.find();
     const results = await cursor.toArray();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(results),
-    };
+    return new Response(JSON.stringify(results), { status: 200 });
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    return new Response(error.toString(), { status: 500 });
   } finally {
     await client.close();
   }
-}
+};
