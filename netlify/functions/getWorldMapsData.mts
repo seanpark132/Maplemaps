@@ -23,6 +23,7 @@ export default async function handler(req: Request, context: Context) {
 
   try {
     await client.connect();
+    console.log("Connected.");
     const db: Db = client.db(dbName);
     const coll = db.collection(worldMapsCollection!);
     const cursor = coll.find();
