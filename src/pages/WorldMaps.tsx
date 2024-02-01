@@ -34,7 +34,7 @@ export default function WorldMaps(props: Props) {
 
   return (
     <main className="mt-8">
-      <h1 className="mb-2">Select an area:</h1>
+      <h1 className="mb-2">Select a map/area:</h1>
       <div
         className="relative"
         onContextMenu={(event) => handleRightClick(event)}
