@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center px-6 py-6">
+      <div className=" min-w-180 flex flex-col items-center justify-center p-6">
         <Routes>
           <Route
             index
