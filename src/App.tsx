@@ -10,9 +10,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://maplemaps.netlify.app/.netlify/functions/getWorldMapsData",
-        );
+        const response = await fetch("/.netlify/functions/getWorldMapsData");
         const data = await response.json();
         setAllWorldMapsData(data);
       } catch (error) {

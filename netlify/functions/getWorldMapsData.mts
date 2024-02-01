@@ -24,11 +24,21 @@ export default async (req: Request, context: Context) => {
   console.log("Pass 1");
 
   try {
+    await client.connect();
     const db: Db = client.db(dbName);
     const coll = db.collection(worldMapsCollection!);
     const cursor = coll.find();
     const results = await cursor.toArray();
-    return new Response(JSON.stringify(results), { status: 200 });
+
+    const headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    };
+
+    return new Response(JSON.stringify(results), {
+      status: 200,
+      headers: headers,
+    });
   } catch (error) {
     return new Response(error.toString(), { status: 500 });
   } finally {
