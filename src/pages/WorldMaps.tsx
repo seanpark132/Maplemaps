@@ -6,6 +6,7 @@ import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables.tsx";
 
 type Props = {
   allWorldMapsData: any[];
+  allMapsData: any[];
 };
 
 export default function WorldMaps(props: Props) {
@@ -64,6 +65,7 @@ export default function WorldMaps(props: Props) {
             x={map.spot.value.x}
             y={map.spot.value.y}
             type={map.type}
+            mapNumbers={map.mapNumbers}
           />
         ))}
       </div>

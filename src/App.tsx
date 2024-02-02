@@ -6,9 +6,10 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const [allWorldMapsData, setAllWorldMapsData] = useState([]);
+  const [allMapsData, setAllMapsData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchWorldMapsData = async () => {
       try {
         const response = await fetch("/.netlify/functions/getWorldMapsData");
         const data = await response.json();
@@ -18,17 +19,33 @@ function App() {
       }
     };
 
-    fetchData();
+    const fetchMapsData = async () => {
+      try {
+        const response = await fetch("/.netlify/functions/getmapsData");
+        const data = await response.json();
+        setAllMapsData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchWorldMapsData();
+    fetchMapsData();
   }, []);
 
   return (
     <>
       <Navbar />
-      <div className=" min-w-180 flex flex-col items-center justify-center p-6">
+      <div className=" flex min-w-180 flex-col items-center justify-center p-6">
         <Routes>
           <Route
             index
-            element={<WorldMaps allWorldMapsData={allWorldMapsData} />}
+            element={
+              <WorldMaps
+                allWorldMapsData={allWorldMapsData}
+                allMapsData={allMapsData}
+              />
+            }
           />
         </Routes>
       </div>
