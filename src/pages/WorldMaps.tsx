@@ -3,10 +3,11 @@ import LinkArea from "../components/LinkArea";
 import MapDot from "../components/MapDot.tsx";
 import RegionSelect from "../components/RegionSelect";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables.tsx";
+import { Link, Map, WorldMapData } from "../types/worldMapTypes.ts";
 
 type Props = {
-  allWorldMapsData: any[];
-  allMapsData: any[];
+  worldMapsData: WorldMapData[];
+  mapsData: any[];
 };
 
 export default function WorldMaps(props: Props) {
@@ -23,15 +24,13 @@ export default function WorldMaps(props: Props) {
     return <RegionSelect setSearchParams={setSearchParams} />;
   }
 
-  const worldMapData = props.allWorldMapsData.find(
-    (worldMapData) => worldMapData.raw.worldMapName === worldMap,
+  const worldMapData = props.worldMapsData.find(
+    (data) => data.worldMapName === worldMap,
   );
-  const linksArray = worldMapData?.raw.links;
-  const mapsArray = worldMapData?.raw.maps;
-  const parentWorldData = props.allWorldMapsData.find(
-    (worldMapData) => worldMapData.raw.worldMapName === parentWorld,
+  const parentWorldData = props.worldMapsData.find(
+    (data) => data.worldMapName === parentWorld,
   );
-  const parentParentWorld = parentWorldData?.raw.parentWorld;
+  const parentParentWorld = parentWorldData?.parentWorld;
 
   return (
     <main className="mt-8">
@@ -46,26 +45,20 @@ export default function WorldMaps(props: Props) {
           height={470}
           alt={`World map image: ${worldMap}`}
         />
-        {linksArray?.map((link: any) => (
+        {worldMapData?.links.map((link: Link) => (
           <LinkArea
             key={link.linksTo}
-            allWorldMapsData={props.allWorldMapsData}
+            link={link}
+            worldMapsData={props.worldMapsData}
             currentWorldMap={worldMap}
-            worldMap={link.linksTo}
-            base64ImgCode={link.linkImage.image}
-            x={link.linkImage.origin.value.x}
-            y={link.linkImage.origin.value.y}
             setSearchParams={setSearchParams}
           />
         ))}
-        {mapsArray?.map((map: any) => (
+        {worldMapData?.maps.map((map: Map) => (
           <MapDot
-            key={`${map.spot.value.x}${map.spot.value.y}${map.type}`}
+            key={`${map.x}${map.y}${map.type}`}
             currentWorldMap={worldMap}
-            x={map.spot.value.x}
-            y={map.spot.value.y}
-            type={map.type}
-            mapNumbers={map.mapNumbers}
+            map={map}
           />
         ))}
       </div>

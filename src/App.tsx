@@ -5,15 +5,15 @@ import WorldMaps from "./pages/WorldMaps";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const [allWorldMapsData, setAllWorldMapsData] = useState([]);
-  const [allMapsData, setAllMapsData] = useState([]);
+  const [worldMapsData, setWorldMapsData] = useState([]);
+  const [mapsData, setMapsData] = useState([]);
 
   useEffect(() => {
     const fetchWorldMapsData = async () => {
       try {
         const response = await fetch("/.netlify/functions/getWorldMapsData");
         const data = await response.json();
-        setAllWorldMapsData(data);
+        setWorldMapsData(data);
       } catch (error) {
         console.error(error);
       }
@@ -23,7 +23,7 @@ function App() {
       try {
         const response = await fetch("/.netlify/functions/getmapsData");
         const data = await response.json();
-        setAllMapsData(data);
+        setMapsData(data);
       } catch (error) {
         console.error(error);
       }
@@ -41,10 +41,7 @@ function App() {
           <Route
             index
             element={
-              <WorldMaps
-                allWorldMapsData={allWorldMapsData}
-                allMapsData={allMapsData}
-              />
+              <WorldMaps worldMapsData={worldMapsData} mapsData={mapsData} />
             }
           />
         </Routes>

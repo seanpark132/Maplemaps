@@ -6,13 +6,11 @@ import {
   WORLD_MAP_OFFSETS,
 } from "../GlobalVariables";
 import MapDotHover from "./MapDotHover";
+import { Map } from "../types/worldMapTypes";
 
 type Props = {
   currentWorldMap: string;
-  x: number;
-  y: number;
-  type: number;
-  mapNumbers: number[];
+  map: Map;
 };
 
 export default function MapDot(props: Props) {
@@ -24,8 +22,8 @@ export default function MapDot(props: Props) {
     setHalfImgHeight(image.height / 2);
   }
 
-  let left = ORIGIN_X + props.x - Math.ceil(halfImgWidth);
-  let top = ORIGIN_Y + props.y - Math.ceil(halfImgHeight);
+  let left = ORIGIN_X + props.map.x - Math.ceil(halfImgWidth);
+  let top = ORIGIN_Y + props.map.y - Math.ceil(halfImgHeight);
 
   if (props.currentWorldMap in WORLD_MAP_OFFSETS) {
     left -=
@@ -44,11 +42,11 @@ export default function MapDot(props: Props) {
         visibility: `${halfImgWidth + halfImgHeight === 0 ? "hidden" : "visible"}`,
       }}
     >
-      {props.mapNumbers.length === 1 && (
-        <MapDotHover mapNumber={props.mapNumbers[0]} />
+      {props.map.mapNumbers.length === 1 && (
+        <MapDotHover mapNumber={props.map.mapNumbers[0]} />
       )}
       <img
-        src={`${GOOGLE_CLOUD_IMAGE_URL}/dots/${props.type}.png`}
+        src={`${GOOGLE_CLOUD_IMAGE_URL}/dots/${props.map.type}.png`}
         onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
         alt="World Map Dot"
       />
