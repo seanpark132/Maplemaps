@@ -42,7 +42,7 @@ export default function LinkArea(props: Props) {
       onClick={handleClick}
     >
       <img
-        src={`data:image/png;base64,${props.link.base64Image} `}
+        src={`data:image/png;base64,${props.link.imageBase64} `}
         alt={`${props.link.linksTo}`}
       />
     </span>

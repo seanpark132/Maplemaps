@@ -21,7 +21,7 @@ function App() {
 
     const fetchMapsData = async () => {
       try {
-        const response = await fetch("/.netlify/functions/getmapsData");
+        const response = await fetch("/.netlify/functions/getMapsData");
         const data = await response.json();
         setMapsData(data);
       } catch (error) {
