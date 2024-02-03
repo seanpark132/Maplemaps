@@ -7,27 +7,29 @@ export default async (req: Request, context: Context) => {
   const dbName = Netlify.env.get("MONGODB_DATABASE");
   const mapsCollection = Netlify.env.get("MONGODB_MAPS_COLLECTION");
 
-  if (!uri) {
-    throw new Error("The MONGODB_URI environment variable is not defined.");
-  }
-  if (!dbName) {
-    throw new Error(
-      "The MONGODB_DATABASE environment variable is not defined.",
-    );
-  }
-  if (!mapsCollection) {
-    throw new Error(
-      "The MONGODB_WORLD_MAPS_COLLECTION environment variable is not defined.",
-    );
-  }
-  const client = new MongoClient(uri);
+  const client = new MongoClient(uri!);
   console.log("Pass 1");
 
   try {
     await client.connect();
-    const db: Db = client.db(dbName);
+    const db: Db = client.db(dbName!);
     const coll = db.collection(mapsCollection!);
-    const cursor = coll.find();
+    // const pipeline = [
+    //   {$project: {
+    //     _id:0,
+    //     target_full_file_path:1, map_id:1, map_name:1,"raw.mobs."
+
+    //   }}
+    // ]
+    const cursor = coll
+      .find({})
+      .project({
+        target_full_file_path: 1,
+        map_id: 1,
+        map_name: 1,
+        "raw.mobs": 1,
+        _id: 0,
+      });
     const results = await cursor.toArray();
 
     const headers = {

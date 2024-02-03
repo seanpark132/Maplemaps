@@ -30,7 +30,7 @@ function App() {
     };
 
     fetchWorldMapsData();
-    fetchMapsData();
+    // fetchMapsData();
   }, []);
 
   return (
