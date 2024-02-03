@@ -1,8 +1,6 @@
-import { ObjectId, Timestamp } from "mongodb";
-
 export type WorldMapData = {
-  worldMapName: string;
-  parentWorld: string;
+  worldMapName?: string;
+  parentWorld?: string;
   links: Link[];
   maps: Map[];
 };
@@ -15,7 +13,7 @@ export type Link = {
 };
 
 export type Map = {
-  description: string;
+  description?: string;
   type: number;
   x: number;
   y: number;

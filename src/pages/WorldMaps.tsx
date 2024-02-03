@@ -14,7 +14,6 @@ export default function WorldMaps(props: Props) {
   const [searchParams, setSearchParams] = useSearchParams({
     worldMap: "",
     parentWorld: "",
-    map: "",
   });
   const worldMap = searchParams.get("worldMap");
   const parentWorld = searchParams.get("parentWorld");
@@ -59,6 +58,7 @@ export default function WorldMaps(props: Props) {
             key={`${map.x}${map.y}${map.type}`}
             currentWorldMap={worldMap}
             map={map}
+            mapsData={props.mapsData}
           />
         ))}
       </div>
