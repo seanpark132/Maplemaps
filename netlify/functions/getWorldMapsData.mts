@@ -14,7 +14,7 @@ export default async (req: Request, context: Context) => {
     await client.connect();
     const db: Db = client.db(dbName!);
     const coll = db.collection(worldMapsCollection!);
-    const cursor = coll.find({}).project({ raw: 1 });
+    const cursor = coll.find({}).project({ raw: 1, _id: 0 });
     const results = await cursor.toArray();
 
     const formattedData = results.map(({ raw }) => {
