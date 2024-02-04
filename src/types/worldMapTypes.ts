@@ -13,7 +13,6 @@ export type Link = {
 };
 
 export type Map = {
-  description?: string;
   type: number;
   x: number;
   y: number;

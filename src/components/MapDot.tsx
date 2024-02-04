@@ -11,6 +11,7 @@ import { Map } from "../types/worldMapTypes";
 type Props = {
   currentWorldMap: string;
   map: Map;
+  mapsData: any[];
 };
 
 export default function MapDot(props: Props) {
@@ -35,17 +36,21 @@ export default function MapDot(props: Props) {
   }
   return (
     <span
-      className="absolute z-10"
+      className="map-dot-container absolute"
       style={{
         left: `${left}px`,
         top: `${top}px`,
-        visibility: `${halfImgWidth + halfImgHeight === 0 ? "hidden" : "visible"}`,
       }}
     >
       {props.map.mapNumbers.length === 1 && (
-        <MapDotHover mapNumber={props.map.mapNumbers[0]} />
+        <MapDotHover
+          key={props.map.mapNumbers[0]}
+          mapNumber={props.map.mapNumbers[0]}
+          mapsData={props.mapsData}
+        />
       )}
       <img
+        className="z-10"
         src={`${GOOGLE_CLOUD_IMAGE_URL}/dots/${props.map.type}.png`}
         onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
         alt="World Map Dot"
