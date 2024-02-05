@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className=" flex min-w-180 flex-col items-center justify-center p-6">
+      <div className="flex min-w-180 flex-col items-center justify-center p-6">
         <Routes>
           <Route
             index
@@ -50,12 +50,14 @@ function App() {
               <WorldMaps worldMapsData={worldMapsData} mapsData={mapsData} />
             }
           />
-          {mapsData.map((map) => (
-            <Route
-              path={`/map/${map.map_id}`}
-              element={<MapInfo mapData={map} />}
-            />
-          ))}
+          {mapsData &&
+            mapsData.map((map) => (
+              <Route
+                key={map.map_id}
+                path={`/map/${map.map_id}`}
+                element={<MapInfo mapData={map} />}
+              />
+            ))}
         </Routes>
       </div>
     </>
