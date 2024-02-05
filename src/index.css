@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply border-gray-400;
+  }
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -29,8 +37,7 @@ h2 {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #242424;
     background-color: #ffffff;
-    border-color: #213547;
   }
 }

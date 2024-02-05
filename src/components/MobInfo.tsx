@@ -25,7 +25,7 @@ export default function MobInfo(props: Props) {
   }
 
   return (
-    <div className="flex w-full border-b p-6">
+    <div className="flex w-full border-b-2 p-6">
       <div className="text-center">
         <img
           src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData?.mob_id}.png`}

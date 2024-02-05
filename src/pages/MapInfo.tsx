@@ -23,7 +23,7 @@ export default function MapInfo(props: Props) {
         width={1800}
         className="mb-6 rounded-lg border-2"
       />
-      <section className="flex w-fit flex-col border">
+      <section className="flex w-fit flex-col rounded-lg border-2 border-b-0">
         {uniqueMobData &&
           uniqueMobData.map((mob: MobData | undefined) => (
             <MobInfo key={mob?.mob_id} mobData={mob} />
