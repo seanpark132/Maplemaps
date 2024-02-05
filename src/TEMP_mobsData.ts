@@ -1,4 +1,6 @@
-export const TEMP_MOBS_DATA = [
+import { MobData } from "./types/mobTypes";
+
+export const TEMP_MOBS_DATA: MobData[] = [
   {
     mob_id: 100000,
     raw: {

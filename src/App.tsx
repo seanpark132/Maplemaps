@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { WorldMapData } from "./types/worldMapTypes";
 import { TEMP_MAPS_DATA } from "./TEMP_mapsData";
 import { TEMP_WORLD_MAPS_DATA } from "./TEMP_worldMapsData";
+import MapInfo from "./pages/MapInfo";
 
 function App() {
   const [worldMapsData, setWorldMapsData] = useState<WorldMapData[]>([]);
@@ -49,6 +50,12 @@ function App() {
               <WorldMaps worldMapsData={worldMapsData} mapsData={mapsData} />
             }
           />
+          {mapsData.map((map) => (
+            <Route
+              path={`/map/${map.map_id}`}
+              element={<MapInfo mapData={map} />}
+            />
+          ))}
         </Routes>
       </div>
     </>
