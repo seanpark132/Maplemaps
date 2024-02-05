@@ -1,12 +1,11 @@
 import { TEMP_MOBS_DATA } from "../TEMP_mobsData";
 import { MobData } from "../types/mobTypes";
 import MobInfo from "../components/MobInfo";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables";
 
 type Props = {
   mapData: any;
 };
-
-const TEMP_MAP_IMAGE = "/410000870.png";
 
 export default function MapInfo(props: Props) {
   const uniqueMobIds = [
@@ -17,14 +16,14 @@ export default function MapInfo(props: Props) {
   );
 
   return (
-    <main className="mt-8">
+    <main className="my-8">
       <h2 className="mb-4">Map: {props.mapData.raw.name}</h2>
       <img
-        src={TEMP_MAP_IMAGE}
+        src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${props.mapData?.map_id}.png`}
         width={1800}
         className="mb-6 rounded-lg border-2"
       />
-      <section className="flex flex-col p-4">
+      <section className="flex w-fit flex-col border">
         {uniqueMobData &&
           uniqueMobData.map((mob: MobData | undefined) => (
             <MobInfo key={mob?.mob_id} mobData={mob} />

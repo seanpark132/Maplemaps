@@ -1,10 +1,9 @@
+import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables";
 import { MobData } from "../types/mobTypes";
 
 type Props = {
   mobData: MobData | undefined;
 };
-
-const TEMP_MOB_NAME = "/mob-8645130.png";
 
 export default function MobInfo(props: Props) {
   let maxHP: any = props.mobData?.raw.meta.maxHP;
@@ -26,16 +25,22 @@ export default function MobInfo(props: Props) {
   }
 
   return (
-    <div className="flex">
-      <div>
-        <img src={TEMP_MOB_NAME} />
-        <p className="mt-4">{props.mobData?.raw.name}</p>
+    <div className="flex w-full border-b p-6">
+      <div className="text-center">
+        <img
+          src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData?.mob_id}.png`}
+        />
+        <p className="mt-4 font-semibold">{props.mobData?.raw.name}</p>
       </div>
-      <div className="pl-12">
+      <div>
         <ul>
-          <li>Level: {props.mobData?.raw.meta.level}</li>
-          <li>Exp: {props.mobData?.raw.meta.exp}</li>
-          <li>
+          <li className="px-6 py-2 font-semibold">
+            Level: {props.mobData?.raw.meta.level}
+          </li>
+          <li className="px-6 py-2 font-semibold">
+            Exp: {props.mobData?.raw.meta.exp}
+          </li>
+          <li className="px-6 py-2 font-semibold">
             HP: {`${maxHPRounded}${maxHPSuffix}`} ({maxHP})
           </li>
         </ul>
