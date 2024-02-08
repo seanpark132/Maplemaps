@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import "./App.css";
 import WorldMaps from "./pages/WorldMaps";
-import Navbar from "./components/Navbar";
 import { WorldMapData } from "./types/worldMapTypes";
 import { TEMP_MAPS_DATA } from "./TEMP_mapsData";
 import { TEMP_WORLD_MAPS_DATA } from "./TEMP_worldMapsData";
-import MapInfo from "./pages/MapInfo";
+import NoPage from "./pages/NoPage";
+import Loading from "./pages/Loading";
+
+const MapInfo = lazy(() => import("./pages/MapInfo"));
 
 function App() {
   const [worldMapsData, setWorldMapsData] = useState<WorldMapData[]>([]);
@@ -39,26 +41,36 @@ function App() {
     // fetchMapsData();
   }, []);
 
+  if (!mapsData || !worldMapsData) {
+    return <Loading />;
+  }
+
   return (
     <>
-      <Navbar />
       <div className="flex w-full min-w-180 flex-col items-center justify-center p-6">
-        <Routes>
-          <Route
-            index
-            element={
-              <WorldMaps worldMapsData={worldMapsData} mapsData={mapsData} />
-            }
-          />
-          {mapsData &&
-            mapsData.map((map) => (
-              <Route
-                key={map.map_id}
-                path={`/map/${map.map_id}`}
-                element={<MapInfo mapData={map} />}
-              />
-            ))}
-        </Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route
+              index
+              element={
+                <WorldMaps worldMapsData={worldMapsData} mapsData={mapsData} />
+              }
+            />
+            {mapsData &&
+              mapsData.map((map) => (
+                <Route
+                  key={map.map_id}
+                  path={`/map/${map.map_id}`}
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <MapInfo mapData={map} />
+                    </Suspense>
+                  }
+                />
+              ))}
+            <Route path="*" element={<NoPage />} />
+          </Routes>
+        </Suspense>
       </div>
     </>
   );
