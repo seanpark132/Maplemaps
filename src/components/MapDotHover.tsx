@@ -18,7 +18,7 @@ export default function MapDotHover(props: Props) {
   return (
     <>
       {mapData && (
-        <span className="map-dot-hover-container absolute bottom-1/2 left-1/2 z-20 w-fit min-w-16 rounded-md border border-white bg-black-transparent-75 p-3">
+        <span className="map-dot-hover-container absolute bottom-1/2 left-1/2 z-20 w-fit min-w-20 rounded-md border border-white bg-black-transparent-75 p-3">
           <p className="text-nowrap text-sm text-white">{mapData.raw.name}</p>
           {uniqueMobData.map((mob: any) => (
             <p
@@ -29,7 +29,7 @@ export default function MapDotHover(props: Props) {
           {uniqueMobIds.length > 0 && (
             <Link
               to={`/map/${props.mapNumber}`}
-              className="text-sm text-white hover:text-green-400"
+              className="text-nowrap text-sm text-white hover:text-green-400"
             >
               See map details
             </Link>

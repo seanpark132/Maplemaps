@@ -32,7 +32,7 @@ export default function WorldMaps(props: Props) {
   const parentParentWorld = parentWorldData?.parentWorld;
 
   return (
-    <main className="mt-8">
+    <main className="pt-8">
       <h1 className="mb-2">Select a map/area:</h1>
       <div
         className="relative"

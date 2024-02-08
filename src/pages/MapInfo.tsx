@@ -16,19 +16,20 @@ export default function MapInfo(props: Props) {
   );
 
   return (
-    <main className="my-8">
+    <main className="flex w-full flex-col p-8">
       <h2 className="mb-4">Map: {props.mapData.raw.name}</h2>
       <img
         src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${props.mapData?.map_id}.png`}
-        width={1800}
-        className="mb-6 rounded-lg border-2"
+        className="mb-6 max-h-screen rounded-lg border-2 object-contain"
       />
-      <section className="flex w-fit flex-col rounded-lg border-2 border-b-0">
-        {uniqueMobData &&
-          uniqueMobData.map((mob: MobData | undefined) => (
-            <MobInfo key={mob?.mob_id} mobData={mob} />
-          ))}
-      </section>
+      <div className="w-full">
+        <section className="flex w-fit flex-col rounded-lg border-2 border-b-0">
+          {uniqueMobData &&
+            uniqueMobData.map((mob: MobData | undefined) => (
+              <MobInfo key={mob?.mob_id} mobData={mob} />
+            ))}
+        </section>
+      </div>
     </main>
   );
 }
