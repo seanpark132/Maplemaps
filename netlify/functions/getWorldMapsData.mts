@@ -7,35 +7,67 @@ export default async (req: Request, context: Context) => {
   const dbName = Netlify.env.get("MONGODB_DATABASE");
   const worldMapsCollection = Netlify.env.get("MONGODB_WORLD_MAPS_COLLECTION");
 
-  if (!uri) {
-    throw new Error("The MONGODB_URI environment variable is not defined.");
-  }
-  if (!dbName) {
-    throw new Error(
-      "The MONGODB_DATABASE environment variable is not defined.",
-    );
-  }
-  if (!worldMapsCollection) {
-    throw new Error(
-      "The MONGODB_WORLD_MAPS_COLLECTION environment variable is not defined.",
-    );
-  }
-  const client = new MongoClient(uri);
+  const client = new MongoClient(uri!);
   console.log("Pass 1");
 
   try {
     await client.connect();
-    const db: Db = client.db(dbName);
+    const db: Db = client.db(dbName!);
     const coll = db.collection(worldMapsCollection!);
-    const cursor = coll.find();
+    const cursor = coll.find({}).project({ raw: 1, _id: 0 });
     const results = await cursor.toArray();
+
+    const formattedData = results.map(({ raw }) => {
+      const { worldMapName, parentWorld, links, maps } = raw;
+
+      const formattedLinks = links.map(
+        ({
+          linksTo,
+          linkImage: {
+            image,
+            origin: {
+              value: { x, y },
+            },
+          },
+        }) => ({
+          linksTo,
+          imageBase64: image,
+          x,
+          y,
+        }),
+      );
+
+      const formattedMaps = maps.map(
+        ({
+          description,
+          type,
+          spot: {
+            value: { x, y },
+          },
+          mapNumbers,
+        }) => ({
+          description,
+          type,
+          x,
+          y,
+          mapNumbers,
+        }),
+      );
+
+      return {
+        worldMapName,
+        parentWorld,
+        links: formattedLinks,
+        maps: formattedMaps,
+      };
+    });
 
     const headers = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     };
 
-    return new Response(JSON.stringify(results), {
+    return new Response(JSON.stringify(formattedData), {
       status: 200,
       headers: headers,
     });

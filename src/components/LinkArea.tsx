@@ -5,20 +5,18 @@ import {
   WORLD_MAP_OFFSETS,
   LINK_AREA_Z_INDEX,
 } from "../GlobalVariables";
+import { Link, WorldMapData } from "../types/worldMapTypes";
 
 type Props = {
-  allWorldMapsData: any[];
+  worldMapsData: WorldMapData[];
+  link: Link;
   currentWorldMap: string;
-  worldMap: string;
-  base64ImgCode: string;
-  x: number;
-  y: number;
   setSearchParams: ReturnType<typeof useSearchParams>[1];
 };
 
 export default function LinkArea(props: Props) {
-  let left = ORIGIN_X - props.x;
-  let top = ORIGIN_Y - props.y;
+  let left = ORIGIN_X - props.link.x;
+  let top = ORIGIN_Y - props.link.y;
   if (props.currentWorldMap in WORLD_MAP_OFFSETS) {
     left -=
       WORLD_MAP_OFFSETS[props.currentWorldMap as keyof typeof WORLD_MAP_OFFSETS]
@@ -28,10 +26,10 @@ export default function LinkArea(props: Props) {
         .y;
   }
 
-  const worldMapData = props.allWorldMapsData.find(
-    (worldMapData) => worldMapData.raw.worldMapName === props.worldMap,
+  const worldMapData = props.worldMapsData.find(
+    (data) => data.worldMapName === props.link.linksTo,
   );
-  const parentWorld = worldMapData?.raw.parentWorld;
+  const parentWorld = worldMapData?.parentWorld;
 
   return (
     <span
@@ -39,20 +37,20 @@ export default function LinkArea(props: Props) {
       style={{
         left: `${left}px`,
         top: `${top}px`,
-        zIndex: `${LINK_AREA_Z_INDEX.includes(props.worldMap) && 9}`,
+        zIndex: `${LINK_AREA_Z_INDEX.includes(props.link.linksTo) && 9}`,
       }}
       onClick={handleClick}
     >
       <img
-        src={`data:image/png;base64,${props.base64ImgCode} `}
-        alt={`${props.worldMap}`}
+        src={`data:image/png;base64,${props.link.imageBase64} `}
+        alt={`${props.link.linksTo}`}
       />
     </span>
   );
 
   function handleClick() {
     props.setSearchParams((prev) => {
-      prev.set("worldMap", props.worldMap);
+      prev.set("worldMap", props.link.linksTo);
       prev.set("parentWorld", parentWorld ? parentWorld : "");
       return prev;
     });

@@ -1,0 +1,7 @@
+.map-dot-hover-container {
+  visibility: hidden;
+}
+
+.map-dot-container:hover .map-dot-hover-container {
+  visibility: visible;
+}
