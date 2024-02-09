@@ -14,7 +14,7 @@ export default async (req: Request, context: Context) => {
     await client.connect();
     const db: Db = client.db(dbName!);
     const coll = db.collection(mapsCollection!);
-    const cursor = coll.find({});
+    const cursor = coll.find({}).project({ _id: 0 });
     const results = await cursor.toArray();
 
     const headers = {
