@@ -27,6 +27,7 @@ export default async (req: Request, context: Context) => {
       headers: headers,
     });
   } catch (error) {
+    console.error("Error:", error);
     return new Response(error.toString(), { status: 500 });
   } finally {
     await client.close();
