@@ -7,11 +7,12 @@ import {
 } from "../GlobalVariables";
 import MapDotHover from "./MapDotHover";
 import { Map } from "../types/worldMapTypes";
+import { MapData } from "../types/mapTypes";
 
 type Props = {
   currentWorldMap: string;
   map: Map;
-  mapsData: any[];
+  mapsData: MapData[];
 };
 
 export default function MapDot(props: Props) {

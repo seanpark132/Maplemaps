@@ -4,10 +4,11 @@ import MapDot from "../components/MapDot.tsx";
 import RegionSelect from "../components/RegionSelect";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables.tsx";
 import { Link, Map, WorldMapData } from "../types/worldMapTypes.ts";
+import { MapData } from "../types/mapTypes.ts";
 
 type Props = {
   worldMapsData: WorldMapData[];
-  mapsData: any[];
+  mapsData: MapData[];
 };
 
 export default function WorldMaps(props: Props) {
