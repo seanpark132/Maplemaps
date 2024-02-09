@@ -25,7 +25,7 @@ export default function MapDotHover(props: Props) {
               className="text-nowrap text-red-500"
             >{`${mob.raw.name} (${mob.raw.meta.level})`}</p>
           ))}
-          {mobIds && mobIds.length > 0 && (
+          {mobIds && (
             <Link
               to={`/map/${props.mapNumber}`}
               className="text-nowrap text-white hover:text-green-400"
