@@ -3,6 +3,7 @@ import { MobData } from "../types/mobTypes";
 import MobInfo from "../components/MobInfo";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables";
 import { MapData } from "../types/mapTypes";
+import MobSpawnInfo from "../components/MobSpawnInfo";
 
 type Props = {
   mapData: MapData;
@@ -21,13 +22,16 @@ export default function MapInfo(props: Props) {
         src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${props.mapData.map_id}.png`}
         className="mb-6 max-h-screen rounded-lg border-2 object-contain"
       />
-      <div className="w-full">
-        <section className="flex w-fit flex-col rounded-lg border-2 border-b-0">
-          {mobsData.map((mob) => (
-            <MobInfo key={mob?.mob_id} mobData={mob} />
-          ))}
-        </section>
-      </div>
+      <section className="flex h-fit w-full">
+        {mobsData.length > 0 && (
+          <div className="flex w-fit flex-col rounded-lg border-2">
+            {mobsData.map((mob) => (
+              <MobInfo key={mob?.mob_id} mobData={mob} />
+            ))}
+          </div>
+        )}
+        <MobSpawnInfo spawnPoints={props.mapData.numMobs} mobsData={mobsData} />
+      </section>
     </main>
   );
 }

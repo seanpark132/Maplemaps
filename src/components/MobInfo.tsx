@@ -25,14 +25,15 @@ export default function MobInfo(props: Props) {
   }
 
   return (
-    <div className="flex w-full border-b-2 p-8">
+    <div className="flex w-full p-8">
       <div className="text-center">
         <img
           src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData?.mob_id}.png`}
+          width={200}
         />
         <p className="mt-4 font-semibold">{props.mobData?.raw.name}</p>
       </div>
-      <div>
+      <div className="flex h-full flex-col justify-center">
         <ul>
           <li className="px-6 py-2 font-semibold">
             Level: {props.mobData?.raw.meta.level}
