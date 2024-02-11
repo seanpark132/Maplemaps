@@ -1,5 +1,6 @@
 import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables";
 import { MobData } from "../types/mobTypes";
+import InfoGrid from "./InfoGrid";
 
 type Props = {
   mobData: MobData | undefined;
@@ -24,6 +25,13 @@ export default function MobInfo(props: Props) {
     maxHPSuffix = "K";
   }
 
+  const descriptions = ["Level", "Exp", "HP"];
+  const values = [
+    props.mobData!.raw.meta.level,
+    props.mobData!.raw.meta.exp!.toLocaleString("US"),
+    `${maxHPRounded}${maxHPSuffix} ${` (${maxHP.toLocaleString("US")})`}`,
+  ];
+
   return (
     <div className="flex w-full p-8">
       <div className="text-center">
@@ -34,14 +42,7 @@ export default function MobInfo(props: Props) {
         <p className="mt-4 font-semibold">{props.mobData?.raw.name}</p>
       </div>
       <div className="flex h-full flex-col justify-center px-8">
-        <ul>
-          <li>Level: {props.mobData?.raw.meta.level}</li>
-          <li>Exp: {props.mobData?.raw.meta.exp?.toLocaleString("en-US")}</li>
-          <li>
-            HP: {`${maxHPRounded}${maxHPSuffix}`} (
-            {maxHP.toLocaleString("en-US")})
-          </li>
-        </ul>
+        <InfoGrid descriptions={descriptions} values={values} />
       </div>
     </div>
   );

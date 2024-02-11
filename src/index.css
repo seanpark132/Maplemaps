@@ -35,10 +35,6 @@ h2 {
   font-weight: 600;
 }
 
-li {
-  font-weight: 500;
-  margin: 0.5rem 0;
-}
 @media (prefers-color-scheme: light) {
   :root {
     color: #242424;

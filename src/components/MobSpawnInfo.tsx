@@ -1,5 +1,6 @@
 import { MapData } from "../types/mapTypes";
 import { MobData } from "../types/mobTypes";
+import InfoGrid from "./InfoGrid";
 
 type Props = {
   mapData: MapData;
@@ -24,20 +25,33 @@ export default function MobSpawnInfo(props: Props) {
   const hourlyMobs = props.mapData.capacityPerGen * 480;
   const expRate = hourlyMobs * averageExp;
   const mesoRate = hourlyMobs * 7.5 * averageLevel;
+  const descriptions = [
+    "Capacity/gen",
+    "Capacity",
+    "Spawn Points",
+    "Mobs / hour",
+    "Exp / hour",
+    "Meso / hour",
+    "Meso / hour (reboot)",
+  ];
+
+  const values = [
+    props.mapData.capacityPerGen,
+    props.mapData.capacity,
+    props.mapData.numMobs,
+    hourlyMobs.toLocaleString("US"),
+    expRate.toLocaleString("US"),
+    mesoRate.toLocaleString("US"),
+    (mesoRate * 6).toLocaleString("US"),
+  ];
 
   return (
     <div className="ml-8 rounded-lg border-2 p-8">
-      <ul>
-        <li>Capacity/gen: {props.mapData.capacityPerGen}</li>
-        <li>Capacity: {props.mapData.capacity}</li>
-        <li>Spawn Points: {props.mapData.numMobs}</li>
-        <li>Mobs / hour: {hourlyMobs.toLocaleString("US")}</li>
-        <li>Exp / hour (base): {expRate.toLocaleString("US")}</li>
-        <li>Meso / hour (base): {mesoRate.toLocaleString("US")}</li>
-        <li>
-          Reboot Meso / hour (base): {(mesoRate * 6).toLocaleString("US")}
-        </li>
-      </ul>
+      <h2>Map Spawn Info:</h2>
+      <p className="mb-4 mt-2 w-72 text-wrap">
+        **Some capacity/gen and capacity numbers may be incorrect
+      </p>
+      <InfoGrid descriptions={descriptions} values={values} />
     </div>
   );
 }

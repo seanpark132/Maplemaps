@@ -31,7 +31,6 @@ export default function MapInfo(props: Props) {
               <MobInfo key={mob?.mob_id} mobData={mob} />
             ))}
           </div>
-
           <MobSpawnInfo mapData={props.mapData} mobsData={mobsData} />
         </section>
       )}
