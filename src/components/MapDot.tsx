@@ -4,6 +4,7 @@ import {
   ORIGIN_X,
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
+  MAP_DOT_NUMBERS,
 } from "../GlobalVariables";
 import MapDotHover from "./MapDotHover";
 import { Map } from "../types/worldMapTypes";
@@ -16,6 +17,10 @@ type Props = {
 };
 
 export default function MapDot(props: Props) {
+  if (!MAP_DOT_NUMBERS.includes(props.map.type)) {
+    return;
+  }
+
   const [halfImgWidth, setHalfImgWidth] = useState(0);
   const [halfImgHeight, setHalfImgHeight] = useState(0);
 
