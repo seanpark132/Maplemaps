@@ -29,19 +29,14 @@ export default function MobInfo(props: Props) {
       <div className="text-center">
         <img
           src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData?.mob_id}.png`}
-          width={200}
         />
         <p className="mt-4 font-semibold">{props.mobData?.raw.name}</p>
       </div>
-      <div className="flex h-full flex-col justify-center">
+      <div className="flex h-full flex-col justify-center px-8">
         <ul>
-          <li className="px-6 py-2 font-semibold">
-            Level: {props.mobData?.raw.meta.level}
-          </li>
-          <li className="px-6 py-2 font-semibold">
-            Exp: {props.mobData?.raw.meta.exp?.toLocaleString("en-US")}
-          </li>
-          <li className="px-6 py-2 font-semibold">
+          <li>Level: {props.mobData?.raw.meta.level}</li>
+          <li>Exp: {props.mobData?.raw.meta.exp?.toLocaleString("en-US")}</li>
+          <li>
             HP: {`${maxHPRounded}${maxHPSuffix}`} (
             {maxHP.toLocaleString("en-US")})
           </li>

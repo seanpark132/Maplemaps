@@ -22,9 +22,9 @@ export default function MapInfo(props: Props) {
         src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${props.mapData.map_id}.png`}
         className="mb-6 max-h-screen rounded-lg border-2 object-contain"
       />
-      <section className="flex h-fit w-full">
+      <section className="flex w-full">
         {mobsData.length > 0 && (
-          <div className="flex w-fit flex-col rounded-lg border-2">
+          <div className="flex w-fit flex-col justify-center rounded-lg border-2">
             {mobsData.map((mob) => (
               <MobInfo key={mob?.mob_id} mobData={mob} />
             ))}

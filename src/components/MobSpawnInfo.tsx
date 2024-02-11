@@ -29,13 +29,16 @@ export default function MobSpawnInfo(props: Props) {
   const mesoRate = hourlyMobs * 7.5 * averageLevel;
 
   return (
-    <div className="h-full rounded-lg border-2">
+    <div className="ml-8 rounded-lg border-2 p-8">
       <ul>
         <li>Capacity: {capacity}</li>
         <li>Spawn Points: {props.spawnPoints}</li>
-        <li>Mobs / hour: {hourlyMobs}</li>
+        <li>Mobs / hour: {hourlyMobs.toLocaleString("US")}</li>
         <li>Exp / hour (base): {expRate.toLocaleString("US")}</li>
         <li>Meso / hour (base): {mesoRate.toLocaleString("US")}</li>
+        <li>
+          Reboot Meso / hour (base): {(mesoRate * 6).toLocaleString("US")}
+        </li>
       </ul>
     </div>
   );
