@@ -17,21 +17,24 @@ export default function MapInfo(props: Props) {
 
   return (
     <main className="flex w-full flex-col p-8">
-      <h2 className="mb-4">Map: {props.mapData.name}</h2>
+      <h2 className="mb-4">
+        {props.mapData.streetName} : {props.mapData.name}
+      </h2>
       <img
         src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${props.mapData.map_id}.png`}
         className="mb-6 max-h-screen rounded-lg border-2 object-contain"
       />
-      <section className="flex w-full">
-        {mobsData.length > 0 && (
+      {mobsData && mobsData.length > 0 && (
+        <section className="flex w-full">
           <div className="flex w-fit flex-col justify-center rounded-lg border-2">
             {mobsData.map((mob) => (
               <MobInfo key={mob?.mob_id} mobData={mob} />
             ))}
           </div>
-        )}
-        <MobSpawnInfo spawnPoints={props.mapData.numMobs} mobsData={mobsData} />
-      </section>
+
+          <MobSpawnInfo mapData={props.mapData} mobsData={mobsData} />
+        </section>
+      )}
     </main>
   );
 }

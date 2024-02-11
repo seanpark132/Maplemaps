@@ -1,15 +1,12 @@
+import { MapData } from "../types/mapTypes";
 import { MobData } from "../types/mobTypes";
 
 type Props = {
-  spawnPoints: number;
+  mapData: MapData;
   mobsData: (MobData | undefined)[];
 };
 
 export default function MobSpawnInfo(props: Props) {
-  let capacity = props.spawnPoints - 1;
-  if (props.spawnPoints > 40) {
-    capacity = 39;
-  }
   let averageExp = 0;
   let averageLevel = 0;
 
@@ -24,15 +21,16 @@ export default function MobSpawnInfo(props: Props) {
     averageLevel = levelSum / levelArray.length;
   }
 
-  const hourlyMobs = capacity * 480;
+  const hourlyMobs = props.mapData.capacityPerGen * 480;
   const expRate = hourlyMobs * averageExp;
   const mesoRate = hourlyMobs * 7.5 * averageLevel;
 
   return (
     <div className="ml-8 rounded-lg border-2 p-8">
       <ul>
-        <li>Capacity: {capacity}</li>
-        <li>Spawn Points: {props.spawnPoints}</li>
+        <li>Capacity/gen: {props.mapData.capacityPerGen}</li>
+        <li>Capacity: {props.mapData.capacity}</li>
+        <li>Spawn Points: {props.mapData.numMobs}</li>
         <li>Mobs / hour: {hourlyMobs.toLocaleString("US")}</li>
         <li>Exp / hour (base): {expRate.toLocaleString("US")}</li>
         <li>Meso / hour (base): {mesoRate.toLocaleString("US")}</li>

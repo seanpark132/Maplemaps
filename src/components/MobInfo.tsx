@@ -29,6 +29,7 @@ export default function MobInfo(props: Props) {
       <div className="text-center">
         <img
           src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData?.mob_id}.png`}
+          width={200}
         />
         <p className="mt-4 font-semibold">{props.mobData?.raw.name}</p>
       </div>
