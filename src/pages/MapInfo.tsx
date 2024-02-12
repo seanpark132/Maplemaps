@@ -27,9 +27,11 @@ export default function MapInfo(props: Props) {
       {mobsData && mobsData.length > 0 && (
         <section className="flex w-full">
           <div className="flex w-fit flex-col justify-center rounded-lg border-2">
-            {mobsData.map((mob) => (
-              <MobInfo key={mob?.mob_id} mobData={mob} />
-            ))}
+            {mobsData.map((mob: MobData | undefined) => {
+              if (mob) {
+                return <MobInfo key={mob.mob_id} mobData={mob} />;
+              }
+            })}
           </div>
           <MobSpawnInfo mapData={props.mapData} mobsData={mobsData} />
         </section>
