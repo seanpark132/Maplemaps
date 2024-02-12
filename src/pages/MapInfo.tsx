@@ -17,12 +17,12 @@ export default function MapInfo(props: Props) {
 
   return (
     <main className="flex w-full flex-col p-8">
-      <h2 className="mb-4">
+      <h2 className="mb-8">
         {props.mapData.streetName} : {props.mapData.name}
       </h2>
       <img
         src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${props.mapData.map_id}.png`}
-        className="mb-6 max-h-screen rounded-lg border-2 object-contain"
+        className="image-max-height mb-8 rounded-lg border-2 object-contain"
       />
       {mobsData && mobsData.length > 0 && (
         <section className="flex w-full">

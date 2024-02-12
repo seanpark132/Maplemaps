@@ -5,3 +5,7 @@
 .map-dot-container:hover .map-dot-hover-container {
   visibility: visible;
 }
+
+.image-max-height {
+  max-height: calc(100vh - 4rem);
+}

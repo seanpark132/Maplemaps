@@ -17,9 +17,9 @@ export default function InfoGrid(props: Props) {
         ))}
       </ul>
       <ul>
-        {props.values.map((num: number | string) => (
+        {props.values.map((num: number | string, index: number) => (
           <li
-            key={num}
+            key={`${index}:${num}`}
             className="border-2 border-b border-l p-3 font-semibold"
           >
             {num}
