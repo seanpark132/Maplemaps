@@ -7,12 +7,12 @@ type Props = {
 
 export default function RegionSelect(props: Props) {
   return (
-    <main className="mt-8">
-      <h1 className="mb-4">Select a Region:</h1>
-      <div className="grid grid-cols-2 gap-16">
+    <main className="w-full">
+      <h1 className="text-center">Select a Region:</h1>
+      <div className="flex flex-wrap justify-center">
         <button onClick={() => handleClick("WorldMap082", "")}>
           <img
-            className=""
+            className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap082.webp`}
             width={640}
             height={470}
@@ -21,6 +21,7 @@ export default function RegionSelect(props: Props) {
         </button>
         <button onClick={() => handleClick("GWorldMap", "")}>
           <img
+            className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_GWorldMap.webp`}
             width={640}
             height={470}
@@ -29,7 +30,7 @@ export default function RegionSelect(props: Props) {
         </button>
         <button onClick={() => handleClick("WorldMap", "")}>
           <img
-            className=""
+            className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap.webp`}
             width={640}
             height={470}

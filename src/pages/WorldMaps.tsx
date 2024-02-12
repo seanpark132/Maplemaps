@@ -33,7 +33,7 @@ export default function WorldMaps(props: Props) {
   const parentParentWorld = parentWorldData?.parentWorld;
 
   return (
-    <main className="pt-8">
+    <main className="flex min-w-[40rem] flex-col items-center pt-8">
       <h1 className="mb-2">Select a map/area:</h1>
       <div
         className="relative"

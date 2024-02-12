@@ -46,7 +46,7 @@ function App() {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-center p-4 lg:p-6">
+      <div className="flex w-full flex-col justify-center p-4 lg:p-6">
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route
