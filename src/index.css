@@ -6,7 +6,7 @@
   *,
   ::before,
   ::after {
-    @apply border-gray-400;
+    @apply border-slate-400;
   }
 }
 
