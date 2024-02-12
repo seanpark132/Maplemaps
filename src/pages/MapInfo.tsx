@@ -16,8 +16,8 @@ export default function MapInfo(props: Props) {
   );
 
   return (
-    <main className="flex w-full flex-col p-8">
-      <h2 className="mb-8">
+    <main className="flex w-full flex-col lg:p-6">
+      <h2 className="mb-6">
         {props.mapData.streetName} : {props.mapData.name}
       </h2>
       <img
@@ -25,8 +25,8 @@ export default function MapInfo(props: Props) {
         className="image-max-height mb-8 rounded-lg border-2 object-contain"
       />
       {mobsData && mobsData.length > 0 && (
-        <section className="flex w-full">
-          <div className="flex w-fit flex-col justify-center rounded-lg border-2">
+        <section className="flex flex-col md:flex-row">
+          <div className="mb-8 flex w-fit flex-col justify-center rounded-lg border-2 md:mb-0">
             {mobsData.map((mob: MobData | undefined) => {
               if (mob) {
                 return <MobInfo key={mob.mob_id} mobData={mob} />;

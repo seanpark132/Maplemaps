@@ -46,7 +46,7 @@ export default function MobSpawnInfo(props: Props) {
   ];
 
   return (
-    <div className="ml-8 rounded-lg border-2 p-8">
+    <div className="w-fit rounded-lg border-2 p-4 md:ml-8 md:p-8">
       <h2>Map Spawn Info:</h2>
       <p className="mb-4 mt-2 w-64 text-wrap">
         **Some capacity/gen and capacity numbers may be incorrect
