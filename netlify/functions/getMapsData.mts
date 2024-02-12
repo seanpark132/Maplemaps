@@ -14,22 +14,7 @@ export default async (req: Request, context: Context) => {
     await client.connect();
     const db: Db = client.db(dbName!);
     const coll = db.collection(mapsCollection!);
-    // const pipeline = [
-    //   {$project: {
-    //     _id:0,
-    //     target_full_file_path:1, map_id:1, map_name:1,"raw.mobs."
-
-    //   }}
-    // ]
-    const cursor = coll
-      .find({})
-      .project({
-        target_full_file_path: 1,
-        map_id: 1,
-        map_name: 1,
-        "raw.mobs": 1,
-        _id: 0,
-      });
+    const cursor = coll.find({}).project({ _id: 0 });
     const results = await cursor.toArray();
 
     const headers = {
@@ -42,6 +27,7 @@ export default async (req: Request, context: Context) => {
       headers: headers,
     });
   } catch (error) {
+    console.error("Error:", error);
     return new Response(error.toString(), { status: 500 });
   } finally {
     await client.close();

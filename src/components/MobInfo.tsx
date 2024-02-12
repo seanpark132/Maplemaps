@@ -1,50 +1,35 @@
 import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables";
-import { MobData } from "../types/mobTypes";
+import { MaxHP, MobData } from "../types/mobTypes";
+import InfoGrid from "./InfoGrid";
 
 type Props = {
-  mobData: MobData | undefined;
+  mobData: MobData;
 };
 
 export default function MobInfo(props: Props) {
-  let maxHP: any = props.mobData?.raw.meta.maxHP;
+  let maxHP: number | MaxHP | undefined = props.mobData?.raw.meta.maxHP;
   if (typeof maxHP !== "number") {
     maxHP = Number(maxHP?.$numberLong);
   }
 
-  let maxHPRounded = maxHP;
-  let maxHPSuffix = "";
-  if (maxHP / 1000000000 > 1) {
-    maxHPRounded = Math.round((maxHP * 10) / 1000000000) / 10;
-    maxHPSuffix = "B";
-  } else if (maxHP / 1000000 > 1) {
-    maxHPRounded = Math.round((maxHP * 10) / 1000000) / 10;
-    maxHPSuffix = "M";
-  } else if (maxHP / 1000 > 1) {
-    maxHPRounded = Math.round((maxHP * 10) / 1000) / 10;
-    maxHPSuffix = "K";
-  }
+  const descriptions = ["Level", "Exp", "HP"];
+  const values = [
+    props.mobData.raw.meta.level,
+    props.mobData.raw.meta.exp!.toLocaleString("US"),
+    `${` ${maxHP.toLocaleString("US")}`}`,
+  ];
 
   return (
-    <div className="flex w-full border-b-2 p-8">
-      <div className="text-center">
+    <div className="flex items-center p-4 lg:p-8">
+      <div className="flex w-20 flex-col items-center justify-center text-center md:w-40">
         <img
-          src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData?.mob_id}.png`}
+          src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData.mob_id}.png`}
+          className="w-20 md:w-40"
         />
-        <p className="mt-4 font-semibold">{props.mobData?.raw.name}</p>
+        <p className="mt-4 font-semibold">{props.mobData.raw.name}</p>
       </div>
-      <div>
-        <ul>
-          <li className="px-6 py-2 font-semibold">
-            Level: {props.mobData?.raw.meta.level}
-          </li>
-          <li className="px-6 py-2 font-semibold">
-            Exp: {props.mobData?.raw.meta.exp?.toLocaleString("en-US")}
-          </li>
-          <li className="px-6 py-2 font-semibold">
-            HP: {`${maxHPRounded}${maxHPSuffix}`} (
-            {maxHP.toLocaleString("en-US")})
-          </li>
-        </ul>
+      <div className="flex h-full flex-col justify-center pl-3 lg:pl-6">
+        <InfoGrid descriptions={descriptions} values={values} />
       </div>
     </div>
   );
