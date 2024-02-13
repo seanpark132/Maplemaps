@@ -28,7 +28,7 @@ export default function MobInfo(props: Props) {
         />
         <p className="mt-4 font-semibold">{props.mobData.raw.name}</p>
       </div>
-      <div className="flex h-full flex-col justify-center pl-3 lg:pl-6">
+      <div className="flex h-full flex-col justify-center pl-4 lg:pl-8">
         <InfoGrid descriptions={descriptions} values={values} />
       </div>
     </div>

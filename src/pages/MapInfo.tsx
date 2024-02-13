@@ -17,7 +17,7 @@ export default function MapInfo(props: Props) {
 
   return (
     <main className="flex w-full flex-col lg:p-6">
-      <h2 className="mb-6">
+      <h2 className="my-6">
         {props.mapData.streetName} : {props.mapData.name}
       </h2>
       <img
