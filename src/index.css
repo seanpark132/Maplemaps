@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  *,
-  ::before,
-  ::after {
-    @apply border-slate-400;
+  @media (prefers-color-scheme: light) {
+    *,
+    ::before,
+    ::after {
+      @apply border-gray-400;
+    }
   }
 }
 
