@@ -5,7 +5,7 @@ import {
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
   MAP_DOT_NUMBERS,
-} from "../GlobalVariables";
+} from "../utils/GlobalVariables";
 import MapDotHover from "./MapDotHover";
 import { Map } from "../types/worldMapTypes";
 import { MapData } from "../types/mapTypes";
@@ -13,7 +13,7 @@ import { MapData } from "../types/mapTypes";
 type Props = {
   currentWorldMap: string;
   map: Map;
-  mapsData: MapData[];
+  mapsData: Record<number, MapData>;
 };
 
 export default function MapDot(props: Props) {

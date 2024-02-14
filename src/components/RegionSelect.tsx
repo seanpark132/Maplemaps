@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
 
 type Props = {
   setSearchParams: ReturnType<typeof useSearchParams>[1];

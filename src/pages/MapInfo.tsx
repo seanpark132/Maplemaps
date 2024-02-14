@@ -1,7 +1,7 @@
 import { TEMP_MOBS_DATA } from "../TEMP_mobsData";
 import { MobData } from "../types/mobTypes";
 import MobInfo from "../components/MobInfo";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../GlobalVariables";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
 import { MapData } from "../types/mapTypes";
 import MobSpawnInfo from "../components/MobSpawnInfo";
 

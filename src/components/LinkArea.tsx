@@ -4,11 +4,11 @@ import {
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
   LINK_AREA_Z_INDEX,
-} from "../GlobalVariables";
+} from "../utils/GlobalVariables";
 import { Link, WorldMapData } from "../types/worldMapTypes";
 
 type Props = {
-  worldMapsData: WorldMapData[];
+  worldMapsData: Record<string, WorldMapData>;
   link: Link;
   currentWorldMap: string;
   setSearchParams: ReturnType<typeof useSearchParams>[1];
@@ -26,9 +26,7 @@ export default function LinkArea(props: Props) {
         .y;
   }
 
-  const worldMapData = props.worldMapsData.find(
-    (data) => data.worldMapName === props.link.linksTo,
-  );
+  const worldMapData = props.worldMapsData[props.link.linksTo];
   const parentWorld = worldMapData?.parentWorld;
 
   return (
