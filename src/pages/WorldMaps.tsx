@@ -48,40 +48,40 @@ export default function WorldMaps(props: Props) {
   const parentWorldData = parentWorld ? worldMapsData[parentWorld] : null;
   const parentParentWorld = parentWorldData?.parentWorld;
 
-  return (
-    worldMapData && (
-      <main className="flex min-w-[40rem] flex-col items-center pt-8">
-        <h1 className="mb-2">Select a map/area:</h1>
-        <div
-          className="relative"
-          onContextMenu={(event) => handleRightClick(event)}
-        >
-          <img
-            src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/${imageName}`}
-            width={640}
-            height={470}
-            alt={`World map image: ${worldMap}`}
+  return worldMapData ? (
+    <main className="flex min-w-[40rem] flex-col items-center pt-8">
+      <h1 className="mb-2">Select a map/area:</h1>
+      <div
+        className="relative"
+        onContextMenu={(event) => handleRightClick(event)}
+      >
+        <img
+          src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/${imageName}`}
+          width={640}
+          height={470}
+          alt={`World map image: ${worldMap}`}
+        />
+        {worldMapData.links.map((link: Link) => (
+          <LinkArea
+            key={link.linksTo}
+            link={link}
+            worldMapsData={worldMapsData}
+            currentWorldMap={worldMap}
+            setSearchParams={setSearchParams}
           />
-          {worldMapData.links.map((link: Link) => (
-            <LinkArea
-              key={link.linksTo}
-              link={link}
-              worldMapsData={worldMapsData}
-              currentWorldMap={worldMap}
-              setSearchParams={setSearchParams}
-            />
-          ))}
-          {worldMapData.maps.map((map: Map) => (
-            <MapDot
-              key={`${map.x}${map.y}${map.type}`}
-              currentWorldMap={worldMap}
-              map={map}
-              mapsData={props.mapsData}
-            />
-          ))}
-        </div>
-      </main>
-    )
+        ))}
+        {worldMapData.maps.map((map: Map) => (
+          <MapDot
+            key={`${map.x}${map.y}${map.type}`}
+            currentWorldMap={worldMap}
+            map={map}
+            mapsData={props.mapsData}
+          />
+        ))}
+      </div>
+    </main>
+  ) : (
+    <Loading />
   );
 
   function handleRightClick(event: any) {
