@@ -48,7 +48,7 @@ export default function MapDot(props: Props) {
         top: `${top}px`,
       }}
     >
-      {props.map.mapNumbers.length === 1 && (
+      {props.map.mapNumbers && (
         <MapDotHover
           key={props.map.mapNumbers[0]}
           mapNumber={props.map.mapNumbers[0]}
