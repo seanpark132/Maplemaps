@@ -2,7 +2,7 @@ import { MongoClient, Db } from "mongodb";
 import type { Context } from "@netlify/functions";
 import "dotenv/config";
 
-export async function POST(req: Request, context: Context) {
+export default async (req: Request, context: Context) => {
   const uri = Netlify.env.get("MONGODB_URI");
   const dbName = Netlify.env.get("MONGODB_DATABASE");
   const worldMapsCollection = Netlify.env.get("MONGODB_WORLD_MAPS_COLLECTION");
@@ -18,6 +18,7 @@ export async function POST(req: Request, context: Context) {
   }
 
   const body = await req.json();
+  const worldMapNumbers = body.worldMapNumbers;
   const client = new MongoClient(uri!);
 
   try {
@@ -25,9 +26,11 @@ export async function POST(req: Request, context: Context) {
     console.log("Connected to MongoDB client.");
     const db: Db = client.db(dbName);
     const coll = db.collection(worldMapsCollection);
-    const cursor = coll.find({ worldMapName: { $in: body } }).project({
-      _id: 0,
-    });
+    const cursor = coll
+      .find({ worldMapName: { $in: worldMapNumbers } })
+      .project({
+        _id: 0,
+      });
     const results = await cursor.toArray();
     const resultsObject = results.reduce((acc, item) => {
       acc[item.worldMapName] = item;
@@ -48,4 +51,4 @@ export async function POST(req: Request, context: Context) {
   } finally {
     await client.close();
   }
-}
+};
