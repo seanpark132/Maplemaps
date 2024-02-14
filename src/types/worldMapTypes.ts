@@ -13,6 +13,7 @@ export type Link = {
 };
 
 export type Map = {
+  noTooltip?: boolean;
   description?: string;
   type: number;
   x: number;
