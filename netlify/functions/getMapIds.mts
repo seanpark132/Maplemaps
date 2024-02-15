@@ -26,13 +26,14 @@ export default async (req: Request, context: Context) => {
     const coll = db.collection(mapsCollection);
     const cursor = coll.find({}).project({ map_id: 1, _id: 0 });
     const results = await cursor.toArray();
+    const mapIdsOnlyArray = results.map((obj) => obj.map_id);
 
     const headers = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     };
 
-    return new Response(JSON.stringify(results), {
+    return new Response(JSON.stringify(mapIdsOnlyArray), {
       status: 200,
       headers: headers,
     });

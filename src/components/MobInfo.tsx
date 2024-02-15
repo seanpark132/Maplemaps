@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function MobInfo(props: Props) {
-  let maxHP: number | MaxHP | undefined = props.mobData?.raw.meta.maxHP;
+  let maxHP: number | MaxHP | undefined = props.mobData.raw.meta.maxHP;
   if (typeof maxHP !== "number") {
     maxHP = Number(maxHP?.$numberLong);
   }

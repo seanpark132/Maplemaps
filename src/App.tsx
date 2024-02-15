@@ -51,7 +51,12 @@ function App() {
                   path={`/map/${id}`}
                   element={
                     <Suspense fallback={<Loading />}>
-                      <MapInfo mapsData={mapsData} />
+                      <MapInfo
+                        id={id}
+                        mapIds={mapIds}
+                        mapsData={mapsData}
+                        mobsData={mobsData}
+                      />
                     </Suspense>
                   }
                 />
