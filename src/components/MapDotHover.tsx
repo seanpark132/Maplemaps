@@ -27,6 +27,7 @@ export default function MapDotHover(props: Props) {
         mobLevel={mobsData[0]?.raw.meta.level}
       />
       <p className="text-nowrap text-white">{mapData.name} </p>
+      <hr className="border-gray-500" />
       {mobsData.map((mob: MobData | undefined) => {
         if (mob) {
           return (
