@@ -112,7 +112,7 @@ const WORLD_MAP_OFFSETS = {
 
 const MAP_DOT_NUMBERS = [0, 1, 2, 3, 8, 9, 10, 11, 12, 28, 29, 47, 48, 49];
 
-const LEVEL_TO_SACRED_FORCE = {
+const LEVEL_TO_SACRED_FORCE: Record<number, number> = {
   260: 30,
   261: 30,
   262: 50,
