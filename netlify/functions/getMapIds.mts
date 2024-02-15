@@ -17,8 +17,6 @@ export default async (req: Request, context: Context) => {
     return;
   }
 
-  const body = await req.json();
-  const mapIds = body.mapIds;
   const client = new MongoClient(uri);
 
   try {
@@ -26,19 +24,16 @@ export default async (req: Request, context: Context) => {
     console.log("Connected to MongoDB client.");
     const db: Db = client.db(dbName);
     const coll = db.collection(mapsCollection);
-    const cursor = coll.find({ map_id: { $in: mapIds } }).project({ _id: 0 });
+    const cursor = coll.find({}).project({ map_id: 1, _id: 0 });
     const results = await cursor.toArray();
-    const resultsObject = results.reduce((acc, item) => {
-      acc[item.map_id] = item;
-      return acc;
-    }, {});
+    const mapIdsOnlyArray = results.map((obj) => obj.map_id);
 
     const headers = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     };
 
-    return new Response(JSON.stringify(resultsObject), {
+    return new Response(JSON.stringify(mapIdsOnlyArray), {
       status: 200,
       headers: headers,
     });

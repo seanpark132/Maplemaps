@@ -6,68 +6,43 @@ export default async (req: Request, context: Context) => {
   const uri = Netlify.env.get("MONGODB_URI");
   const dbName = Netlify.env.get("MONGODB_DATABASE");
   const worldMapsCollection = Netlify.env.get("MONGODB_WORLD_MAPS_COLLECTION");
+  if (!uri) {
+    ("MONGODB_URI environment variable is not set.");
+    return;
+  } else if (!dbName) {
+    ("MONGODB_DATABASE environment variable is not set.");
+    return;
+  } else if (!worldMapsCollection) {
+    ("MONGODB_WORLD_MAPS_COLLECTION environment variable is not set.");
+    return;
+  }
 
+  const body = await req.json();
+  const worldMapNumbers = body.worldMapNumbers;
   const client = new MongoClient(uri!);
-  console.log("Pass 1");
 
   try {
     await client.connect();
-    const db: Db = client.db(dbName!);
-    const coll = db.collection(worldMapsCollection!);
-    const cursor = coll.find({}).project({ raw: 1, _id: 0 });
+    console.log("Connected to MongoDB client.");
+    const db: Db = client.db(dbName);
+    const coll = db.collection(worldMapsCollection);
+    const cursor = coll
+      .find({ worldMapName: { $in: worldMapNumbers } })
+      .project({
+        _id: 0,
+      });
     const results = await cursor.toArray();
-
-    const formattedData = results.map(({ raw }) => {
-      const { worldMapName, parentWorld, links, maps } = raw;
-
-      const formattedLinks = links.map(
-        ({
-          linksTo,
-          linkImage: {
-            image,
-            origin: {
-              value: { x, y },
-            },
-          },
-        }) => ({
-          linksTo,
-          imageBase64: image,
-          x,
-          y,
-        }),
-      );
-
-      const formattedMaps = maps.map(
-        ({
-          description,
-          type,
-          spot: {
-            value: { x, y },
-          },
-          mapNumbers,
-        }) => ({
-          description,
-          type,
-          x,
-          y,
-          mapNumbers,
-        }),
-      );
-
-      return {
-        worldMapName,
-        parentWorld,
-        links: formattedLinks,
-        maps: formattedMaps,
-      };
-    });
+    const resultsObject = results.reduce((acc, item) => {
+      acc[item.worldMapName] = item;
+      return acc;
+    }, {});
 
     const headers = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     };
 
-    return new Response(JSON.stringify(formattedData), {
+    return new Response(JSON.stringify(resultsObject), {
       status: 200,
       headers: headers,
     });

@@ -1,48 +1,28 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, lazy, Suspense } from "react";
 import "./App.css";
 import WorldMaps from "./pages/WorldMaps";
-import { WorldMapData } from "./types/worldMapTypes";
-import { TEMP_WORLD_MAPS_DATA } from "./TEMP_worldMapsData";
 import NoPage from "./pages/NoPage";
 import Loading from "./pages/Loading";
+import { WorldMapData } from "./types/worldMapTypes";
 import { MapData } from "./types/mapTypes";
+import { MobData } from "./types/mobTypes";
+import { useFetchMapIds } from "./hooks/useFetchMapIds";
 
 const MapInfo = lazy(() => import("./pages/MapInfo"));
 
 function App() {
-  const [worldMapsData, setWorldMapsData] = useState<WorldMapData[]>([]);
-  const [mapsData, setMapsData] = useState<MapData[]>([]);
+  const [worldMapsData, setWorldMapsData] = useState<
+    Record<string, WorldMapData>
+  >({});
+  const [visitedWorldMaps, setVisitedWorldMaps] = useState<Set<string>>(
+    new Set(),
+  );
+  const [mapsData, setMapsData] = useState<Record<number, MapData>>({});
+  const [mobsData, setMobsData] = useState<Record<number, MobData>>({});
+  const [mapIds, setMapIds] = useState<number[]>([]);
 
-  useEffect(() => {
-    //   const fetchWorldMapsData = async () => {
-    //     try {
-    //       const response = await fetch("/.netlify/functions/getWorldMapsData");
-    //       const data = await response.json();
-    //       setWorldMapsData(data);
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   };
-
-    const fetchMapsData = async () => {
-      try {
-        const response = await fetch("/.netlify/functions/getMapsData");
-        const data = await response.json();
-        setMapsData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    // fetchWorldMapsData();
-    setWorldMapsData(TEMP_WORLD_MAPS_DATA);
-    fetchMapsData();
-  }, []);
-
-  if (!mapsData || !worldMapsData) {
-    return <Loading />;
-  }
+  useFetchMapIds(setMapIds);
 
   return (
     <>
@@ -52,17 +32,31 @@ function App() {
             <Route
               index
               element={
-                <WorldMaps worldMapsData={worldMapsData} mapsData={mapsData} />
+                <WorldMaps
+                  worldMapsData={worldMapsData}
+                  visitedWorldMaps={visitedWorldMaps}
+                  mapsData={mapsData}
+                  mobsData={mobsData}
+                  setWorldMapsData={setWorldMapsData}
+                  setVisitedWorldMaps={setVisitedWorldMaps}
+                  setMapsData={setMapsData}
+                  setMobsData={setMobsData}
+                />
               }
             />
-            {mapsData &&
-              mapsData.map((map) => (
+            {mapIds &&
+              mapIds.map((id) => (
                 <Route
-                  key={map.map_id}
-                  path={`/map/${map.map_id}`}
+                  key={id}
+                  path={`/map/${id}`}
                   element={
                     <Suspense fallback={<Loading />}>
-                      <MapInfo mapData={map} />
+                      <MapInfo
+                        id={id}
+                        mapIds={mapIds}
+                        mapsData={mapsData}
+                        mobsData={mobsData}
+                      />
                     </Suspense>
                   }
                 />
