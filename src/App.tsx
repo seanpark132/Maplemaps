@@ -7,6 +7,7 @@ import Loading from "./pages/Loading";
 import { WorldMapData } from "./types/worldMapTypes";
 import { MapData } from "./types/mapTypes";
 import { MobData } from "./types/mobTypes";
+import { useFetchMapIds } from "./hooks/useFetchMapIds";
 
 const MapInfo = lazy(() => import("./pages/MapInfo"));
 
@@ -19,6 +20,9 @@ function App() {
   );
   const [mapsData, setMapsData] = useState<Record<number, MapData>>({});
   const [mobsData, setMobsData] = useState<Record<number, MobData>>({});
+  const [mapIds, setMapIds] = useState<number[]>([]);
+
+  useFetchMapIds(setMapIds);
 
   return (
     <>
@@ -40,19 +44,18 @@ function App() {
                 />
               }
             />
-            {/* likely need an array of just map_ids*/}
-            {/* {mapsData &&
-              mapsData.map((map) => (
+            {mapIds &&
+              mapIds.map((id) => (
                 <Route
-                  key={map.map_id}
-                  path={`/map/${map.map_id}`}
+                  key={id}
+                  path={`/map/${id}`}
                   element={
                     <Suspense fallback={<Loading />}>
-                      <MapInfo mapData={map} />
+                      <MapInfo mapsData={mapsData} />
                     </Suspense>
                   }
                 />
-              ))} */}
+              ))}
             <Route path="*" element={<NoPage />} />
           </Routes>
         </Suspense>
