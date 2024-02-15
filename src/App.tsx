@@ -4,12 +4,19 @@ import "./App.css";
 import WorldMaps from "./pages/WorldMaps";
 import NoPage from "./pages/NoPage";
 import Loading from "./pages/Loading";
+import { WorldMapData } from "./types/worldMapTypes";
 import { MapData } from "./types/mapTypes";
 import { MobData } from "./types/mobTypes";
 
 const MapInfo = lazy(() => import("./pages/MapInfo"));
 
 function App() {
+  const [worldMapsData, setWorldMapsData] = useState<
+    Record<string, WorldMapData>
+  >({});
+  const [visitedWorldMaps, setVisitedWorldMaps] = useState<Set<string>>(
+    new Set(),
+  );
   const [mapsData, setMapsData] = useState<Record<number, MapData>>({});
   const [mobsData, setMobsData] = useState<Record<number, MobData>>({});
 
@@ -22,8 +29,12 @@ function App() {
               index
               element={
                 <WorldMaps
+                  worldMapsData={worldMapsData}
+                  visitedWorldMaps={visitedWorldMaps}
                   mapsData={mapsData}
                   mobsData={mobsData}
+                  setWorldMapsData={setWorldMapsData}
+                  setVisitedWorldMaps={setVisitedWorldMaps}
                   setMapsData={setMapsData}
                   setMobsData={setMobsData}
                 />

@@ -1,5 +1,4 @@
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
 import Loading from "./Loading.tsx";
 import LinkArea from "../components/LinkArea";
 import MapDot from "../components/MapDot.tsx";
@@ -8,23 +7,23 @@ import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables.ts";
 import { Link, Map, WorldMapData } from "../types/worldMapTypes.ts";
 import { MapData } from "../types/mapTypes.ts";
 import { MobData } from "../types/mobTypes.ts";
-import Error from "./Error.tsx";
 import { useFetchWorldMapsData } from "../hooks/useFetchWorldMapsData.tsx";
+import { useFetchMapsAndMobsData } from "../hooks/useFetchMapsAndMobsData.tsx";
 
 type Props = {
+  worldMapsData: Record<string, WorldMapData>;
   mapsData: Record<number, MapData>;
   mobsData: Record<number, MobData>;
+  visitedWorldMaps: Set<string>;
+  setWorldMapsData: React.Dispatch<
+    React.SetStateAction<Record<string, WorldMapData>>
+  >;
+  setVisitedWorldMaps: React.Dispatch<React.SetStateAction<Set<string>>>;
   setMapsData: React.Dispatch<React.SetStateAction<Record<number, MapData>>>;
   setMobsData: React.Dispatch<React.SetStateAction<Record<number, MobData>>>;
 };
 
 export default function WorldMaps(props: Props) {
-  const [worldMapsData, setWorldMapsData] = useState<
-    Record<string, WorldMapData>
-  >({});
-  const [visitedWorldMaps, setVisitedWorldMaps] = useState<Set<string>>(
-    new Set(),
-  );
   const [searchParams, setSearchParams] = useSearchParams({
     worldMap: "",
     parentWorld: "",
@@ -33,19 +32,22 @@ export default function WorldMaps(props: Props) {
   const parentWorld = searchParams.get("parentWorld");
   const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.webp`;
 
-  useFetchWorldMapsData(
+  useFetchWorldMapsData(worldMap, props.worldMapsData, props.setWorldMapsData);
+  useFetchMapsAndMobsData(
     worldMap,
-    worldMapsData,
-    setWorldMapsData,
-    setVisitedWorldMaps,
+    props.worldMapsData,
+    props.visitedWorldMaps,
+    props.setMapsData,
+    props.setMobsData,
+    props.setVisitedWorldMaps,
   );
 
   if (!worldMap) {
     return <RegionSelect setSearchParams={setSearchParams} />;
   }
 
-  const worldMapData = worldMapsData[worldMap];
-  const parentWorldData = parentWorld ? worldMapsData[parentWorld] : null;
+  const worldMapData = props.worldMapsData[worldMap];
+  const parentWorldData = parentWorld ? props.worldMapsData[parentWorld] : null;
   const parentParentWorld = parentWorldData?.parentWorld;
 
   return worldMapData ? (
@@ -65,7 +67,7 @@ export default function WorldMaps(props: Props) {
           <LinkArea
             key={link.linksTo}
             link={link}
-            worldMapsData={worldMapsData}
+            worldMapsData={props.worldMapsData}
             currentWorldMap={worldMap}
             setSearchParams={setSearchParams}
           />
@@ -76,6 +78,7 @@ export default function WorldMaps(props: Props) {
             currentWorldMap={worldMap}
             map={map}
             mapsData={props.mapsData}
+            mobsData={props.mobsData}
           />
         ))}
       </div>
