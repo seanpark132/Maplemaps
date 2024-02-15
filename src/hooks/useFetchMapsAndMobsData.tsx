@@ -2,6 +2,11 @@ import { useEffect } from "react";
 import { MapData } from "../types/mapTypes";
 import { MobData } from "../types/mobTypes";
 import { WorldMapData } from "../types/worldMapTypes";
+import {
+  ARCANE_RIVER_WORLD_MAPS,
+  GRANDIS_WORLD_MAPS,
+  MAPLE_WORLD_MAPS,
+} from "../utils/GlobalVariables";
 
 export const useFetchMapsAndMobsData = (
   worldMap: string | null,
@@ -14,10 +19,15 @@ export const useFetchMapsAndMobsData = (
   useEffect(() => {
     if (!worldMap) return;
     if (visitedWorldMaps.has(worldMap)) return;
-    const currentWorldMapData = worldMapsData[worldMap];
-    if (!currentWorldMapData) return;
 
-    const mapIdsFromWorldMap = currentWorldMapData.maps.flatMap(
+    const regionWorldMap = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
+      ? "WorldMap082"
+      : GRANDIS_WORLD_MAPS.includes(worldMap)
+        ? "GWorldMap"
+        : "WorldMap";
+
+    const regionWorldMapData = worldMapsData[regionWorldMap];
+    const mapIdsFromWorldMap = regionWorldMapData.maps.flatMap(
       (map) => map.mapNumbers,
     );
 
@@ -53,6 +63,26 @@ export const useFetchMapsAndMobsData = (
     };
 
     fetchMapsAndMobsData();
-    setVisitedWorldMaps((prev) => new Set(prev).add(worldMap));
+
+    // Add all ids from the current region to visitedWorldMaps
+    if (regionWorldMap === "WorldMap082") {
+      setVisitedWorldMaps((prev) => {
+        const newSet = new Set(prev);
+        ARCANE_RIVER_WORLD_MAPS.forEach((id) => newSet.add(id));
+        return newSet;
+      });
+    } else if (regionWorldMap === "GWorldMap") {
+      setVisitedWorldMaps((prev) => {
+        const newSet = new Set(prev);
+        GRANDIS_WORLD_MAPS.forEach((id) => newSet.add(id));
+        return newSet;
+      });
+    } else {
+      setVisitedWorldMaps((prev) => {
+        const newSet = new Set(prev);
+        MAPLE_WORLD_MAPS.forEach((id) => newSet.add(id));
+        return newSet;
+      });
+    }
   }, [worldMapsData]);
 };
