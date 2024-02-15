@@ -1,4 +1,3 @@
-import { TEMP_MOBS_DATA } from "../TEMP_mobsData";
 import { Link } from "react-router-dom";
 import { MapData } from "../types/mapTypes";
 import { MobData } from "../types/mobTypes";
@@ -6,6 +5,7 @@ import { MobData } from "../types/mobTypes";
 type Props = {
   mapNumber: number;
   mapsData: Record<number, MapData>;
+  mobsData: Record<number, MobData>;
 };
 
 export default function MapDotHover(props: Props) {
@@ -14,8 +14,8 @@ export default function MapDotHover(props: Props) {
     return;
   }
   const mobIds = mapData.mobIds;
-  const mobsData: (MobData | undefined)[] = mobIds.map((id) =>
-    TEMP_MOBS_DATA.find((mob) => id === mob.mob_id),
+  const mobsData: (MobData | undefined)[] = mobIds.map(
+    (id) => props.mobsData[id],
   );
 
   return (

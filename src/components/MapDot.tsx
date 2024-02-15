@@ -9,11 +9,13 @@ import {
 import MapDotHover from "./MapDotHover";
 import { Map } from "../types/worldMapTypes";
 import { MapData } from "../types/mapTypes";
+import { MobData } from "../types/mobTypes";
 
 type Props = {
   currentWorldMap: string;
   map: Map;
   mapsData: Record<number, MapData>;
+  mobsData: Record<number, MobData>;
 };
 
 export default function MapDot(props: Props) {
@@ -53,6 +55,7 @@ export default function MapDot(props: Props) {
           key={props.map.mapNumbers[0]}
           mapNumber={props.map.mapNumbers[0]}
           mapsData={props.mapsData}
+          mobsData={props.mobsData}
         />
       )}
       <img
