@@ -12,29 +12,25 @@ export const useFetchWorldMapsData = (
   setWorldMapsData: React.Dispatch<
     React.SetStateAction<Record<string, WorldMapData>>
   >,
-  setVisitedWorldMaps: React.Dispatch<React.SetStateAction<Set<string>>>,
 ) => {
   useEffect(() => {
     if (!worldMap) return;
 
     if (!worldMapsData[worldMap]) {
-      const body = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
+      const worldMapNumbers = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
         ? ARCANE_RIVER_WORLD_MAPS
         : GRANDIS_WORLD_MAPS.includes(worldMap)
           ? GRANDIS_WORLD_MAPS
           : MAPLE_WORLD_MAPS;
 
-      const worldMapsRequest = new Request(
-        "/.netlify/functions/getWorldMapsData",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ worldMapNumbers: body }),
-        },
-      );
-
-      const fetchWorldMapsData = async (req: Request) => {
+      const fetchWorldMapsData = async () => {
         try {
+          const req = new Request("/.netlify/functions/getWorldMapsData", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ worldMapNumbers: worldMapNumbers }),
+          });
+
           const response = await fetch(req);
           const data = await response.json();
           setWorldMapsData((prev) => ({ ...prev, ...data }));
@@ -43,8 +39,7 @@ export const useFetchWorldMapsData = (
         }
       };
 
-      fetchWorldMapsData(worldMapsRequest);
-      setVisitedWorldMaps((prev) => new Set(prev).add(worldMap));
+      fetchWorldMapsData();
     }
-  }, [worldMap, setWorldMapsData, setVisitedWorldMaps]);
+  }, [worldMap]);
 };
