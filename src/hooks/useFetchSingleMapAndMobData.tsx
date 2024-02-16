@@ -19,10 +19,10 @@ export const useFetchSingleMapAndMobData = (
     } else {
       const fetchData = async () => {
         try {
-          const mapReq = new Request("/.netlify/functions/getMapsData", {
+          const mapReq = new Request("/.netlify/functions/getMongoDbData", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ mapIds: [id] }),
+            body: JSON.stringify({ reqType: "mapsData", mapIds: [id] }),
           });
 
           const mapResponse = await fetch(mapReq);
@@ -30,10 +30,10 @@ export const useFetchSingleMapAndMobData = (
           const mapDataValue = mapData[id];
           const mobIds = mapDataValue.mobIds;
 
-          const mobReq = new Request("/.netlify/functions/getMobsData", {
+          const mobReq = new Request("/.netlify/functions/getMongoDbData", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ mobIds: mobIds }),
+            body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
           });
           const mobResponse = await fetch(mobReq);
           const mobData: Record<number, MobData> = await mobResponse.json();

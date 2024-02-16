@@ -4,8 +4,11 @@ import { MobData } from "../types/mobTypes";
 import { WorldMapData } from "../types/worldMapTypes";
 import {
   ARCANE_RIVER_WORLD_MAPS,
+  ARCANE_RIVER_WORLD_MAP_NAME,
   GRANDIS_WORLD_MAPS,
+  GRANDIS_WORLD_MAP_NAME,
   MAPLE_WORLD_MAPS,
+  MAPLE_WORLD_MAP_NAME,
 } from "../utils/GlobalVariables";
 
 export const useFetchMapsAndMobsData = (
@@ -21,10 +24,10 @@ export const useFetchMapsAndMobsData = (
     if (visitedWorldMaps.has(worldMap)) return;
 
     const regionWorldMap = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
-      ? "WorldMap082"
+      ? ARCANE_RIVER_WORLD_MAP_NAME
       : GRANDIS_WORLD_MAPS.includes(worldMap)
-        ? "GWorldMap"
-        : "WorldMap";
+        ? GRANDIS_WORLD_MAP_NAME
+        : MAPLE_WORLD_MAP_NAME;
 
     const regionWorldMapData = worldMapsData[regionWorldMap];
     const mapIdsFromWorldMap = regionWorldMapData.maps.flatMap(
@@ -33,10 +36,13 @@ export const useFetchMapsAndMobsData = (
 
     const fetchMapsAndMobsData = async () => {
       try {
-        const mapsReq = new Request("/.netlify/functions/getMapsData", {
+        const mapsReq = new Request("/.netlify/functions/getMongoDbData", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ mapIds: mapIdsFromWorldMap }),
+          body: JSON.stringify({
+            reqType: "mapsData",
+            mapIds: mapIdsFromWorldMap,
+          }),
         });
 
         const mapsResponse = await fetch(mapsReq);
@@ -46,10 +52,10 @@ export const useFetchMapsAndMobsData = (
           return [...acc, ...item.mobIds];
         }, []);
 
-        const mobsReq = new Request("/.netlify/functions/getMobsData", {
+        const mobsReq = new Request("/.netlify/functions/getMongoDbData", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ mobIds: mobIds }),
+          body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
         });
 
         const mobsResponse = await fetch(mobsReq);
@@ -65,13 +71,13 @@ export const useFetchMapsAndMobsData = (
     fetchMapsAndMobsData();
 
     // Add all ids from the current region to visitedWorldMaps
-    if (regionWorldMap === "WorldMap082") {
+    if (regionWorldMap === ARCANE_RIVER_WORLD_MAP_NAME) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         ARCANE_RIVER_WORLD_MAPS.forEach((id) => newSet.add(id));
         return newSet;
       });
-    } else if (regionWorldMap === "GWorldMap") {
+    } else if (regionWorldMap === GRANDIS_WORLD_MAP_NAME) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         GRANDIS_WORLD_MAPS.forEach((id) => newSet.add(id));

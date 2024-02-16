@@ -6,9 +6,10 @@ export const useFetchMapIds = (
   useEffect(() => {
     const fetchMapIds = async () => {
       try {
-        const req = new Request("/.netlify/functions/getMapIds", {
-          method: "GET",
+        const req = new Request("/.netlify/functions/getMongoDbData", {
+          method: "POST",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reqType: "mapIds" }),
         });
 
         const response = await fetch(req);
