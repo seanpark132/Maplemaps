@@ -1,5 +1,10 @@
 import { useSearchParams } from "react-router-dom";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
+import {
+  ARCANE_RIVER_WORLD_MAP_NAME,
+  GOOGLE_CLOUD_IMAGE_URL,
+  GRANDIS_WORLD_MAP_NAME,
+  MAPLE_WORLD_MAP_NAME,
+} from "../utils/GlobalVariables";
 
 type Props = {
   setSearchParams: ReturnType<typeof useSearchParams>[1];
@@ -10,7 +15,7 @@ export default function RegionSelect(props: Props) {
     <main className="w-full">
       <h1 className="text-center">Select a Region:</h1>
       <div className="flex flex-wrap justify-center">
-        <button onClick={() => handleClick("WorldMap082", "")}>
+        <button onClick={() => handleClick(ARCANE_RIVER_WORLD_MAP_NAME, "")}>
           <img
             className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap082.webp`}
@@ -19,7 +24,7 @@ export default function RegionSelect(props: Props) {
             alt="Arcane River Region"
           />
         </button>
-        <button onClick={() => handleClick("GWorldMap", "")}>
+        <button onClick={() => handleClick(GRANDIS_WORLD_MAP_NAME, "")}>
           <img
             className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_GWorldMap.webp`}
@@ -28,7 +33,7 @@ export default function RegionSelect(props: Props) {
             alt="Grandis Region"
           />
         </button>
-        <button onClick={() => handleClick("WorldMap", "")}>
+        <button onClick={() => handleClick(MAPLE_WORLD_MAP_NAME, "")}>
           <img
             className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap.webp`}

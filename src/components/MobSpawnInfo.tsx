@@ -4,15 +4,15 @@ import InfoGrid from "./InfoGrid";
 
 type Props = {
   mapData: MapData;
-  mobsData: (MobData | undefined)[];
+  mobData: (MobData | undefined)[];
 };
 
 export default function MobSpawnInfo(props: Props) {
   let averageExp = 0;
   let averageLevel = 0;
 
-  const expArray = props.mobsData.map((mob) => mob?.raw.meta.exp);
-  const levelArray = props.mobsData.map((mob) => mob?.raw.meta.level);
+  const expArray = props.mobData.map((mob) => mob?.raw.meta.exp);
+  const levelArray = props.mobData.map((mob) => mob?.raw.meta.level);
   const expSum = expArray.reduce((acc, item) => acc! + (item ?? 0), 0);
   const levelSum = levelArray.reduce((acc, item) => acc! + (item ?? 0), 0);
   if (expArray && expSum) {
@@ -46,8 +46,8 @@ export default function MobSpawnInfo(props: Props) {
     (mesoRate * 6).toLocaleString("US"),
   ];
 
-  let forceValue = undefined;
-  let forceDescription = undefined;
+  let forceValue, forceDescription;
+
   if (props.mapData.arcaneForce) {
     forceValue = props.mapData.arcaneForce;
     forceDescription = "Arcane Force";

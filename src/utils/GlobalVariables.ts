@@ -1,4 +1,4 @@
-const ARCANE_RIVER_WORLD_MAPS = [
+const ARCANE_RIVER_WORLD_MAPS: string[] = [
   "WorldMap082",
   "WorldMap0821",
   "WorldMap0822",
@@ -15,7 +15,7 @@ const ARCANE_RIVER_WORLD_MAPS = [
   "WorldMap082a",
 ];
 
-const GRANDIS_WORLD_MAPS = [
+const GRANDIS_WORLD_MAPS: string[] = [
   "WorldMap130",
   "WorldMap140",
   "WorldMap141",
@@ -40,7 +40,7 @@ const GRANDIS_WORLD_MAPS = [
   "WorldMap310",
 ];
 
-const MAPLE_WORLD_MAPS = [
+const MAPLE_WORLD_MAPS: string[] = [
   "WorldMap000",
   "MWorldMap",
   "WorldMap0101",
@@ -100,8 +100,12 @@ const MAPLE_WORLD_MAPS = [
   "WorldMap0121",
 ];
 
-const ORIGIN_X = 320;
-const ORIGIN_Y = 235;
+const ARCANE_RIVER_WORLD_MAP_NAME: string = "WorldMap082";
+const GRANDIS_WORLD_MAP_NAME: string = "GWorldMap";
+const MAPLE_WORLD_MAP_NAME: string = "WorldMap";
+
+const ORIGIN_X: number = 320;
+const ORIGIN_Y: number = 235;
 
 const WORLD_MAP_OFFSETS = {
   GWorldMap: { x: 0, y: 2 },
@@ -110,17 +114,22 @@ const WORLD_MAP_OFFSETS = {
   WorldMap0121: { x: 6, y: 8 },
 };
 
-const MAP_DOT_NUMBERS = [0, 1, 2, 3, 8, 9, 10, 11, 12, 28, 29, 47, 48, 49];
+const MAP_DOT_NUMBERS: number[] = [
+  0, 1, 2, 3, 8, 9, 10, 11, 12, 28, 29, 47, 48, 49,
+];
 
-const LINK_AREA_Z_INDEX = ["WorldMap030", "WorldMap170"];
+const LINK_AREA_Z_INDEX: string[] = ["WorldMap030", "WorldMap170"];
 
-const GOOGLE_CLOUD_IMAGE_URL =
+const GOOGLE_CLOUD_IMAGE_URL: string =
   "https://storage.googleapis.com/maplemaps-2ab75.appspot.com";
 
 export {
   ARCANE_RIVER_WORLD_MAPS,
   GRANDIS_WORLD_MAPS,
   MAPLE_WORLD_MAPS,
+  ARCANE_RIVER_WORLD_MAP_NAME,
+  GRANDIS_WORLD_MAP_NAME,
+  MAPLE_WORLD_MAP_NAME,
   ORIGIN_X,
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,

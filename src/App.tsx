@@ -23,7 +23,6 @@ function App() {
   const [mapIds, setMapIds] = useState<number[]>([]);
 
   useFetchMapIds(setMapIds);
-
   return (
     <>
       <div className="flex w-full flex-col justify-center p-4 lg:p-6">
@@ -44,24 +43,27 @@ function App() {
                 />
               }
             />
-            {mapIds &&
-              mapIds.map((id) => (
-                <Route
-                  key={id}
-                  path={`/map/${id}`}
-                  element={
-                    <Suspense fallback={<Loading />}>
-                      <MapInfo
-                        id={id}
-                        mapIds={mapIds}
-                        mapsData={mapsData}
-                        mobsData={mobsData}
-                      />
-                    </Suspense>
-                  }
-                />
-              ))}
-            <Route path="*" element={<NoPage />} />
+            {mapIds.map((id) => (
+              <Route
+                key={id}
+                path={`/map/${id}`}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <MapInfo
+                      id={id}
+                      mapIds={mapIds}
+                      mapsData={mapsData}
+                      mobsData={mobsData}
+                    />
+                  </Suspense>
+                }
+              />
+            ))}
+            {mapIds.length === 0 ? (
+              <Route path="*" element={<Loading />} />
+            ) : (
+              <Route path="*" element={<NoPage />} />
+            )}
           </Routes>
         </Suspense>
       </div>
