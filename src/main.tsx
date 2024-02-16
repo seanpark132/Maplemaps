@@ -6,10 +6,8 @@ import Navbar from "./components/Navbar.tsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Navbar />
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Navbar />
+    <App />
+  </BrowserRouter>,
 );
