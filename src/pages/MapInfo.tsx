@@ -48,7 +48,7 @@ export default function MapInfo(props: Props) {
               }
             })}
           </div>
-          <MobSpawnInfo mapData={mapData} mobsData={mobData} />
+          <MobSpawnInfo mapData={mapData} mobData={mobData} />
         </section>
       )}
     </main>
