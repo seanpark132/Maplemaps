@@ -25,7 +25,8 @@ export default function MobSpawnInfo(props: Props) {
   const hourlyMobs = props.mapData.capacityPerGen * 480;
   const expRate = hourlyMobs * averageExp;
   const mesoRate = hourlyMobs * 7.5 * averageLevel;
-  const descriptions = [
+
+  let descriptions = [
     "Capacity/gen",
     "Capacity",
     "Spawn Points",
@@ -35,7 +36,7 @@ export default function MobSpawnInfo(props: Props) {
     "Meso / hour (reboot)",
   ];
 
-  const values = [
+  let values = [
     props.mapData.capacityPerGen,
     props.mapData.capacity,
     props.mapData.numMobs,
@@ -45,9 +46,27 @@ export default function MobSpawnInfo(props: Props) {
     (mesoRate * 6).toLocaleString("US"),
   ];
 
+  let forceValue = undefined;
+  let forceDescription = undefined;
+  if (props.mapData.arcaneForce) {
+    forceValue = props.mapData.arcaneForce;
+    forceDescription = "Arcane Force";
+  } else if (props.mapData.sacredForce) {
+    forceValue = props.mapData.sacredForce;
+    forceDescription = "Sacred Force";
+  } else if (props.mapData.starForce) {
+    forceValue = props.mapData.starForce;
+    forceDescription = "Star Force";
+  }
+
+  if (forceValue && forceDescription) {
+    values.unshift(forceValue);
+    descriptions.unshift(forceDescription);
+  }
+
   return (
     <div className="w-fit rounded-lg border-2 p-4 md:ml-8 md:p-8">
-      <h2>Map Spawn Info:</h2>
+      <h2>Map Info:</h2>
       <p className="mb-4 mt-2 w-64 text-wrap">
         **Some capacity/gen and capacity numbers may be incorrect
       </p>

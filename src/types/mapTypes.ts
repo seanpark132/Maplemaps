@@ -7,5 +7,6 @@ export type MapData = {
   numMobs: number;
   mobIds: number[];
   arcaneForce?: number;
+  sacredForce?: number;
   starForce?: number;
 };

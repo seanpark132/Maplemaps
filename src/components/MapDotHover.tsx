@@ -23,8 +23,8 @@ export default function MapDotHover(props: Props) {
     <span className="map-dot-hover-container absolute bottom-1/2 left-1/2 z-20 w-fit min-w-20 rounded-md border border-white bg-black-transparent-75 p-3">
       <MapForceText
         arcaneForce={mapData.arcaneForce}
+        sacredForce={mapData.sacredForce}
         starForce={mapData.starForce}
-        mobLevel={mobsData[0]?.raw.meta.level}
       />
       <p className="text-nowrap text-white">{mapData.name} </p>
       <hr className="border-gray-500" />
