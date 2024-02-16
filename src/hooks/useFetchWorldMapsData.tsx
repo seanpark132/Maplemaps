@@ -17,7 +17,7 @@ export const useFetchWorldMapsData = (
     if (!worldMap) return;
 
     if (!worldMapsData[worldMap]) {
-      const worldMapNumbers = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
+      const worldMapNames = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
         ? ARCANE_RIVER_WORLD_MAPS
         : GRANDIS_WORLD_MAPS.includes(worldMap)
           ? GRANDIS_WORLD_MAPS
@@ -25,10 +25,13 @@ export const useFetchWorldMapsData = (
 
       const fetchWorldMapsData = async () => {
         try {
-          const req = new Request("/.netlify/functions/getWorldMapsData", {
+          const req = new Request("/.netlify/functions/getMongoDbData", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ worldMapNumbers: worldMapNumbers }),
+            body: JSON.stringify({
+              reqType: "worldMapsData",
+              worldMapNames: worldMapNames,
+            }),
           });
 
           const response = await fetch(req);
