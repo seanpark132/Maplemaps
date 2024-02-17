@@ -25,16 +25,19 @@ export const useFetchWorldMapsData = (
 
       const fetchWorldMapsData = async () => {
         try {
-          const req = new Request("/.netlify/functions/getMongoDbData", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              reqType: "worldMapsData",
-              worldMapNames: worldMapNames,
-            }),
-          });
-
-          const response = await fetch(req);
+          const response = await fetch(
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                reqType: "worldMapsData",
+                worldMapNames: worldMapNames,
+              }),
+            },
+          );
           const data = await response.json();
           setWorldMapsData((prev) => ({ ...prev, ...data }));
         } catch (error) {

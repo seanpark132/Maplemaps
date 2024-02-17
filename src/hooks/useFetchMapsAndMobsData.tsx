@@ -36,14 +36,17 @@ export const useFetchMapsAndMobsData = (
 
     const fetchMapsAndMobsData = async () => {
       try {
-        const mapsReq = new Request("/.netlify/functions/getMongoDbData", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            reqType: "mapsData",
-            mapIds: mapIdsFromWorldMap,
-          }),
-        });
+        const mapsReq = new Request(
+          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              reqType: "mapsData",
+              mapIds: mapIdsFromWorldMap,
+            }),
+          },
+        );
 
         const mapsResponse = await fetch(mapsReq);
         const mapsData: Record<number, MapData> = await mapsResponse.json();
@@ -52,11 +55,14 @@ export const useFetchMapsAndMobsData = (
           return [...acc, ...item.mobIds];
         }, []);
 
-        const mobsReq = new Request("/.netlify/functions/getMongoDbData", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
-        });
+        const mobsReq = new Request(
+          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
+          },
+        );
 
         const mobsResponse = await fetch(mobsReq);
         const mobsData: Record<number, MobData> = await mobsResponse.json();

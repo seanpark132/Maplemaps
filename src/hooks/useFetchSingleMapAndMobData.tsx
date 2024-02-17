@@ -19,22 +19,28 @@ export const useFetchSingleMapAndMobData = (
     } else {
       const fetchData = async () => {
         try {
-          const mapReq = new Request("/.netlify/functions/getMongoDbData", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ reqType: "mapsData", mapIds: [id] }),
-          });
+          const mapReq = new Request(
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ reqType: "mapsData", mapIds: [id] }),
+            },
+          );
 
           const mapResponse = await fetch(mapReq);
           const mapData: Record<number, MapData> = await mapResponse.json();
           const mapDataValue = mapData[id];
           const mobIds = mapDataValue.mobIds;
 
-          const mobReq = new Request("/.netlify/functions/getMongoDbData", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
-          });
+          const mobReq = new Request(
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
+            },
+          );
           const mobResponse = await fetch(mobReq);
           const mobData: Record<number, MobData> = await mobResponse.json();
           const mobsDataArray = Object.values(mobData);

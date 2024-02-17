@@ -6,11 +6,14 @@ export const useFetchMapIds = (
   useEffect(() => {
     const fetchMapIds = async () => {
       try {
-        const req = new Request("/.netlify/functions/getMongoDbData", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ reqType: "mapIds" }),
-        });
+        const req = new Request(
+          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ reqType: "mapIds" }),
+          },
+        );
 
         const response = await fetch(req);
         const mapIds: number[] = await response.json();
