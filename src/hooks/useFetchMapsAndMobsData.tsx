@@ -22,6 +22,7 @@ export const useFetchMapsAndMobsData = (
   useEffect(() => {
     if (!worldMap) return;
     if (visitedWorldMaps.has(worldMap)) return;
+    if (Object.keys(worldMapsData).length === 0) return;
 
     const regionWorldMap = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
       ? ARCANE_RIVER_WORLD_MAP_NAME
