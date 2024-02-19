@@ -13,7 +13,7 @@ export default function MapForceText(props: Props) {
           <p className="text-sm text-purple-300">x{props.arcaneForce}</p>
         </div>
       )}
-      {!props.arcaneForce && props.sacredForce && (
+      {props.sacredForce && (
         <div className="flex">
           <img src="/sacred_force.PNG" className="mr-1 h-4 w-4" />
           <p className="text-sm text-purple-300">x{props.sacredForce}</p>

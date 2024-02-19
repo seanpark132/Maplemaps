@@ -50,7 +50,7 @@ export default function MapDot(props: Props) {
         top: `${top}px`,
       }}
     >
-      {props.map.mapNumbers && !props.map.noTooltip && (
+      {props.map.mapNumbers.length > 0 && !props.map.noTooltip && (
         <MapDotHover
           key={props.map.mapNumbers[0]}
           mapNumber={props.map.mapNumbers[0]}

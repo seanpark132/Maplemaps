@@ -27,23 +27,23 @@ export default function MobSpawnInfo(props: Props) {
   const mesoRate = hourlyMobs * 7.5 * averageLevel;
 
   let descriptions = [
-    "Capacity/gen",
-    "Capacity",
-    "Spawn Points",
     "Mobs / hour",
     "Exp / hour",
     "Meso / hour",
     "Meso / hour (reboot)",
+    "Capacity/gen",
+    "Capacity",
+    "Spawn Points",
   ];
 
   let values = [
-    props.mapData.capacityPerGen,
-    props.mapData.capacity,
-    props.mapData.numMobs,
     hourlyMobs.toLocaleString("US"),
     expRate.toLocaleString("US"),
     mesoRate.toLocaleString("US"),
     (mesoRate * 6).toLocaleString("US"),
+    props.mapData.capacityPerGen,
+    props.mapData.capacity,
+    props.mapData.numMobs,
   ];
 
   let forceValue, forceDescription;
@@ -60,8 +60,8 @@ export default function MobSpawnInfo(props: Props) {
   }
 
   if (forceValue && forceDescription) {
-    values.unshift(forceValue);
-    descriptions.unshift(forceDescription);
+    values.push(forceValue);
+    descriptions.push(forceDescription);
   }
 
   return (
