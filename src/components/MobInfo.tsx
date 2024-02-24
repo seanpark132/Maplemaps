@@ -20,7 +20,7 @@ export default function MobInfo(props: Props) {
   ];
 
   return (
-    <div className="flex items-center py-4 lg:py-8">
+    <div className="flex items-center py-4 lg:py-6">
       <div className="flex w-20 flex-col items-center justify-center text-center md:w-40">
         <img
           src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData.mob_id}.png`}
@@ -28,7 +28,7 @@ export default function MobInfo(props: Props) {
         />
         <p className="mt-4 font-semibold">{props.mobData.raw.name}</p>
       </div>
-      <div className="flex h-full flex-col justify-center pl-4 lg:pl-8">
+      <div className="pl-4 lg:pl-8">
         <InfoGrid descriptions={descriptions} values={values} />
       </div>
     </div>
