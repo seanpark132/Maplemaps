@@ -2,10 +2,11 @@ import { MobData } from "../types/mobTypes";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
 import { MapData } from "../types/mapTypes";
 import { useState } from "react";
-import RatesBase from "../components/RatesBase";
+import Rates from "../components/Rates";
 import Loading from "./Loading";
 import { useFetchSingleMapAndMobData } from "../hooks/useFetchSingleMapAndMobData";
 import MobsInfo from "../components/MobsInfo";
+import RatesPersonal from "../components/RatesPersonal";
 
 type Props = {
   id: number;
@@ -42,7 +43,8 @@ export default function MapInfo(props: Props) {
       {mobsData && mobsData.length > 0 && (
         <section className="flex flex-col md:flex-row">
           <MobsInfo mobsData={mobsData} />
-          <RatesBase mapData={mapData} mobData={mobsData} />
+          <Rates mapData={mapData} mobsData={mobsData} />
+          <RatesPersonal />
         </section>
       )}
     </main>

@@ -4,29 +4,14 @@ import InfoGrid from "./InfoGrid";
 
 type Props = {
   mapData: MapData;
-  mobData: (MobData | undefined)[];
+  mobsData: (MobData | undefined)[];
+  hourlyMobs: number;
+  expRate: number;
+  mesoRate: number;
 };
 
 export default function RatesBase(props: Props) {
-  let averageExp = 0;
-  let averageLevel = 0;
-
-  const expArray = props.mobData.map((mob) => mob?.raw.meta.exp);
-  const levelArray = props.mobData.map((mob) => mob?.raw.meta.level);
-  const expSum = expArray.reduce((acc, item) => acc! + (item ?? 0), 0);
-  const levelSum = levelArray.reduce((acc, item) => acc! + (item ?? 0), 0);
-  if (expArray && expSum) {
-    averageExp = expSum / expArray.length;
-  }
-  if (levelArray && levelSum) {
-    averageLevel = levelSum / levelArray.length;
-  }
-
-  const hourlyMobs = props.mapData.capacityPerGen * 480;
-  const expRate = hourlyMobs * averageExp;
-  const mesoRate = hourlyMobs * 7.5 * averageLevel;
-
-  let descriptions = [
+  const descriptions = [
     "Mobs / hour",
     "Exp / hour",
     "Meso / hour",
@@ -34,35 +19,23 @@ export default function RatesBase(props: Props) {
     "Capacity/gen",
     "Capacity",
     "Spawn Points",
+    ...(props.mapData.arcaneForce ? ["Arcane Force"] : []),
+    ...(props.mapData.sacredForce ? ["Sacred Force"] : []),
+    ...(props.mapData.starForce ? ["Star Force"] : []),
   ];
 
-  let values = [
-    hourlyMobs.toLocaleString("US"),
-    expRate.toLocaleString("US"),
-    mesoRate.toLocaleString("US"),
-    (mesoRate * 6).toLocaleString("US"),
+  const values = [
+    props.hourlyMobs.toLocaleString("US"),
+    props.expRate.toLocaleString("US"),
+    props.mesoRate.toLocaleString("US"),
+    (props.mesoRate * 6).toLocaleString("US"),
     props.mapData.capacityPerGen,
     props.mapData.capacity,
     props.mapData.numMobs,
+    ...(props.mapData.arcaneForce ? [props.mapData.arcaneForce] : []),
+    ...(props.mapData.sacredForce ? [props.mapData.sacredForce] : []),
+    ...(props.mapData.starForce ? [props.mapData.starForce] : []),
   ];
-
-  let forceValue, forceDescription;
-
-  if (props.mapData.arcaneForce) {
-    forceValue = props.mapData.arcaneForce;
-    forceDescription = "Arcane Force";
-  } else if (props.mapData.sacredForce) {
-    forceValue = props.mapData.sacredForce;
-    forceDescription = "Sacred Force";
-  } else if (props.mapData.starForce) {
-    forceValue = props.mapData.starForce;
-    forceDescription = "Star Force";
-  }
-
-  if (forceValue && forceDescription) {
-    values.push(forceValue);
-    descriptions.push(forceDescription);
-  }
 
   return (
     <article className="h-fit w-fit rounded-lg border-2 p-4 md:ml-8 md:p-8">
