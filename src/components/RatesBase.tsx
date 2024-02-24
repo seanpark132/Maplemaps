@@ -7,7 +7,7 @@ type Props = {
   mobData: (MobData | undefined)[];
 };
 
-export default function MobSpawnInfo(props: Props) {
+export default function RatesBase(props: Props) {
   let averageExp = 0;
   let averageLevel = 0;
 

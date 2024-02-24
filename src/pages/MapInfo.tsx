@@ -3,7 +3,7 @@ import MobInfo from "../components/MobInfo";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
 import { MapData } from "../types/mapTypes";
 import { useState } from "react";
-import MobSpawnInfo from "../components/MobSpawnInfo";
+import RatesBase from "../components/RatesBase";
 import Loading from "./Loading";
 import { useFetchSingleMapAndMobData } from "../hooks/useFetchSingleMapAndMobData";
 
@@ -48,7 +48,7 @@ export default function MapInfo(props: Props) {
               }
             })}
           </div>
-          <MobSpawnInfo mapData={mapData} mobData={mobData} />
+          <RatesBase mapData={mapData} mobData={mobData} />
         </section>
       )}
     </main>
