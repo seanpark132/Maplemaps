@@ -1,10 +1,8 @@
 import { MapData } from "../types/mapTypes";
-import { MobData } from "../types/mobTypes";
 import InfoGrid from "./InfoGrid";
 
 type Props = {
   mapData: MapData;
-  mobsData: (MobData | undefined)[];
   hourlyMobs: number;
   expRate: number;
   mesoRate: number;
@@ -38,7 +36,7 @@ export default function RatesBase(props: Props) {
   ];
 
   return (
-    <article className="h-fit w-fit rounded-lg border-2 p-4 md:ml-8 md:p-8">
+    <article className="mb-8 h-fit w-fit rounded-lg border-2 p-4 md:mb-0 md:ml-8 md:p-8">
       <h2>Base Rates:</h2>
       <p className="mb-4 mt-2 w-64 text-wrap">
         **Some capacity/gen and capacity numbers may be incorrect

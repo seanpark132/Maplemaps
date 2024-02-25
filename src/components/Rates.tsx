@@ -34,12 +34,18 @@ export default function Rates(props: Props) {
     <>
       <RatesBase
         mapData={props.mapData}
-        mobsData={props.mobsData}
         hourlyMobs={hourlyMobs}
         expRate={expRate}
         mesoRate={mesoRate}
       />
-      <RatesPersonal />
+      <RatesPersonal
+        hourlyMobs={hourlyMobs}
+        expRate={expRate}
+        mesoRate={mesoRate}
+        arcaneForce={props.mapData.arcaneForce}
+        sacredForce={props.mapData.sacredForce}
+        starForce={props.mapData.starForce}
+      />
     </>
   );
 }

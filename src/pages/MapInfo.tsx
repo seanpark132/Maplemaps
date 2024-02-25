@@ -44,7 +44,6 @@ export default function MapInfo(props: Props) {
         <section className="flex flex-col md:flex-row">
           <MobsInfo mobsData={mobsData} />
           <Rates mapData={mapData} mobsData={mobsData} />
-          <RatesPersonal />
         </section>
       )}
     </main>
