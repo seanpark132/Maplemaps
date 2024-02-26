@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PersonalGrid from "./PersonalGrid";
+import ExpSourcesGrid from "./ExpSourcesGrid";
 
 type Props = {
   totalBonusExpPercent: number;
@@ -66,7 +66,7 @@ export default function ExpSources(props: Props) {
 
   return (
     <span className="w-fit">
-      <PersonalGrid
+      <ExpSourcesGrid
         totalBonusExpPercent={props.totalBonusExpPercent}
         inputExpSources={inputExpSources}
         boolExpSources={boolExpSources}
