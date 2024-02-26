@@ -1,11 +1,11 @@
 type Props = {
   totalBonusExpPercent: number;
   inputExpSources: Record<string, number>;
-  boolExpSources: Record<string, boolean>;
+  checkboxExpSources: Record<string, boolean>;
   setInputExpSources: React.Dispatch<
     React.SetStateAction<Record<string, number>>
   >;
-  setBoolExpSources: React.Dispatch<
+  setCheckboxExpSources: React.Dispatch<
     React.SetStateAction<Record<string, boolean>>
   >;
 };
@@ -32,7 +32,7 @@ export default function ExpSourcesGrid(props: Props) {
             <label>{desc}:</label>
           </li>
         ))}
-        {Object.keys(props.boolExpSources).map((desc: string) => (
+        {Object.keys(props.checkboxExpSources).map((desc: string) => (
           <li key={desc} className="border p-1 font-semibold lg:p-3">
             {desc}:
           </li>
@@ -56,7 +56,7 @@ export default function ExpSourcesGrid(props: Props) {
             </li>
           ),
         )}
-        {Object.entries(props.boolExpSources).map(
+        {Object.entries(props.checkboxExpSources).map(
           ([name, value]: [string, boolean]) => (
             <li key={name} className="border p-1 font-semibold lg:p-3">
               <input
@@ -83,27 +83,27 @@ export default function ExpSourcesGrid(props: Props) {
 
   function handleBoolChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, checked } = e.target;
-    if (name === "2x Coupon" && props.boolExpSources["3x Coupon"]) {
-      props.setBoolExpSources((prev) => ({ ...prev, "3x Coupon": false }));
-    } else if (name === "3x Coupon" && props.boolExpSources["2x Coupon"]) {
-      props.setBoolExpSources((prev) => ({ ...prev, "2x Coupon": false }));
+    if (name === "2x Coupon" && props.checkboxExpSources["3x Coupon"]) {
+      props.setCheckboxExpSources((prev) => ({ ...prev, "3x Coupon": false }));
+    } else if (name === "3x Coupon" && props.checkboxExpSources["2x Coupon"]) {
+      props.setCheckboxExpSources((prev) => ({ ...prev, "2x Coupon": false }));
     } else if (
       name === "Real Holy Symbol" &&
-      props.boolExpSources["Decent Holy Symbol"]
+      props.checkboxExpSources["Decent Holy Symbol"]
     ) {
-      props.setBoolExpSources((prev) => ({
+      props.setCheckboxExpSources((prev) => ({
         ...prev,
         "Decent Holy Symbol": false,
       }));
     } else if (
       name === "Decent Holy Symbol" &&
-      props.boolExpSources["Real Holy Symbol"]
+      props.checkboxExpSources["Real Holy Symbol"]
     ) {
-      props.setBoolExpSources((prev) => ({
+      props.setCheckboxExpSources((prev) => ({
         ...prev,
         "Real Holy Symbol": false,
       }));
     }
-    props.setBoolExpSources((prev) => ({ ...prev, [name]: checked }));
+    props.setCheckboxExpSources((prev) => ({ ...prev, [name]: checked }));
   }
 }
