@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ExpSourcesGrid from "./ExpSourcesGrid";
+import { useExpSources } from "../hooks/useExpSources";
 
 type Props = {
   totalBonusExpPercent: number;
@@ -31,40 +32,16 @@ export default function ExpSources(props: Props) {
     "Decent Holy Symbol": false,
   });
 
-  const expValues = {
-    "2x Coupon": 100,
-    "3x Coupon": 200,
-    "MVP/50% Coupon": checkboxExpSources["2x Coupon"]
-      ? 100
-      : checkboxExpSources["3x Coupon"]
-        ? 150
-        : 50,
-    "MP Gold Potion": 10,
-    "Exp Accum Potion": 10,
-    "6 Dice": 30,
-    "Real Holy Symbol": 50,
-    "Decent Holy Symbol": 35,
-  };
+  const isFirstRender = useRef(true);
 
-  useEffect(() => {}, []);
-
-  useEffect(() => {
-    const inputSum = Object.values(inputExpSources).reduce((acc, item) => {
-      if (item) {
-        return acc + item;
-      }
-      return acc;
-    }, 0);
-
-    const boolSum = Object.entries(expValues).reduce((acc, item) => {
-      if (checkboxExpSources[item[0]]) {
-        return acc + item[1];
-      }
-      return acc;
-    }, 0);
-
-    props.setTotalBonusExpPercent(inputSum + boolSum);
-  }, [inputExpSources, checkboxExpSources]);
+  useExpSources(
+    inputExpSources,
+    checkboxExpSources,
+    isFirstRender,
+    setInputExpSources,
+    setCheckboxExpSources,
+    props.setTotalBonusExpPercent,
+  );
 
   return (
     <span className="w-fit">
