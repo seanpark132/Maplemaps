@@ -3,7 +3,8 @@ import { useEffect } from "react";
 export const useExpSources = (
   inputExpSources: Record<string, number>,
   checkboxExpSources: Record<string, boolean>,
-  isFirstRender: React.MutableRefObject<boolean>,
+  isFirstRender1: React.MutableRefObject<boolean>,
+  isFirstRender2: React.MutableRefObject<boolean>,
   setInputExpSources: React.Dispatch<
     React.SetStateAction<Record<string, number>>
   >,
@@ -35,20 +36,22 @@ export const useExpSources = (
 
     const storedCheckboxes = localStorage.getItem("checkboxExpSources");
     if (storedCheckboxes) {
+      console.log(storedCheckboxes);
       setCheckboxExpSources(JSON.parse(storedCheckboxes));
     }
   }, []);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
+    if (isFirstRender1.current) {
+      isFirstRender1.current = false;
       return;
     }
     localStorage.setItem("inputExpSources", JSON.stringify(inputExpSources));
   }, [inputExpSources]);
+
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
+    if (isFirstRender2.current) {
+      isFirstRender2.current = false;
       return;
     }
     localStorage.setItem(

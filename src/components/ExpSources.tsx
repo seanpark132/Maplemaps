@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import ExpSourcesGrid from "./ExpSourcesGrid";
 import { useExpSources } from "../hooks/useExpSources";
 
@@ -32,12 +32,14 @@ export default function ExpSources(props: Props) {
     "Decent Holy Symbol": false,
   });
 
-  const isFirstRender = useRef(true);
+  const isFirstRender1 = useRef(true);
+  const isFirstRender2 = useRef(true);
 
   useExpSources(
     inputExpSources,
     checkboxExpSources,
-    isFirstRender,
+    isFirstRender1,
+    isFirstRender2,
     setInputExpSources,
     setCheckboxExpSources,
     props.setTotalBonusExpPercent,
