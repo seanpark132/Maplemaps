@@ -11,7 +11,7 @@ type Props = {
 export default function PersonalConfigGrid(props: Props) {
   const MAX_INPUT_VALUES: Record<string, number> = {
     "Character Level": 300,
-    "Meso Obtained %": 177,
+    "Meso Obtained %": 247,
     Burning: 100,
     "Legion Exp ": 10,
     "Zero Legion Block": 12,

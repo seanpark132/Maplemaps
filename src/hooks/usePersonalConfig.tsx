@@ -12,11 +12,7 @@ export const usePersonalConfig = (
   const expValues = {
     "2x Coupon": 100,
     "3x Coupon": 200,
-    "MVP/50% Coupon": configCheckboxes["2x Coupon"]
-      ? 100
-      : configCheckboxes["3x Coupon"]
-        ? 150
-        : 50,
+    "MVP/50% Coupon": 50,
     "MP Gold Potion": 10,
     "Exp Accum Potion": 10,
     "6 Dice": 30,
