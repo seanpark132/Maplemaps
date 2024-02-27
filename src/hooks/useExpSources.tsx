@@ -3,8 +3,6 @@ import { useEffect } from "react";
 export const useExpSources = (
   inputExpSources: Record<string, number>,
   checkboxExpSources: Record<string, boolean>,
-  isFirstRender1: React.MutableRefObject<boolean>,
-  isFirstRender2: React.MutableRefObject<boolean>,
   setInputExpSources: React.Dispatch<
     React.SetStateAction<Record<string, number>>
   >,
@@ -36,37 +34,19 @@ export const useExpSources = (
 
     const storedCheckboxes = localStorage.getItem("checkboxExpSources");
     if (storedCheckboxes) {
-      console.log(storedCheckboxes);
       setCheckboxExpSources(JSON.parse(storedCheckboxes));
     }
   }, []);
 
   useEffect(() => {
-    if (isFirstRender1.current) {
-      isFirstRender1.current = false;
-      return;
-    }
-    localStorage.setItem("inputExpSources", JSON.stringify(inputExpSources));
-  }, [inputExpSources]);
-
-  useEffect(() => {
-    if (isFirstRender2.current) {
-      isFirstRender2.current = false;
-      return;
-    }
-    localStorage.setItem(
-      "checkboxExpSources",
-      JSON.stringify(checkboxExpSources),
-    );
-  }, [checkboxExpSources]);
-
-  useEffect(() => {
-    const inputSum = Object.values(inputExpSources).reduce((acc, item) => {
-      if (item) {
-        return acc + item;
-      }
-      return acc;
-    }, 0);
+    const inputSum = Object.values(inputExpSources)
+      .slice(2)
+      .reduce((acc, item) => {
+        if (item) {
+          return acc + item;
+        }
+        return acc;
+      }, 0);
 
     const boolSum = Object.entries(expValues).reduce((acc, item) => {
       if (checkboxExpSources[item[0]]) {
