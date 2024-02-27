@@ -1,5 +1,5 @@
 import { MobData } from "../types/mobTypes";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
 import { MapData } from "../types/mapTypes";
 import { useState } from "react";
 import Rates from "../components/Rates";

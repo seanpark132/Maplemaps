@@ -3,7 +3,7 @@ import {
   ARCANE_RIVER_WORLD_MAPS,
   GRANDIS_WORLD_MAPS,
   MAPLE_WORLD_MAPS,
-} from "../utils/GlobalVariables";
+} from "../utils/GlobalConstants";
 import { WorldMapData } from "../types/worldMapTypes";
 
 export const useFetchWorldMapsData = (

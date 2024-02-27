@@ -1,4 +1,4 @@
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
 import { MaxHP, MobData } from "../types/mobTypes";
 import InfoGrid from "./InfoGrid";
 

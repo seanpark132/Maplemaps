@@ -123,7 +123,7 @@ const LINK_AREA_Z_INDEX: string[] = ["WorldMap030", "WorldMap170"];
 const GOOGLE_CLOUD_IMAGE_URL: string =
   "https://storage.googleapis.com/maplemaps-2ab75.appspot.com";
 
-const LEVEL_EXP_MULTIPLIER = {
+const LEVEL_EXP_MULTIPLIER: Record<string, number> = {
   "40": 0.7,
   "39": 0.71,
   "38": 0.72,
@@ -215,7 +215,8 @@ const BASE_MESO_DROP_MULTIPLIER = {
   300: 7.5,
 };
 
-const LEVEL_MESO_MULTIPLIER = {
+const LEVEL_MESO_MULTIPLIER: Record<string, number> = {
+  "30": 0,
   "29": 0.03,
   "28": 0.17,
   "27": 0.24,

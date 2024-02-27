@@ -5,7 +5,7 @@ import {
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
   MAP_DOT_NUMBERS,
-} from "../utils/GlobalVariables";
+} from "../utils/GlobalConstants";
 import MapDotHover from "./MapDotHover";
 import { Map } from "../types/worldMapTypes";
 import { MapData } from "../types/mapTypes";
