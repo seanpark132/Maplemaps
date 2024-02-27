@@ -1,8 +1,13 @@
 import PersonalConfig from "./PersonalConfig";
 import InfoGrid from "./InfoGrid";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import {
+  LEVEL_EXP_MULTIPLIER,
+  LEVEL_MESO_MULTIPLIER,
+} from "../utils/GlobalConstants";
 
 type Props = {
+  mobLevels: (number | undefined)[];
   hourlyMobs: number;
   expRate: number;
   mesoRate: number;
@@ -22,11 +27,48 @@ export default function RatesPersonal(props: Props) {
     "Mercedes Link": 0,
     "Event Passive": 0,
     "Pendant of Spirit": 0,
+    "Other Exp Bonuses": 0,
   });
   const [totalBonusExpPercent, setTotalBonusExpPercent] = useState<number>(0);
-  const [isExpSourcesOpen, setIsExpSourcesOpen] = useState<boolean>(false);
+  const [isConfigOpen, setIsConfigOpen] = useState<boolean>(false);
+
+  const { levelExpMulti, levelMesoMulti } = useMemo(() => {
+    if (configInputs["Character Level"] === 0) {
+      return { levelExpMulti: 1, levelMesoMulti: 1 };
+    }
+
+    if (props.mobLevels.some((mobLevel) => mobLevel === undefined)) {
+      return { levelExpMulti: 1, levelMesoMulti: 1 };
+    }
+
+    let expMultiSum = 0;
+    let mesoMultiSum = 0;
+
+    props.mobLevels.forEach((mobLevel) => {
+      const levelDiff = configInputs["Character Level"] - mobLevel!;
+      if (levelDiff > 40) {
+        expMultiSum += 0.7;
+      } else if (levelDiff < -36) {
+        expMultiSum += 0.1;
+      } else {
+        expMultiSum += LEVEL_EXP_MULTIPLIER[String(levelDiff)];
+      }
+
+      if (String(levelDiff) in LEVEL_MESO_MULTIPLIER) {
+        mesoMultiSum += LEVEL_MESO_MULTIPLIER[String(levelDiff)];
+      }
+    });
+
+    const avgExpMulti =
+      Math.round((expMultiSum / props.mobLevels.length) * 100) / 100;
+    const avgMesoMulti =
+      Math.round((mesoMultiSum / props.mobLevels.length) * 100) / 100;
+    return { levelExpMulti: avgExpMulti, levelMesoMulti: avgMesoMulti };
+  }, [configInputs["Character Level"]]);
 
   const descriptions = [
+    "Level Exp Multiplier",
+    "Level Meso Multiplier",
     "Mobs / hour",
     "Exp / hour",
     "Meso / hour",
@@ -34,10 +76,25 @@ export default function RatesPersonal(props: Props) {
   ];
 
   const values = [
+    levelExpMulti,
+    levelMesoMulti,
     props.hourlyMobs.toLocaleString("US"),
-    props.expRate.toLocaleString("US"),
-    props.mesoRate.toLocaleString("US"),
-    (props.mesoRate * 6).toLocaleString("US"),
+    Math.round(
+      (props.expRate * levelExpMulti * (100 + totalBonusExpPercent)) / 100,
+    ).toLocaleString("US"),
+    Math.round(
+      (props.mesoRate *
+        levelMesoMulti *
+        (100 + configInputs["Meso Obtained %"])) /
+        100,
+    ).toLocaleString("US"),
+    Math.round(
+      (props.mesoRate *
+        levelMesoMulti *
+        (100 + configInputs["Meso Obtained %"]) *
+        6) /
+        100,
+    ).toLocaleString("US"),
   ];
 
   return (
@@ -45,13 +102,13 @@ export default function RatesPersonal(props: Props) {
       <h2>Personal Rates:</h2>
       <button
         className="mb-4 mt-2 rounded border p-2 text-green-700 dark:text-green-400"
-        onClick={() => setIsExpSourcesOpen((prev) => !prev)}
+        onClick={() => setIsConfigOpen((prev) => !prev)}
       >
-        {isExpSourcesOpen
+        {isConfigOpen
           ? "View Personal Rates"
           : "Click to configure personal rates"}
       </button>
-      {isExpSourcesOpen ? (
+      {isConfigOpen ? (
         <PersonalConfig
           configInputs={configInputs}
           setConfigInputs={setConfigInputs}

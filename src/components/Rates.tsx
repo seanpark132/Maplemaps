@@ -9,8 +9,9 @@ type Props = {
 };
 
 export default function Rates(props: Props) {
+  // component only renders when mobsData has length >= 1
   let averageExp = props.mobsData[0]!.raw.meta.exp;
-  let averageLevel = props.mobsData[0]!.raw.meta.exp;
+  let averageLevel = props.mobsData[0]!.raw.meta.level;
 
   if (props.mobsData.length > 1) {
     const numMobs = props.mobsData.length;
@@ -39,6 +40,7 @@ export default function Rates(props: Props) {
         mesoRate={mesoRate}
       />
       <RatesPersonal
+        mobLevels={props.mobsData.map((mob) => mob?.raw.meta.level)}
         hourlyMobs={hourlyMobs}
         expRate={expRate}
         mesoRate={mesoRate}
