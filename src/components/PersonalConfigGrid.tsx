@@ -25,7 +25,7 @@ export default function PersonalConfigGrid(props: Props) {
     <div className="flex w-fit rounded border">
       <ul>
         {Object.keys(props.configInputs)
-          .slice(0, 2)
+          .slice(0, 3)
           .map((desc: string) => (
             <li key={desc} className="border p-1 font-semibold lg:p-3">
               <label>{desc}:</label>
@@ -35,7 +35,7 @@ export default function PersonalConfigGrid(props: Props) {
           Total Bonus Exp %:
         </li>
         {Object.keys(props.configInputs)
-          .slice(2)
+          .slice(3)
           .map((desc: string) => (
             <li key={desc} className="border p-1 font-semibold lg:p-3">
               <label>{desc}:</label>
@@ -49,7 +49,7 @@ export default function PersonalConfigGrid(props: Props) {
       </ul>
       <ul>
         {Object.entries(props.configInputs)
-          .slice(0, 2)
+          .slice(0, 3)
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
@@ -66,7 +66,7 @@ export default function PersonalConfigGrid(props: Props) {
           {props.totalBonusExpPercent}
         </li>
         {Object.entries(props.configInputs)
-          .slice(2)
+          .slice(3)
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input

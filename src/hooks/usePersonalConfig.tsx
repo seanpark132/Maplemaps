@@ -34,7 +34,7 @@ export const usePersonalConfig = (
 
   useEffect(() => {
     const inputSum = Object.values(configInputs)
-      .slice(2)
+      .slice(3)
       .reduce((acc, item) => {
         if (item) {
           return acc + item;
