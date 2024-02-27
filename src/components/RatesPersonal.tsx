@@ -1,4 +1,4 @@
-import ExpSources from "./ExpSources";
+import PersonalConfig from "./PersonalConfig";
 import InfoGrid from "./InfoGrid";
 import { useState } from "react";
 
@@ -12,9 +12,7 @@ type Props = {
 };
 
 export default function RatesPersonal(props: Props) {
-  const [inputExpSources, setInputExpSources] = useState<
-    Record<string, number>
-  >({
+  const [configInputs, setConfigInputs] = useState<Record<string, number>>({
     "Character Level": 0,
     "Meso Obtained %": 0,
     Burning: 0,
@@ -51,12 +49,12 @@ export default function RatesPersonal(props: Props) {
       >
         {isExpSourcesOpen
           ? "View Personal Rates"
-          : "Click here to add bonus EXP sources"}
+          : "Click to configure personal rates"}
       </button>
       {isExpSourcesOpen ? (
-        <ExpSources
-          inputExpSources={inputExpSources}
-          setInputExpSources={setInputExpSources}
+        <PersonalConfig
+          configInputs={configInputs}
+          setConfigInputs={setConfigInputs}
           totalBonusExpPercent={totalBonusExpPercent}
           setTotalBonusExpPercent={setTotalBonusExpPercent}
         />

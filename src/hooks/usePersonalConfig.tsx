@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 
-export const useExpSources = (
-  inputExpSources: Record<string, number>,
-  checkboxExpSources: Record<string, boolean>,
-  setInputExpSources: React.Dispatch<
-    React.SetStateAction<Record<string, number>>
-  >,
-  setCheckboxExpSources: React.Dispatch<
+export const usePersonalConfig = (
+  configInputs: Record<string, number>,
+  configCheckboxes: Record<string, boolean>,
+  setConfigInputs: React.Dispatch<React.SetStateAction<Record<string, number>>>,
+  setConfigCheckboxes: React.Dispatch<
     React.SetStateAction<Record<string, boolean>>
   >,
   setTotalBonusExpPercent: React.Dispatch<React.SetStateAction<number>>,
@@ -14,9 +12,9 @@ export const useExpSources = (
   const expValues = {
     "2x Coupon": 100,
     "3x Coupon": 200,
-    "MVP/50% Coupon": checkboxExpSources["2x Coupon"]
+    "MVP/50% Coupon": configCheckboxes["2x Coupon"]
       ? 100
-      : checkboxExpSources["3x Coupon"]
+      : configCheckboxes["3x Coupon"]
         ? 150
         : 50,
     "MP Gold Potion": 10,
@@ -27,19 +25,19 @@ export const useExpSources = (
   };
 
   useEffect(() => {
-    const storedInputs = localStorage.getItem("inputExpSources");
+    const storedInputs = localStorage.getItem("configInputs");
     if (storedInputs) {
-      setInputExpSources(JSON.parse(storedInputs));
+      setConfigInputs(JSON.parse(storedInputs));
     }
 
-    const storedCheckboxes = localStorage.getItem("checkboxExpSources");
+    const storedCheckboxes = localStorage.getItem("configCheckboxes");
     if (storedCheckboxes) {
-      setCheckboxExpSources(JSON.parse(storedCheckboxes));
+      setConfigCheckboxes(JSON.parse(storedCheckboxes));
     }
   }, []);
 
   useEffect(() => {
-    const inputSum = Object.values(inputExpSources)
+    const inputSum = Object.values(configInputs)
       .slice(2)
       .reduce((acc, item) => {
         if (item) {
@@ -49,12 +47,12 @@ export const useExpSources = (
       }, 0);
 
     const boolSum = Object.entries(expValues).reduce((acc, item) => {
-      if (checkboxExpSources[item[0]]) {
+      if (configCheckboxes[item[0]]) {
         return acc + item[1];
       }
       return acc;
     }, 0);
 
     setTotalBonusExpPercent(inputSum + boolSum);
-  }, [inputExpSources, checkboxExpSources]);
+  }, [configInputs, configCheckboxes]);
 };
