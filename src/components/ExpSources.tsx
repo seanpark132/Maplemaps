@@ -1,24 +1,16 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import ExpSourcesGrid from "./ExpSourcesGrid";
 import { useExpSources } from "../hooks/useExpSources";
 
 type Props = {
+  inputExpSources: Record<string, number>;
+  setInputExpSources: React.Dispatch<
+    React.SetStateAction<Record<string, number>>
+  >;
   totalBonusExpPercent: number;
   setTotalBonusExpPercent: React.Dispatch<React.SetStateAction<number>>;
 };
 export default function ExpSources(props: Props) {
-  const [inputExpSources, setInputExpSources] = useState<
-    Record<string, number>
-  >({
-    Burning: 0,
-    "Legion Exp ": 0,
-    "Zero Legion Block": 0,
-    "Hyper Stat": 0,
-    "Mercedes Link": 0,
-    "Event Passive": 0,
-    "Pendant of Spirit": 0,
-  });
-
   const [checkboxExpSources, setCheckboxExpSources] = useState<
     Record<string, boolean>
   >({
@@ -32,15 +24,10 @@ export default function ExpSources(props: Props) {
     "Decent Holy Symbol": false,
   });
 
-  const isFirstRender1 = useRef(true);
-  const isFirstRender2 = useRef(true);
-
   useExpSources(
-    inputExpSources,
+    props.inputExpSources,
     checkboxExpSources,
-    isFirstRender1,
-    isFirstRender2,
-    setInputExpSources,
+    props.setInputExpSources,
     setCheckboxExpSources,
     props.setTotalBonusExpPercent,
   );
@@ -49,9 +36,9 @@ export default function ExpSources(props: Props) {
     <span className="w-fit">
       <ExpSourcesGrid
         totalBonusExpPercent={props.totalBonusExpPercent}
-        inputExpSources={inputExpSources}
+        inputExpSources={props.inputExpSources}
         checkboxExpSources={checkboxExpSources}
-        setInputExpSources={setInputExpSources}
+        setInputExpSources={props.setInputExpSources}
         setCheckboxExpSources={setCheckboxExpSources}
       />
     </span>

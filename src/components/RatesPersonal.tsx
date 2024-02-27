@@ -12,8 +12,19 @@ type Props = {
 };
 
 export default function RatesPersonal(props: Props) {
-  const [userLevel, setUserLevel] = useState<number>(0);
-  const [totalMesoPercent, setTotalMesoPercent] = useState<number>(0);
+  const [inputExpSources, setInputExpSources] = useState<
+    Record<string, number>
+  >({
+    "Character Level": 0,
+    "Meso Obtained %": 0,
+    Burning: 0,
+    "Legion Exp ": 0,
+    "Zero Legion Block": 0,
+    "Hyper Stat": 0,
+    "Mercedes Link": 0,
+    "Event Passive": 0,
+    "Pendant of Spirit": 0,
+  });
   const [totalBonusExpPercent, setTotalBonusExpPercent] = useState<number>(0);
   const [isExpSourcesOpen, setIsExpSourcesOpen] = useState<boolean>(false);
 
@@ -44,6 +55,8 @@ export default function RatesPersonal(props: Props) {
       </button>
       {isExpSourcesOpen ? (
         <ExpSources
+          inputExpSources={inputExpSources}
+          setInputExpSources={setInputExpSources}
           totalBonusExpPercent={totalBonusExpPercent}
           setTotalBonusExpPercent={setTotalBonusExpPercent}
         />

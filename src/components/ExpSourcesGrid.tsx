@@ -12,6 +12,8 @@ type Props = {
 
 export default function ExpSourcesGrid(props: Props) {
   const MAX_INPUT_VALUES: Record<string, number> = {
+    "Character Level": 300,
+    "Meso Obtained %": 177,
     Burning: 100,
     "Legion Exp ": 10,
     "Zero Legion Block": 12,
@@ -24,14 +26,24 @@ export default function ExpSourcesGrid(props: Props) {
   return (
     <div className="flex w-fit rounded border">
       <ul>
+        {Object.keys(props.inputExpSources)
+          .slice(0, 2)
+          .map((desc: string) => (
+            <li key={desc} className="border p-1 font-semibold lg:p-3">
+              <label>{desc}:</label>
+            </li>
+          ))}
+
         <li className="border bg-green-300 p-1  font-semibold lg:p-3 dark:bg-green-700">
           Total Bonus Exp %:
         </li>
-        {Object.keys(props.inputExpSources).map((desc: string) => (
-          <li key={desc} className="border p-1 font-semibold lg:p-3">
-            <label>{desc}:</label>
-          </li>
-        ))}
+        {Object.keys(props.inputExpSources)
+          .slice(2)
+          .map((desc: string) => (
+            <li key={desc} className="border p-1 font-semibold lg:p-3">
+              <label>{desc}:</label>
+            </li>
+          ))}
         {Object.keys(props.checkboxExpSources).map((desc: string) => (
           <li key={desc} className="border p-1 font-semibold lg:p-3">
             {desc}:
@@ -39,11 +51,9 @@ export default function ExpSourcesGrid(props: Props) {
         ))}
       </ul>
       <ul>
-        <li className="border bg-green-300 p-1 font-semibold lg:p-3 dark:bg-green-700">
-          {props.totalBonusExpPercent}
-        </li>
-        {Object.entries(props.inputExpSources).map(
-          ([name, value]: [string, number]) => (
+        {Object.entries(props.inputExpSources)
+          .slice(0, 2)
+          .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
                 className="w-16 border p-1 font-semibold lg:w-28 lg:p-3"
@@ -54,8 +64,24 @@ export default function ExpSourcesGrid(props: Props) {
                 onChange={(e) => handleInputChange(e)}
               />
             </li>
-          ),
-        )}
+          ))}
+        <li className="border bg-green-300 p-1 font-semibold lg:p-3 dark:bg-green-700">
+          {props.totalBonusExpPercent}
+        </li>
+        {Object.entries(props.inputExpSources)
+          .slice(2)
+          .map(([name, value]: [string, number]) => (
+            <li key={name}>
+              <input
+                className="w-16 border p-1 font-semibold lg:w-28 lg:p-3"
+                type="number"
+                name={name}
+                max={MAX_INPUT_VALUES[name]}
+                value={value}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </li>
+          ))}
         {Object.entries(props.checkboxExpSources).map(
           ([name, value]: [string, boolean]) => (
             <li key={name} className="border p-1 font-semibold lg:p-3">
@@ -64,7 +90,7 @@ export default function ExpSourcesGrid(props: Props) {
                 name={name}
                 className="border p-1 font-semibold lg:p-3"
                 checked={value}
-                onChange={(e) => handleBoolChange(e)}
+                onChange={(e) => handleCheckboxChange(e)}
               />
             </li>
           ),
@@ -78,32 +104,31 @@ export default function ExpSourcesGrid(props: Props) {
     if (parseInt(value) > MAX_INPUT_VALUES[name]) {
       value = String(MAX_INPUT_VALUES[name]);
     }
-    props.setInputExpSources((prev) => ({ ...prev, [name]: parseInt(value) }));
+    props.setInputExpSources((prev) => {
+      const newPrev = { ...prev, [name]: parseInt(value) };
+      localStorage.setItem("inputExpSources", JSON.stringify(newPrev));
+      return newPrev;
+    });
   }
 
-  function handleBoolChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, checked } = e.target;
-    if (name === "2x Coupon" && props.checkboxExpSources["3x Coupon"]) {
-      props.setCheckboxExpSources((prev) => ({ ...prev, "3x Coupon": false }));
-    } else if (name === "3x Coupon" && props.checkboxExpSources["2x Coupon"]) {
-      props.setCheckboxExpSources((prev) => ({ ...prev, "2x Coupon": false }));
-    } else if (
-      name === "Real Holy Symbol" &&
-      props.checkboxExpSources["Decent Holy Symbol"]
-    ) {
-      props.setCheckboxExpSources((prev) => ({
-        ...prev,
-        "Decent Holy Symbol": false,
-      }));
-    } else if (
-      name === "Decent Holy Symbol" &&
-      props.checkboxExpSources["Real Holy Symbol"]
-    ) {
-      props.setCheckboxExpSources((prev) => ({
-        ...prev,
-        "Real Holy Symbol": false,
-      }));
-    }
-    props.setCheckboxExpSources((prev) => ({ ...prev, [name]: checked }));
+    const exclusions: Record<string, string> = {
+      "2x Coupon": "3x Coupon",
+      "3x Coupon": "2x Coupon",
+      "Real Holy Symbol": "Decent Holy Symbol",
+      "Decent Holy Symbol": "Real Holy Symbol",
+    };
+
+    props.setCheckboxExpSources((prev) => {
+      const newPrev = { ...prev, [name]: checked };
+
+      if (exclusions[name] && checked) {
+        newPrev[exclusions[name]] = false;
+      }
+
+      localStorage.setItem("checkboxExpSources", JSON.stringify(newPrev));
+      return newPrev;
+    });
   }
 }
