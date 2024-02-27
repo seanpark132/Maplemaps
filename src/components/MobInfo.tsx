@@ -15,7 +15,9 @@ export default function MobInfo(props: Props) {
   const descriptions = ["Level", "Exp", "HP"];
   const values = [
     props.mobData.raw.meta.level,
-    props.mobData.raw.meta.exp!.toLocaleString("US"),
+    props.mobData.raw.meta.exp
+      ? props.mobData.raw.meta.exp.toLocaleString("US")
+      : 0,
     `${` ${maxHP.toLocaleString("US")}`}`,
   ];
 
