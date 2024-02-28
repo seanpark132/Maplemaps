@@ -10,6 +10,7 @@ import MapDotHover from "./MapDotHover";
 import { Map } from "../types/worldMapTypes";
 import { MapData } from "../types/mapTypes";
 import { MobData } from "../types/mobTypes";
+import { Link } from "react-router-dom";
 
 type Props = {
   currentWorldMap: string;
@@ -43,8 +44,9 @@ export default function MapDot(props: Props) {
         .y;
   }
   return (
-    <span
-      className="map-dot-container absolute"
+    <Link
+      className="map-dot-container absolute p-1"
+      to={`/map/${props.map.mapNumbers[0]}`}
       style={{
         left: `${left}px`,
         top: `${top}px`,
@@ -64,6 +66,6 @@ export default function MapDot(props: Props) {
         onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
         alt="World Map Dot"
       />
-    </span>
+    </Link>
   );
 }
