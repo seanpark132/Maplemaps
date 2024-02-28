@@ -1,10 +1,11 @@
-import PersonalConfig from "./PersonalConfig";
+import PersonalConfigGrid from "./PersonalConfigGrid";
 import InfoGrid from "./InfoGrid";
 import { useState, useMemo } from "react";
 import {
   LEVEL_EXP_MULTIPLIER,
   LEVEL_MESO_MULTIPLIER,
 } from "../utils/GlobalConstants";
+import { usePersonalConfig } from "../hooks/usePersonalConfig";
 
 type Props = {
   mobLevels: (number | undefined)[];
@@ -29,6 +30,18 @@ export default function RatesPersonal(props: Props) {
     "Event Passive": 0,
     "Pendant of Spirit": 0,
     "Other Exp Bonuses": 0,
+  });
+  const [configCheckboxes, setConfigCheckboxes] = useState<
+    Record<string, boolean>
+  >({
+    "2x Coupon": false,
+    "3x Coupon": false,
+    "MVP/50% Coupon": false,
+    "MP Gold Potion": false,
+    "Exp Accum Potion": false,
+    "6 Dice": false,
+    "Real Holy Symbol": false,
+    "Decent Holy Symbol": false,
   });
   const [totalBonusExpPercent, setTotalBonusExpPercent] = useState<number>(0);
   const [isConfigOpen, setIsConfigOpen] = useState<boolean>(false);
@@ -66,6 +79,14 @@ export default function RatesPersonal(props: Props) {
       Math.round((mesoMultiSum / props.mobLevels.length) * 100) / 100;
     return { levelExpMulti: avgExpMulti, levelMesoMulti: avgMesoMulti };
   }, [configInputs["Character Level"]]);
+
+  usePersonalConfig(
+    configInputs,
+    configCheckboxes,
+    setConfigInputs,
+    setConfigCheckboxes,
+    setTotalBonusExpPercent,
+  );
 
   const descriptions = [
     "Level Exp Multiplier",
@@ -118,11 +139,12 @@ export default function RatesPersonal(props: Props) {
           : "Click to configure personal rates"}
       </button>
       {isConfigOpen ? (
-        <PersonalConfig
-          configInputs={configInputs}
-          setConfigInputs={setConfigInputs}
+        <PersonalConfigGrid
           totalBonusExpPercent={totalBonusExpPercent}
-          setTotalBonusExpPercent={setTotalBonusExpPercent}
+          configInputs={configInputs}
+          configCheckboxes={configCheckboxes}
+          setConfigInputs={setConfigInputs}
+          setConfigCheckboxes={setConfigCheckboxes}
         />
       ) : (
         <InfoGrid descriptions={descriptions} values={values} />

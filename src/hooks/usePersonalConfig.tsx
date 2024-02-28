@@ -23,7 +23,13 @@ export const usePersonalConfig = (
   useEffect(() => {
     const storedInputs = localStorage.getItem("configInputs");
     if (storedInputs) {
-      setConfigInputs(JSON.parse(storedInputs));
+      let parsed = JSON.parse(storedInputs);
+      for (let key in parsed) {
+        if (parsed[key] === null) {
+          parsed[key] = 0;
+        }
+      }
+      setConfigInputs(parsed);
     }
 
     const storedCheckboxes = localStorage.getItem("configCheckboxes");

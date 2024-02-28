@@ -74,7 +74,7 @@ export default function PersonalConfigGrid(props: Props) {
                 type="number"
                 name={name}
                 max={MAX_INPUT_VALUES[name]}
-                value={value}
+                value={isNaN(value) ? "" : value}
                 onChange={(e) => handleInputChange(e)}
               />
             </li>
