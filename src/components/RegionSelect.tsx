@@ -4,7 +4,7 @@ import {
   GOOGLE_CLOUD_IMAGE_URL,
   GRANDIS_WORLD_MAP_NAME,
   MAPLE_WORLD_MAP_NAME,
-} from "../utils/GlobalVariables";
+} from "../utils/GlobalConstants";
 
 type Props = {
   setSearchParams: ReturnType<typeof useSearchParams>[1];

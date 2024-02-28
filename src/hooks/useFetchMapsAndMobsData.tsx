@@ -9,7 +9,7 @@ import {
   GRANDIS_WORLD_MAP_NAME,
   MAPLE_WORLD_MAPS,
   MAPLE_WORLD_MAP_NAME,
-} from "../utils/GlobalVariables";
+} from "../utils/GlobalConstants";
 
 export const useFetchMapsAndMobsData = (
   worldMap: string | null,

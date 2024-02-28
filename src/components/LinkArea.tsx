@@ -4,7 +4,7 @@ import {
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
   LINK_AREA_Z_INDEX,
-} from "../utils/GlobalVariables";
+} from "../utils/GlobalConstants";
 import { Link, WorldMapData } from "../types/worldMapTypes";
 
 type Props = {

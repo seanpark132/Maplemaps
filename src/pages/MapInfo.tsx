@@ -1,11 +1,11 @@
 import { MobData } from "../types/mobTypes";
-import MobInfo from "../components/MobInfo";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
 import { MapData } from "../types/mapTypes";
 import { useState } from "react";
-import MobSpawnInfo from "../components/MobSpawnInfo";
+import Rates from "../components/Rates";
 import Loading from "./Loading";
 import { useFetchSingleMapAndMobData } from "../hooks/useFetchSingleMapAndMobData";
+import MobsInfo from "../components/MobsInfo";
 
 type Props = {
   id: number;
@@ -16,22 +16,22 @@ type Props = {
 
 export default function MapInfo(props: Props) {
   const [mapData, setMapData] = useState<MapData | undefined>();
-  const [mobData, setMobData] = useState<(MobData | undefined)[]>([]);
+  const [mobsData, setMobsData] = useState<(MobData | undefined)[]>([]);
 
   useFetchSingleMapAndMobData(
     props.id,
     props.mapsData,
     props.mobsData,
     setMapData,
-    setMobData,
+    setMobsData,
   );
 
-  if (!mapData || !mobData || !props.mapIds) {
+  if (!mapData || !mobsData || !props.mapIds) {
     return <Loading />;
   }
 
   return (
-    <main className="flex w-full flex-col lg:p-6">
+    <main className="flex w-full flex-col lg:p-6 lg:pt-4">
       <h2 className="my-6">
         {mapData.streetName} : {mapData.name}
       </h2>
@@ -39,16 +39,10 @@ export default function MapInfo(props: Props) {
         src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${mapData.map_id}.png`}
         className="image-max-height mb-8 rounded-lg border-2 object-contain"
       />
-      {mobData && mobData.length > 0 && (
+      {mobsData && mobsData.length > 0 && (
         <section className="flex flex-col md:flex-row">
-          <div className="mb-8 flex w-fit flex-col justify-center rounded-lg border-2 md:mb-0">
-            {mobData.map((mob: MobData | undefined) => {
-              if (mob) {
-                return <MobInfo key={mob.mob_id} mobData={mob} />;
-              }
-            })}
-          </div>
-          <MobSpawnInfo mapData={mapData} mobData={mobData} />
+          <MobsInfo mobsData={mobsData} />
+          <Rates mapData={mapData} mobsData={mobsData} />
         </section>
       )}
     </main>

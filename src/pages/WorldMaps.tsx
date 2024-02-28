@@ -3,7 +3,7 @@ import Loading from "./Loading.tsx";
 import LinkArea from "../components/LinkArea";
 import MapDot from "../components/MapDot.tsx";
 import RegionSelect from "../components/RegionSelect";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalVariables.ts";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants.ts";
 import { Link, Map, WorldMapData } from "../types/worldMapTypes.ts";
 import { MapData } from "../types/mapTypes.ts";
 import { MobData } from "../types/mobTypes.ts";

@@ -35,6 +35,10 @@ li {
   font-size: 0.875rem;
 }
 
+input {
+  background-color: #242424;
+}
+
 h1 {
   font-size: 1.75rem;
   font-weight: 600;
@@ -48,6 +52,10 @@ h2 {
 @media (prefers-color-scheme: light) {
   :root {
     color: #242424;
+    background-color: #ffffff;
+  }
+
+  input {
     background-color: #ffffff;
   }
 }
