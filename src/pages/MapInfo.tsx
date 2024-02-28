@@ -6,7 +6,6 @@ import Rates from "../components/Rates";
 import Loading from "./Loading";
 import { useFetchSingleMapAndMobData } from "../hooks/useFetchSingleMapAndMobData";
 import MobsInfo from "../components/MobsInfo";
-import RatesPersonal from "../components/RatesPersonal";
 
 type Props = {
   id: number;
