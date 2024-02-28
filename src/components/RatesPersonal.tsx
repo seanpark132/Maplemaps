@@ -89,12 +89,12 @@ export default function RatesPersonal(props: Props) {
   );
 
   const descriptions = [
-    "Level Exp Multiplier",
-    "Level Meso Multiplier",
-    "Mobs / hour",
-    "Exp / hour",
-    "Meso / hour",
-    "Meso / hour (reboot)",
+    "Level Exp Multi",
+    "Level Meso Multi",
+    "Mobs/hour",
+    "Exp/hour",
+    "Meso/hour",
+    "Meso/hour (Reboot)",
   ];
 
   const hourlyMobsMulti = configInputs["Custom mobs / hour"] / props.hourlyMobs;

@@ -31,7 +31,7 @@ export default function PersonalConfigGrid(props: Props) {
               <label>{desc}:</label>
             </li>
           ))}
-        <li className="border bg-green-300 p-1  font-semibold lg:p-3 dark:bg-green-700">
+        <li className="border bg-green-300 p-1 font-semibold lg:p-3 dark:bg-green-700">
           Total Bonus Exp %:
         </li>
         {Object.keys(props.configInputs)
