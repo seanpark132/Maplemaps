@@ -48,8 +48,8 @@ export default function MapDot(props: Props) {
       className="map-dot-container absolute p-1"
       to={`/map/${props.map.mapNumbers[0]}`}
       style={{
-        left: `${left}px`,
-        top: `${top}px`,
+        left: `${left - 4}px`,
+        top: `${top - 4}px`,
       }}
     >
       {props.map.mapNumbers.length > 0 && !props.map.noTooltip && (
