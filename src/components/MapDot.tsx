@@ -44,28 +44,38 @@ export default function MapDot(props: Props) {
         .y;
   }
   return (
-    <Link
+    <span
       className="map-dot-container absolute p-1"
-      to={`/map/${props.map.mapNumbers[0]}`}
       style={{
         left: `${left - 4}px`,
         top: `${top - 4}px`,
       }}
     >
-      {props.map.mapNumbers.length > 0 && !props.map.noTooltip && (
-        <MapDotHover
-          key={props.map.mapNumbers[0]}
-          mapNumber={props.map.mapNumbers[0]}
-          mapsData={props.mapsData}
-          mobsData={props.mobsData}
+      {props.map.mapNumbers.length > 0 && !props.map.noTooltip ? (
+        <>
+          <Link to={`/map/${props.map.mapNumbers[0]}`}>
+            <img
+              className="z-10"
+              src={`${GOOGLE_CLOUD_IMAGE_URL}/dots/${props.map.type}.png`}
+              onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
+              alt="World Map Dot"
+            />
+          </Link>
+          <MapDotHover
+            key={props.map.mapNumbers[0]}
+            mapNumber={props.map.mapNumbers[0]}
+            mapsData={props.mapsData}
+            mobsData={props.mobsData}
+          />
+        </>
+      ) : (
+        <img
+          className="z-10"
+          src={`${GOOGLE_CLOUD_IMAGE_URL}/dots/${props.map.type}.png`}
+          onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
+          alt="World Map Dot"
         />
       )}
-      <img
-        className="z-10"
-        src={`${GOOGLE_CLOUD_IMAGE_URL}/dots/${props.map.type}.png`}
-        onLoad={(e) => updateImgDimensions(e.target as HTMLImageElement)}
-        alt="World Map Dot"
-      />
-    </Link>
+    </span>
   );
 }
