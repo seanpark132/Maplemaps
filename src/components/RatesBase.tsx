@@ -4,6 +4,7 @@ import InfoGrid from "./InfoGrid";
 type Props = {
   mapData: MapData;
   hourlyMobs: number;
+  hourlyMobsInstanced: number;
   hourlyMobsFrenzy: number;
   expRate: number;
   mesoRate: number;
@@ -12,6 +13,7 @@ type Props = {
 export default function RatesBase(props: Props) {
   const descriptions = [
     "Mobs/hour",
+    ...(props.mapData.sacredForce ? ["Mobs/hour (Instanced)"] : []),
     "Mobs/hour (Frenzy)",
     "Exp/hour",
     "Meso/hour",
@@ -26,6 +28,9 @@ export default function RatesBase(props: Props) {
 
   const values = [
     props.hourlyMobs.toLocaleString("US"),
+    ...(props.mapData.sacredForce
+      ? [props.hourlyMobsInstanced.toLocaleString("US")]
+      : []),
     props.hourlyMobsFrenzy.toLocaleString("US"),
     props.expRate.toLocaleString("US"),
     props.mesoRate.toLocaleString("US"),

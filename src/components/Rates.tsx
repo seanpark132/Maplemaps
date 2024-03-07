@@ -28,6 +28,9 @@ export default function Rates(props: Props) {
   }
 
   const hourlyMobs = props.mapData.capacityPerGen * 480;
+  const hourlyMobsInstanced = props.mapData.sacredForce
+    ? (props.mapData.capacityPerGen + 1) * 480
+    : 0;
   const hourlyMobsFrenzy =
     Math.min(props.mapData.capacityPerGen * 1.7, props.mapData.numMobs) * 1666;
   const expRate = hourlyMobs * (averageExp ? averageExp : 0);
@@ -38,6 +41,7 @@ export default function Rates(props: Props) {
       <RatesBase
         mapData={props.mapData}
         hourlyMobs={hourlyMobs}
+        hourlyMobsInstanced={hourlyMobsInstanced}
         hourlyMobsFrenzy={hourlyMobsFrenzy}
         expRate={expRate}
         mesoRate={mesoRate}
