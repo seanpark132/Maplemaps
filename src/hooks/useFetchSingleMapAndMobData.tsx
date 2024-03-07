@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { MapData } from "../types/mapTypes";
-import { MobData } from "../types/mobTypes";
+import { MapData, MobData } from "../types/dataTypes";
 
 export const useFetchSingleMapAndMobData = (
   id: number,

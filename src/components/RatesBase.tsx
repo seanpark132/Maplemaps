@@ -1,4 +1,4 @@
-import { MapData } from "../types/mapTypes";
+import { MapData } from "../types/dataTypes";
 import InfoGrid from "./InfoGrid";
 
 type Props = {

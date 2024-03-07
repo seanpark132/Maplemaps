@@ -4,9 +4,13 @@ import LinkArea from "../components/LinkArea";
 import MapDot from "../components/MapDot.tsx";
 import RegionSelect from "../components/RegionSelect";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants.ts";
-import { Link, Map, WorldMapData } from "../types/worldMapTypes.ts";
-import { MapData } from "../types/mapTypes.ts";
-import { MobData } from "../types/mobTypes.ts";
+import {
+  Link,
+  Map,
+  WorldMapData,
+  MapData,
+  MobData,
+} from "../types/dataTypes.ts";
 import { useFetchWorldMapsData } from "../hooks/useFetchWorldMapsData.tsx";
 import { useFetchMapsAndMobsData } from "../hooks/useFetchMapsAndMobsData.tsx";
 

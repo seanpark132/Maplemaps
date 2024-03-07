@@ -1,5 +1,5 @@
 import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
-import { MaxHP, MobData } from "../types/mobTypes";
+import { MobData } from "../types/dataTypes";
 import InfoGrid from "./InfoGrid";
 
 type Props = {
@@ -7,7 +7,8 @@ type Props = {
 };
 
 export default function MobInfo(props: Props) {
-  let maxHP: number | MaxHP | undefined = props.mobData.raw.meta.maxHP;
+  let maxHP: number | { $numberLong: string } | undefined =
+    props.mobData.raw.meta.maxHP;
   if (typeof maxHP !== "number") {
     maxHP = Number(maxHP?.$numberLong);
   }

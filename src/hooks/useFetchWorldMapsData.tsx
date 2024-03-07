@@ -4,7 +4,7 @@ import {
   GRANDIS_WORLD_MAPS,
   MAPLE_WORLD_MAPS,
 } from "../utils/GlobalConstants";
-import { WorldMapData } from "../types/worldMapTypes";
+import { WorldMapData } from "../types/dataTypes";
 
 export const useFetchWorldMapsData = (
   worldMap: string | null,

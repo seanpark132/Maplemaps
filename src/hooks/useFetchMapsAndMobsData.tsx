@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { MapData } from "../types/mapTypes";
-import { MobData } from "../types/mobTypes";
-import { WorldMapData } from "../types/worldMapTypes";
+import { WorldMapData, MapData, MobData } from "../types/dataTypes";
 import {
   ARCANE_RIVER_WORLD_MAPS,
   ARCANE_RIVER_WORLD_MAP_NAME,

@@ -7,9 +7,7 @@ import {
   MAP_DOT_NUMBERS,
 } from "../utils/GlobalConstants";
 import MapDotHover from "./MapDotHover";
-import { Map } from "../types/worldMapTypes";
-import { MapData } from "../types/mapTypes";
-import { MobData } from "../types/mobTypes";
+import { Map, MapData, MobData } from "../types/dataTypes";
 import { Link } from "react-router-dom";
 
 type Props = {
