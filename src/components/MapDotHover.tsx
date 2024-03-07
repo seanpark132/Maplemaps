@@ -33,7 +33,7 @@ export default function MapDotHover(props: Props) {
             <p
               key={mob.mob_id}
               className="text-nowrap text-red-500"
-            >{`${mob.raw.name} (Lv. ${mob.raw.meta.level})`}</p>
+            >{`${mob.name} (Lv. ${mob.level})`}</p>
           );
         }
       })}
