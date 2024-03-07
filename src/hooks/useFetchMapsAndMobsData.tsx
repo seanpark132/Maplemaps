@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { MapData } from "../types/mapTypes";
-import { MobData } from "../types/mobTypes";
-import { WorldMapData } from "../types/worldMapTypes";
+import { WorldMapData, MapData, MobData } from "../types/dataTypes";
 import {
   ARCANE_RIVER_WORLD_MAPS,
   ARCANE_RIVER_WORLD_MAP_NAME,
@@ -38,7 +36,7 @@ export const useFetchMapsAndMobsData = (
     const fetchMapsAndMobsData = async () => {
       try {
         const mapsReq = new Request(
-          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -57,7 +55,7 @@ export const useFetchMapsAndMobsData = (
         }, []);
 
         const mobsReq = new Request(
-          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

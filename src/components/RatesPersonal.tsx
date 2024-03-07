@@ -8,7 +8,7 @@ import {
 import { usePersonalConfig } from "../hooks/usePersonalConfig";
 
 type Props = {
-  mobLevels: (number | undefined)[];
+  mobLevels: number[];
   hourlyMobs: number;
   expRate: number;
   mesoRate: number;
@@ -59,7 +59,7 @@ export default function RatesPersonal(props: Props) {
     let mesoMultiSum = 0;
 
     props.mobLevels.forEach((mobLevel) => {
-      const levelDiff = configInputs["Character Level"] - mobLevel!;
+      const levelDiff = configInputs["Character Level"] - mobLevel;
       if (levelDiff > 40) {
         expMultiSum += 0.7;
       } else if (levelDiff < -36) {

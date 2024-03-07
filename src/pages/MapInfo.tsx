@@ -1,6 +1,5 @@
-import { MobData } from "../types/mobTypes";
+import { MapData, MobData } from "../types/dataTypes";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
-import { MapData } from "../types/mapTypes";
 import { useState } from "react";
 import Rates from "../components/Rates";
 import Loading from "./Loading";
@@ -16,7 +15,7 @@ type Props = {
 
 export default function MapInfo(props: Props) {
   const [mapData, setMapData] = useState<MapData | undefined>();
-  const [mobsData, setMobsData] = useState<(MobData | undefined)[]>([]);
+  const [mobsData, setMobsData] = useState<MobData[]>([]);
 
   useFetchSingleMapAndMobData(
     props.id,
@@ -26,7 +25,7 @@ export default function MapInfo(props: Props) {
     setMobsData,
   );
 
-  if (!mapData || !mobsData || !props.mapIds) {
+  if (!mapData || mobsData.length === 0 || !props.mapIds) {
     return <Loading />;
   }
 

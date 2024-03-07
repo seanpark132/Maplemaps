@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-import { MapData } from "../types/mapTypes";
-import { MobData } from "../types/mobTypes";
+import { MapData, MobData } from "../types/dataTypes";
 
 export const useFetchSingleMapAndMobData = (
   id: number,
   mapsData: Record<number, MapData>,
   mobsData: Record<number, MobData>,
   setMapData: React.Dispatch<React.SetStateAction<MapData | undefined>>,
-  setMobData: React.Dispatch<React.SetStateAction<(MobData | undefined)[]>>,
+  setMobData: React.Dispatch<React.SetStateAction<MobData[]>>,
 ) => {
   useEffect(() => {
     if (mapsData[id]) {
@@ -20,7 +19,7 @@ export const useFetchSingleMapAndMobData = (
       const fetchData = async () => {
         try {
           const mapReq = new Request(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -34,7 +33,7 @@ export const useFetchSingleMapAndMobData = (
           const mobIds = mapDataValue.mobIds;
 
           const mobReq = new Request(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },

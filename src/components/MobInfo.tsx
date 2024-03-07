@@ -1,5 +1,5 @@
 import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
-import { MaxHP, MobData } from "../types/mobTypes";
+import { MobData } from "../types/dataTypes";
 import InfoGrid from "./InfoGrid";
 
 type Props = {
@@ -7,18 +7,16 @@ type Props = {
 };
 
 export default function MobInfo(props: Props) {
-  let maxHP: number | MaxHP | undefined = props.mobData.raw.meta.maxHP;
+  let maxHP: number | { $numberLong: string } = props.mobData.maxHP;
   if (typeof maxHP !== "number") {
-    maxHP = Number(maxHP?.$numberLong);
+    maxHP = Number(maxHP.$numberLong);
   }
 
   const descriptions = ["Level", "Exp", "HP"];
   const values = [
-    props.mobData.raw.meta.level,
-    props.mobData.raw.meta.exp
-      ? props.mobData.raw.meta.exp.toLocaleString("US")
-      : 0,
-    `${` ${maxHP.toLocaleString("US")}`}`,
+    props.mobData.level,
+    props.mobData.exp.toLocaleString("US"),
+    maxHP.toLocaleString("US"),
   ];
 
   return (
@@ -28,7 +26,7 @@ export default function MobInfo(props: Props) {
           src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/mobs/${props.mobData.mob_id}.png`}
           className="w-20 md:w-40"
         />
-        <p className="mt-4 font-semibold">{props.mobData.raw.name}</p>
+        <p className="mt-4 font-semibold">{props.mobData.name}</p>
       </div>
       <div className="pl-4 lg:pl-8">
         <InfoGrid descriptions={descriptions} values={values} />

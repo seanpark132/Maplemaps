@@ -4,7 +4,7 @@ import {
   GRANDIS_WORLD_MAPS,
   MAPLE_WORLD_MAPS,
 } from "../utils/GlobalConstants";
-import { WorldMapData } from "../types/worldMapTypes";
+import { WorldMapData } from "../types/dataTypes";
 
 export const useFetchWorldMapsData = (
   worldMap: string | null,
@@ -26,7 +26,7 @@ export const useFetchWorldMapsData = (
       const fetchWorldMapsData = async () => {
         try {
           const response = await fetch(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
             {
               method: "POST",
               headers: {

@@ -5,7 +5,7 @@ import {
   WORLD_MAP_OFFSETS,
   LINK_AREA_Z_INDEX,
 } from "../utils/GlobalConstants";
-import { Link, WorldMapData } from "../types/worldMapTypes";
+import { Link, WorldMapData } from "../types/dataTypes";
 
 type Props = {
   worldMapsData: Record<string, WorldMapData>;

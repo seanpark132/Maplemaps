@@ -7,7 +7,7 @@ export const useFetchMapIds = (
     const fetchMapIds = async () => {
       try {
         const req = new Request(
-          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
