@@ -20,7 +20,7 @@ export const useFetchSingleMapAndMobData = (
       const fetchData = async () => {
         try {
           const mapReq = new Request(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ export const useFetchSingleMapAndMobData = (
           const mobIds = mapDataValue.mobIds;
 
           const mobReq = new Request(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },

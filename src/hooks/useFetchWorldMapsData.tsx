@@ -26,7 +26,7 @@ export const useFetchWorldMapsData = (
       const fetchWorldMapsData = async () => {
         try {
           const response = await fetch(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/nonprod/fetch-mongodb",
+            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
             {
               method: "POST",
               headers: {
