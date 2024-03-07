@@ -4,9 +4,7 @@ import "./App.css";
 import WorldMaps from "./pages/WorldMaps";
 import NoPage from "./pages/NoPage";
 import Loading from "./pages/Loading";
-import { WorldMapData } from "./types/dataTypes";
-import { MapData } from "./types/mapTypes";
-import { MobData } from "./types/mobTypes";
+import { WorldMapData, MapData, MobData } from "./types/dataTypes";
 import { useFetchMapIds } from "./hooks/useFetchMapIds";
 
 const MapInfo = lazy(() => import("./pages/MapInfo"));
