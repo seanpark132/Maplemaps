@@ -7,16 +7,16 @@ type Props = {
 };
 
 export default function MobInfo(props: Props) {
-  let maxHP: number | { $numberLong: string } | undefined = props.mobData.maxHP;
+  let maxHP: number | { $numberLong: string } = props.mobData.maxHP;
   if (typeof maxHP !== "number") {
-    maxHP = Number(maxHP?.$numberLong);
+    maxHP = Number(maxHP.$numberLong);
   }
 
   const descriptions = ["Level", "Exp", "HP"];
   const values = [
     props.mobData.level,
-    props.mobData.exp ? props.mobData.exp.toLocaleString("US") : 0,
-    `${` ${maxHP.toLocaleString("US")}`}`,
+    props.mobData.exp.toLocaleString("US"),
+    maxHP.toLocaleString("US"),
   ];
 
   return (

@@ -15,7 +15,7 @@ type Props = {
 
 export default function MapInfo(props: Props) {
   const [mapData, setMapData] = useState<MapData | undefined>();
-  const [mobsData, setMobsData] = useState<(MobData | undefined)[]>([]);
+  const [mobsData, setMobsData] = useState<MobData[]>([]);
 
   useFetchSingleMapAndMobData(
     props.id,
@@ -25,7 +25,7 @@ export default function MapInfo(props: Props) {
     setMobsData,
   );
 
-  if (!mapData || !mobsData || !props.mapIds) {
+  if (!mapData || mobsData.length === 0 || !props.mapIds) {
     return <Loading />;
   }
 

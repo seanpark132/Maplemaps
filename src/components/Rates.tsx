@@ -4,22 +4,22 @@ import RatesPersonal from "./RatesPersonal";
 
 type Props = {
   mapData: MapData;
-  mobsData: (MobData | undefined)[];
+  mobsData: MobData[];
 };
 
 export default function Rates(props: Props) {
   // component only renders when mobsData has length >= 1
-  let averageExp = props.mobsData[0]!.exp;
-  let averageLevel = props.mobsData[0]!.level;
+  let averageExp = props.mobsData[0].exp;
+  let averageLevel = props.mobsData[0].level;
 
   if (props.mobsData.length > 1) {
     const numMobs = props.mobsData.length;
     const expSum = props.mobsData
-      .map((mob) => mob?.exp)
-      .reduce((acc, item) => acc! + (item ?? 0), 0);
+      .map((mob) => mob.exp)
+      .reduce((acc, item) => acc + (item ?? 0), 0);
     const levelSum = props.mobsData
-      .map((mob) => mob?.level)
-      .reduce((acc, item) => acc! + (item ?? 0), 0);
+      .map((mob) => mob.level)
+      .reduce((acc, item) => acc + (item ?? 0), 0);
     if (expSum && levelSum) {
       averageExp = expSum / numMobs;
       averageLevel = levelSum / numMobs;
@@ -46,7 +46,7 @@ export default function Rates(props: Props) {
         mesoRate={mesoRate}
       />
       <RatesPersonal
-        mobLevels={props.mobsData.map((mob) => mob?.level)}
+        mobLevels={props.mobsData.map((mob) => mob.level)}
         hourlyMobs={hourlyMobs}
         expRate={expRate}
         mesoRate={mesoRate}

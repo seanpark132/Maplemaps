@@ -6,7 +6,7 @@ export const useFetchSingleMapAndMobData = (
   mapsData: Record<number, MapData>,
   mobsData: Record<number, MobData>,
   setMapData: React.Dispatch<React.SetStateAction<MapData | undefined>>,
-  setMobData: React.Dispatch<React.SetStateAction<(MobData | undefined)[]>>,
+  setMobData: React.Dispatch<React.SetStateAction<MobData[]>>,
 ) => {
   useEffect(() => {
     if (mapsData[id]) {

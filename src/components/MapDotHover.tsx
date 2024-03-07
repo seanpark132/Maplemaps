@@ -14,9 +14,7 @@ export default function MapDotHover(props: Props) {
     return;
   }
   const mobIds = mapData.mobIds;
-  const mobsData: (MobData | undefined)[] = mobIds.map(
-    (id) => props.mobsData[id],
-  );
+  const mobsData: MobData[] = mobIds.map((id) => props.mobsData[id]);
 
   return (
     <span className="map-dot-hover-container absolute bottom-1/2 left-1/2 z-20 w-fit min-w-20 rounded-md border border-white bg-black-transparent-75 p-3">
@@ -27,7 +25,7 @@ export default function MapDotHover(props: Props) {
       />
       <p className="text-nowrap text-white">{mapData.name} </p>
       <hr className="border-gray-500" />
-      {mobsData.map((mob: MobData | undefined) => {
+      {mobsData.map((mob: MobData) => {
         if (mob) {
           return (
             <p
