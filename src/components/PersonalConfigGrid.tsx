@@ -27,22 +27,22 @@ export default function PersonalConfigGrid(props: Props) {
         {Object.keys(props.configInputs)
           .slice(0, 3)
           .map((desc: string) => (
-            <li key={desc} className="border p-1 font-semibold lg:p-3">
+            <li key={desc} className="border px-1.5 py-2 font-semibold lg:p-3">
               <label>{desc}:</label>
             </li>
           ))}
-        <li className="border bg-green-300 p-1 font-semibold lg:p-3 dark:bg-green-700">
+        <li className="border bg-green-300 px-1.5 py-2 font-semibold lg:p-3 dark:bg-green-700">
           Total Bonus Exp %:
         </li>
         {Object.keys(props.configInputs)
           .slice(3)
           .map((desc: string) => (
-            <li key={desc} className="border p-1 font-semibold lg:p-3">
+            <li key={desc} className="border px-1.5 py-2 font-semibold lg:p-3">
               <label>{desc}:</label>
             </li>
           ))}
         {Object.keys(props.configCheckboxes).map((desc: string) => (
-          <li key={desc} className="border p-1 font-semibold lg:p-3">
+          <li key={desc} className="border px-1.5 py-2 font-semibold lg:p-3">
             {desc}:
           </li>
         ))}
@@ -53,7 +53,7 @@ export default function PersonalConfigGrid(props: Props) {
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
-                className="w-16 border p-1 font-semibold lg:w-28 lg:p-3"
+                className="w-28 border px-1.5 py-2 font-semibold lg:p-3"
                 type="number"
                 name={name}
                 max={MAX_INPUT_VALUES[name]}
@@ -62,7 +62,7 @@ export default function PersonalConfigGrid(props: Props) {
               />
             </li>
           ))}
-        <li className="border bg-green-300 p-1 font-semibold lg:p-3 dark:bg-green-700">
+        <li className="border bg-green-300 px-1.5 py-2 font-semibold lg:p-3 dark:bg-green-700">
           {props.totalBonusExpPercent}
         </li>
         {Object.entries(props.configInputs)
@@ -70,7 +70,7 @@ export default function PersonalConfigGrid(props: Props) {
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
-                className="w-16 border p-1 font-semibold lg:w-28 lg:p-3"
+                className="w-28 border px-1.5 py-2 font-semibold lg:p-3"
                 type="number"
                 name={name}
                 max={MAX_INPUT_VALUES[name]}
@@ -81,11 +81,11 @@ export default function PersonalConfigGrid(props: Props) {
           ))}
         {Object.entries(props.configCheckboxes).map(
           ([name, value]: [string, boolean]) => (
-            <li key={name} className="border p-1 font-semibold lg:p-3">
+            <li key={name} className="border px-1.5 py-2 font-semibold lg:p-3">
               <input
                 type="checkbox"
                 name={name}
-                className="border p-1 font-semibold lg:p-3"
+                className="border px-1.5 py-2 font-semibold lg:p-3"
                 checked={value}
                 onChange={(e) => handleCheckboxChange(e)}
               />

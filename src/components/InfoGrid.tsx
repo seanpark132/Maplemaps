@@ -8,7 +8,7 @@ export default function InfoGrid(props: Props) {
     <div className="flex w-fit rounded border">
       <ul>
         {props.descriptions.map((desc: string) => (
-          <li key={desc} className="border p-1 font-semibold lg:p-3">
+          <li key={desc} className="border px-1.5 py-2 font-semibold lg:p-3">
             {desc}:
           </li>
         ))}
@@ -17,7 +17,7 @@ export default function InfoGrid(props: Props) {
         {props.values.map((num: number | string, index: number) => (
           <li
             key={`${index}:${num}`}
-            className="border p-1 font-semibold lg:p-3"
+            className="border px-1.5 py-2 font-semibold lg:p-3"
           >
             {num}
           </li>

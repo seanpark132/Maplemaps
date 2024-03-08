@@ -21,7 +21,7 @@ export default function RatesPersonal(props: Props) {
   const [configInputs, setConfigInputs] = useState<Record<string, number>>({
     "Character Level": 0,
     "Meso Obtained %": 0,
-    "Custom mobs / hour": props.hourlyMobs,
+    "Custom mobs/hr": props.hourlyMobs,
     Burning: 0,
     "Legion Exp ": 0,
     "Zero Legion Block": 0,
@@ -91,18 +91,18 @@ export default function RatesPersonal(props: Props) {
   const descriptions = [
     "Level Exp Multi",
     "Level Meso Multi",
-    "Mobs/hour",
-    "Exp/hour",
-    "Meso/hour",
-    "Meso/hour (Reboot)",
+    "Mobs/hr",
+    "Exp/hr",
+    "Meso/hr",
+    "Meso/hr (Reboot)",
   ];
 
-  const hourlyMobsMulti = configInputs["Custom mobs / hour"] / props.hourlyMobs;
+  const hourlyMobsMulti = configInputs["Custom mobs/hr"] / props.hourlyMobs;
 
   const values = [
     levelExpMulti,
     levelMesoMulti,
-    configInputs["Custom mobs / hour"].toLocaleString("US"),
+    configInputs["Custom mobs/hr"].toLocaleString("US"),
     Math.round(
       (props.expRate *
         levelExpMulti *
