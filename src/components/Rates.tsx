@@ -31,7 +31,10 @@ export default function Rates(props: Props) {
     ? (props.mapData.capacityPerGen + 1) * 480
     : 0;
   const hourlyMobsFrenzy =
-    Math.min(props.mapData.capacityPerGen * 1.7, props.mapData.numMobs) * 1666;
+    Math.min(
+      Math.floor(props.mapData.capacityPerGen * 1.7),
+      props.mapData.numMobs,
+    ) * 1666;
   const expRate = hourlyMobs * (averageExp ? averageExp : 0);
   const mesoRate = hourlyMobs * 7.5 * (averageLevel ? averageLevel : 0);
 

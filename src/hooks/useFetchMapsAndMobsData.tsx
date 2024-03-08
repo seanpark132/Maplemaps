@@ -2,11 +2,8 @@ import { useEffect } from "react";
 import { WorldMapData, MapData, MobData } from "../types/dataTypes";
 import {
   ARCANE_RIVER_WORLD_MAPS,
-  ARCANE_RIVER_WORLD_MAP_NAME,
   GRANDIS_WORLD_MAPS,
-  GRANDIS_WORLD_MAP_NAME,
   MAPLE_WORLD_MAPS,
-  MAPLE_WORLD_MAP_NAME,
 } from "../utils/GlobalConstants";
 
 export const useFetchMapsAndMobsData = (
@@ -22,16 +19,24 @@ export const useFetchMapsAndMobsData = (
     if (visitedWorldMaps.has(worldMap)) return;
     if (Object.keys(worldMapsData).length === 0) return;
 
-    const regionWorldMap = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
-      ? ARCANE_RIVER_WORLD_MAP_NAME
+    const regionWorldMaps = ARCANE_RIVER_WORLD_MAPS.includes(worldMap)
+      ? ARCANE_RIVER_WORLD_MAPS
       : GRANDIS_WORLD_MAPS.includes(worldMap)
-        ? GRANDIS_WORLD_MAP_NAME
-        : MAPLE_WORLD_MAP_NAME;
+        ? GRANDIS_WORLD_MAPS
+        : MAPLE_WORLD_MAPS;
 
-    const regionWorldMapData = worldMapsData[regionWorldMap];
-    const mapIdsFromWorldMap = regionWorldMapData.maps.flatMap(
-      (map) => map.mapNumbers,
+    const regionWorldMapsData = regionWorldMaps.map(
+      (name: string) => worldMapsData[name],
     );
+
+    const regionMapIds = regionWorldMapsData.reduce(
+      (acc: number[], item: WorldMapData) => {
+        return acc.concat(item.maps.flatMap((map) => map.mapNumbers));
+      },
+      [],
+    );
+
+    const uniqueRegionMapIds = [...new Set(regionMapIds)];
 
     const fetchMapsAndMobsData = async () => {
       try {
@@ -42,7 +47,7 @@ export const useFetchMapsAndMobsData = (
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               reqType: "mapsData",
-              mapIds: mapIdsFromWorldMap,
+              mapIds: uniqueRegionMapIds,
             }),
           },
         );
@@ -76,13 +81,13 @@ export const useFetchMapsAndMobsData = (
     fetchMapsAndMobsData();
 
     // Add all ids from the current region to visitedWorldMaps
-    if (regionWorldMap === ARCANE_RIVER_WORLD_MAP_NAME) {
+    if (worldMap in ARCANE_RIVER_WORLD_MAPS) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         ARCANE_RIVER_WORLD_MAPS.forEach((id) => newSet.add(id));
         return newSet;
       });
-    } else if (regionWorldMap === GRANDIS_WORLD_MAP_NAME) {
+    } else if (worldMap in GRANDIS_WORLD_MAPS) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         GRANDIS_WORLD_MAPS.forEach((id) => newSet.add(id));

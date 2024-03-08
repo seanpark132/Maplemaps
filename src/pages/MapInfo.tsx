@@ -25,7 +25,7 @@ export default function MapInfo(props: Props) {
     setMobsData,
   );
 
-  if (!mapData || mobsData.length === 0 || !props.mapIds) {
+  if (!mapData || !props.mapIds) {
     return <Loading />;
   }
 
