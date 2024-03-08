@@ -30,8 +30,8 @@ export default function MapInfo(props: Props) {
   }
 
   return (
-    <main className="flex w-full flex-col lg:p-6 lg:pt-4">
-      <h2 className="my-6">
+    <main className="flex w-full flex-col lg:p-6 lg:pt-0">
+      <h2 className="mb-4">
         {mapData.streetName} : {mapData.name}
       </h2>
       <img
@@ -39,7 +39,7 @@ export default function MapInfo(props: Props) {
         className="image-max-height mb-8 rounded-lg border-2 object-contain"
       />
       {mobsData && mobsData.length > 0 && (
-        <section className="flex flex-col md:flex-row">
+        <section className="flex flex-col xl:flex-row">
           <MobsInfo mobsData={mobsData} />
           <Rates mapData={mapData} mobsData={mobsData} />
         </section>

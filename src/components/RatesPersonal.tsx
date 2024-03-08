@@ -21,7 +21,7 @@ export default function RatesPersonal(props: Props) {
   const [configInputs, setConfigInputs] = useState<Record<string, number>>({
     "Character Level": 0,
     "Meso Obtained %": 0,
-    "Custom mobs / hour": props.hourlyMobs,
+    "Custom mobs/hr": props.hourlyMobs,
     Burning: 0,
     "Legion Exp ": 0,
     "Zero Legion Block": 0,
@@ -40,8 +40,8 @@ export default function RatesPersonal(props: Props) {
     "MP Gold Potion": false,
     "Exp Accum Potion": false,
     "6 Dice": false,
-    "Real Holy Symbol": false,
     "Decent Holy Symbol": false,
+    "Real Holy Symbol": false,
   });
   const [totalBonusExpPercent, setTotalBonusExpPercent] = useState<number>(0);
   const [isConfigOpen, setIsConfigOpen] = useState<boolean>(false);
@@ -91,18 +91,18 @@ export default function RatesPersonal(props: Props) {
   const descriptions = [
     "Level Exp Multi",
     "Level Meso Multi",
-    "Mobs/hour",
-    "Exp/hour",
-    "Meso/hour",
-    "Meso/hour (Reboot)",
+    "Mobs/hr",
+    "Exp/hr",
+    "Meso/hr",
+    "Meso/hr (Reboot)",
   ];
 
-  const hourlyMobsMulti = configInputs["Custom mobs / hour"] / props.hourlyMobs;
+  const hourlyMobsMulti = configInputs["Custom mobs/hr"] / props.hourlyMobs;
 
   const values = [
     levelExpMulti,
     levelMesoMulti,
-    configInputs["Custom mobs / hour"].toLocaleString("US"),
+    configInputs["Custom mobs/hr"].toLocaleString("US"),
     Math.round(
       (props.expRate *
         levelExpMulti *
@@ -128,7 +128,7 @@ export default function RatesPersonal(props: Props) {
   ];
 
   return (
-    <article className="h-fit w-fit rounded-lg border-2 p-4 md:ml-8 md:p-8">
+    <article className="h-fit w-fit rounded-lg border-2 p-4 md:p-6 xl:ml-8">
       <h2>Personal Rates:</h2>
       <button
         className="mb-4 mt-2 rounded border p-2 text-green-700 dark:text-green-400"
