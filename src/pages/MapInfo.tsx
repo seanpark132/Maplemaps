@@ -39,7 +39,7 @@ export default function MapInfo(props: Props) {
         className="image-max-height mb-8 rounded-lg border-2 object-contain"
       />
       {mobsData && mobsData.length > 0 && (
-        <section className="flex flex-col md:flex-row">
+        <section className="flex flex-col xl:flex-row">
           <MobsInfo mobsData={mobsData} />
           <Rates mapData={mapData} mobsData={mobsData} />
         </section>
