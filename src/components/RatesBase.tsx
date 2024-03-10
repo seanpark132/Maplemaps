@@ -44,7 +44,7 @@ export default function RatesBase(props: Props) {
   ];
 
   return (
-    <article className="mb-8 h-fit w-fit rounded-lg border-2 p-4 md:p-6 xl:ml-8">
+    <article className="mb-8 h-fit w-fit rounded-lg border-2 p-4 md:p-6 xl:ml-8 2xl:p-8">
       <h2>Base Rates:</h2>
       <p className="mb-4 mt-2 w-64 text-wrap">
         **Some capacity/gen and capacity numbers may be incorrect
