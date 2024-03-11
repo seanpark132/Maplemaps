@@ -35,7 +35,7 @@ export default function MapInfo(props: Props) {
         {mapData.streetName} : {mapData.name}
       </h2>
       <img
-        src={`${GOOGLE_CLOUD_IMAGE_URL}/raw/maps/${mapData.map_id}.png`}
+        src={`${GOOGLE_CLOUD_IMAGE_URL}/maps/${mapData.map_id}.webp`}
         className="image-max-height mb-8 rounded-lg border-2 object-contain"
       />
       {mobsData && mobsData.length > 0 && (
