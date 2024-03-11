@@ -6,6 +6,7 @@ import NoPage from "./pages/NoPage";
 import Loading from "./pages/Loading";
 import { WorldMapData, MapData, MobData } from "./types/dataTypes";
 import { useFetchMapIds } from "./hooks/useFetchMapIds";
+import About from "./pages/About";
 
 const MapInfo = lazy(() => import("./pages/MapInfo"));
 
@@ -41,6 +42,7 @@ function App() {
                 />
               }
             />
+            <Route path="/about" element={<About />} />
             {mapIds.map((id) => (
               <Route
                 key={id}
