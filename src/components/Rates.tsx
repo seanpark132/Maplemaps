@@ -28,7 +28,7 @@ export default function Rates(props: Props) {
 
   const hourlyMobs = props.mapData.capacityPerGen * 480;
   const hourlyMobsInstanced = props.mapData.sacredForce
-    ? (props.mapData.capacityPerGen + 1) * 480
+    ? Math.min(props.mapData.capacityPerGen + 1, props.mapData.numMobs) * 480
     : 0;
   const hourlyMobsFrenzy =
     Math.min(

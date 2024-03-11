@@ -28,7 +28,7 @@
 }
 
 p {
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 li {
@@ -62,7 +62,7 @@ h2 {
 
 @media (min-width: 1024px) {
   p {
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
 
   li {
