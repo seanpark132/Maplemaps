@@ -13,6 +13,7 @@ export const useFetchWorldMapsData = (
   setWorldMapsData: React.Dispatch<
     React.SetStateAction<Record<string, WorldMapData>>
   >,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   useEffect(() => {
     if (!worldMap) return;
@@ -35,6 +36,7 @@ export const useFetchWorldMapsData = (
           setWorldMapsData((prev) => ({ ...prev, ...data }));
         } catch (error) {
           console.error(error);
+          setIsError(true);
         }
       };
 

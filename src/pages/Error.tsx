@@ -1,7 +1,7 @@
 export default function Error() {
   return (
-    <main>
-      <h1 className="p-6">Error</h1>
+    <main className="p-6 xl:p-12">
+      <h1>An error has occurred. Please try refreshing the page.</h1>
     </main>
   );
 }

@@ -25,6 +25,7 @@ type Props = {
   setVisitedWorldMaps: React.Dispatch<React.SetStateAction<Set<string>>>;
   setMapsData: React.Dispatch<React.SetStateAction<Record<number, MapData>>>;
   setMobsData: React.Dispatch<React.SetStateAction<Record<number, MobData>>>;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function WorldMaps(props: Props) {
@@ -36,7 +37,12 @@ export default function WorldMaps(props: Props) {
   const parentWorld = searchParams.get("parentWorld");
   const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.webp`;
 
-  useFetchWorldMapsData(worldMap, props.worldMapsData, props.setWorldMapsData);
+  useFetchWorldMapsData(
+    worldMap,
+    props.worldMapsData,
+    props.setWorldMapsData,
+    props.setIsError,
+  );
   useFetchMapsAndMobsData(
     worldMap,
     props.worldMapsData,
@@ -44,6 +50,7 @@ export default function WorldMaps(props: Props) {
     props.setMapsData,
     props.setMobsData,
     props.setVisitedWorldMaps,
+    props.setIsError,
   );
 
   if (!worldMap) {

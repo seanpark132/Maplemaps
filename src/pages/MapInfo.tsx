@@ -11,6 +11,7 @@ type Props = {
   mapIds: number[];
   mapsData: Record<number, MapData>;
   mobsData: Record<number, MobData>;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function MapInfo(props: Props) {
@@ -23,6 +24,7 @@ export default function MapInfo(props: Props) {
     props.mobsData,
     setMapData,
     setMobsData,
+    props.setIsError,
   );
 
   if (!mapData || !props.mapIds) {

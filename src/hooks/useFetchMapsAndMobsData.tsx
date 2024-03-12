@@ -14,6 +14,7 @@ export const useFetchMapsAndMobsData = (
   setMapsData: React.Dispatch<React.SetStateAction<Record<number, MapData>>>,
   setMobsData: React.Dispatch<React.SetStateAction<Record<number, MobData>>>,
   setVisitedWorldMaps: React.Dispatch<React.SetStateAction<Set<string>>>,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   useEffect(() => {
     if (!worldMap) return;
@@ -65,6 +66,7 @@ export const useFetchMapsAndMobsData = (
         setMobsData((prev) => ({ ...prev, ...mobsData }));
       } catch (error) {
         console.error(error);
+        setIsError(true);
       }
     };
 

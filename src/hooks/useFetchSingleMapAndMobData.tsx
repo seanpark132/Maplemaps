@@ -8,6 +8,7 @@ export const useFetchSingleMapAndMobData = (
   mobsData: Record<number, MobData>,
   setMapData: React.Dispatch<React.SetStateAction<MapData | undefined>>,
   setMobData: React.Dispatch<React.SetStateAction<MobData[]>>,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   useEffect(() => {
     if (mapsData[id]) {
@@ -40,6 +41,7 @@ export const useFetchSingleMapAndMobData = (
           setMobData(mobsDataArray);
         } catch (error) {
           console.error(error);
+          setIsError(true);
         }
       };
 

@@ -3,6 +3,7 @@ import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
 
 export const useFetchMapIds = (
   setMapIds: React.Dispatch<React.SetStateAction<number[]>>,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   useEffect(() => {
     const fetchMapIds = async () => {
@@ -11,6 +12,7 @@ export const useFetchMapIds = (
         setMapIds(mapIds);
       } catch (error) {
         console.error(error);
+        setIsError(true);
       }
     };
     fetchMapIds();
