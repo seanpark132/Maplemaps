@@ -34,6 +34,7 @@ export default function Rates(props: Props) {
     Math.min(
       Math.floor(props.mapData.capacityPerGen * 1.7),
       props.mapData.numMobs,
+      49,
     ) * 1666;
   const expRate = hourlyMobs * (averageExp ? averageExp : 0);
   const mesoRate = hourlyMobs * 7.5 * (averageLevel ? averageLevel : 0);
