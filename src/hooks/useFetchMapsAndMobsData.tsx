@@ -5,6 +5,7 @@ import {
   GRANDIS_WORLD_MAPS,
   MAPLE_WORLD_MAPS,
 } from "../utils/GlobalConstants";
+import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
 
 export const useFetchMapsAndMobsData = (
   worldMap: string | null,
@@ -13,6 +14,7 @@ export const useFetchMapsAndMobsData = (
   setMapsData: React.Dispatch<React.SetStateAction<Record<number, MapData>>>,
   setMobsData: React.Dispatch<React.SetStateAction<Record<number, MobData>>>,
   setVisitedWorldMaps: React.Dispatch<React.SetStateAction<Set<string>>>,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   useEffect(() => {
     if (!worldMap) return;
@@ -40,65 +42,50 @@ export const useFetchMapsAndMobsData = (
 
     const fetchMapsAndMobsData = async () => {
       try {
-        const mapsReq = new Request(
-          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
+        const mapsData: Record<number, MapData> = await fetchMongoDbConstructor(
           {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              reqType: "mapsData",
-              mapIds: uniqueRegionMapIds,
-              secret: import.meta.env.VITE_SECRET,
-            }),
+            reqType: "mapsData",
+            dataQuery: uniqueRegionMapIds,
+            dataQueryKey: "mapIds",
           },
         );
-
-        const mapsResponse = await fetch(mapsReq);
-        const mapsData: Record<number, MapData> = await mapsResponse.json();
         const mapsDataArray = Object.values(mapsData);
         const mobIds = mapsDataArray.reduce((acc: number[], item: MapData) => {
           return [...acc, ...item.mobIds];
         }, []);
 
-        const mobsReq = new Request(
-          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
+        const mobsData: Record<number, MobData> = await fetchMongoDbConstructor(
           {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              reqType: "mobsData",
-              mobIds: mobIds,
-              secret: import.meta.env.VITE_SECRET,
-            }),
+            reqType: "mobsData",
+            dataQuery: mobIds,
+            dataQueryKey: "mobIds",
           },
         );
-
-        const mobsResponse = await fetch(mobsReq);
-        const mobsData: Record<number, MobData> = await mobsResponse.json();
 
         setMapsData((prev) => ({ ...prev, ...mapsData }));
         setMobsData((prev) => ({ ...prev, ...mobsData }));
       } catch (error) {
         console.error(error);
+        setIsError(true);
       }
     };
 
     fetchMapsAndMobsData();
 
     // Add all ids from the current region to visitedWorldMaps
-    if (worldMap in ARCANE_RIVER_WORLD_MAPS) {
+    if (ARCANE_RIVER_WORLD_MAPS.includes(worldMap)) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         ARCANE_RIVER_WORLD_MAPS.forEach((id) => newSet.add(id));
         return newSet;
       });
-    } else if (worldMap in GRANDIS_WORLD_MAPS) {
+    } else if (GRANDIS_WORLD_MAPS.includes(worldMap)) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         GRANDIS_WORLD_MAPS.forEach((id) => newSet.add(id));
         return newSet;
       });
-    } else {
+    } else if (MAPLE_WORLD_MAPS.includes(worldMap)) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         MAPLE_WORLD_MAPS.forEach((id) => newSet.add(id));

@@ -5,6 +5,7 @@ import {
   MAPLE_WORLD_MAPS,
 } from "../utils/GlobalConstants";
 import { WorldMapData } from "../types/dataTypes";
+import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
 
 export const useFetchWorldMapsData = (
   worldMap: string | null,
@@ -12,6 +13,7 @@ export const useFetchWorldMapsData = (
   setWorldMapsData: React.Dispatch<
     React.SetStateAction<Record<string, WorldMapData>>
   >,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   useEffect(() => {
     if (!worldMap) return;
@@ -25,24 +27,16 @@ export const useFetchWorldMapsData = (
 
       const fetchWorldMapsData = async () => {
         try {
-          const response = await fetch(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                reqType: "worldMapsData",
-                worldMapNames: worldMapNames,
-                secret: import.meta.env.VITE_SECRET,
-              }),
-            },
-          );
-          const data = await response.json();
+          const data = await fetchMongoDbConstructor({
+            reqType: "worldMapsData",
+            dataQuery: worldMapNames,
+            dataQueryKey: "worldMapNames",
+          });
+
           setWorldMapsData((prev) => ({ ...prev, ...data }));
         } catch (error) {
           console.error(error);
+          setIsError(true);
         }
       };
 

@@ -1,14 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, lazy, Suspense } from "react";
+import { useState, Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import "./App.css";
 import WorldMaps from "./pages/WorldMaps";
 import NoPage from "./pages/NoPage";
 import Loading from "./pages/Loading";
 import { WorldMapData, MapData, MobData } from "./types/dataTypes";
 import { useFetchMapIds } from "./hooks/useFetchMapIds";
-import About from "./pages/About";
 
-const MapInfo = lazy(() => import("./pages/MapInfo"));
+import About from "./pages/About";
+import Error from "./pages/Error";
+import MapInfo from "./pages/MapInfo";
 
 function App() {
   const [worldMapsData, setWorldMapsData] = useState<
@@ -20,52 +22,60 @@ function App() {
   const [mapsData, setMapsData] = useState<Record<number, MapData>>({});
   const [mobsData, setMobsData] = useState<Record<number, MobData>>({});
   const [mapIds, setMapIds] = useState<number[]>([]);
+  const [isError, setIsError] = useState<boolean>(false);
 
-  useFetchMapIds(setMapIds);
+  useFetchMapIds(setMapIds, setIsError);
+
+  if (isError) {
+    return <Error />;
+  }
+
   return (
     <>
       <div className="flex w-full flex-col justify-center p-4 lg:p-6">
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route
-              index
-              element={
-                <WorldMaps
-                  worldMapsData={worldMapsData}
-                  visitedWorldMaps={visitedWorldMaps}
-                  mapsData={mapsData}
-                  mobsData={mobsData}
-                  setWorldMapsData={setWorldMapsData}
-                  setVisitedWorldMaps={setVisitedWorldMaps}
-                  setMapsData={setMapsData}
-                  setMobsData={setMobsData}
-                />
-              }
-            />
-            <Route path="/about" element={<About />} />
-            {mapIds.map((id) => (
+        <ErrorBoundary fallback={<Error />}>
+          <Suspense fallback={<Loading />}>
+            <Routes>
               <Route
-                key={id}
-                path={`/map/${id}`}
+                index
                 element={
-                  <Suspense fallback={<Loading />}>
+                  <WorldMaps
+                    worldMapsData={worldMapsData}
+                    visitedWorldMaps={visitedWorldMaps}
+                    mapsData={mapsData}
+                    mobsData={mobsData}
+                    setWorldMapsData={setWorldMapsData}
+                    setVisitedWorldMaps={setVisitedWorldMaps}
+                    setMapsData={setMapsData}
+                    setMobsData={setMobsData}
+                    setIsError={setIsError}
+                  />
+                }
+              />
+              <Route path="/about" element={<About />} />
+              {mapIds.map((id) => (
+                <Route
+                  key={id}
+                  path={`/map/${id}`}
+                  element={
                     <MapInfo
                       id={id}
                       mapIds={mapIds}
                       mapsData={mapsData}
                       mobsData={mobsData}
+                      setIsError={setIsError}
                     />
-                  </Suspense>
-                }
-              />
-            ))}
-            {mapIds.length === 0 ? (
-              <Route path="*" element={<Loading />} />
-            ) : (
-              <Route path="*" element={<NoPage />} />
-            )}
-          </Routes>
-        </Suspense>
+                  }
+                />
+              ))}
+              {mapIds.length === 0 ? (
+                <Route path="*" element={<Loading />} />
+              ) : (
+                <Route path="*" element={<NoPage />} />
+              )}
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </>
   );

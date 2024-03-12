@@ -4,6 +4,7 @@ import {
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
   LINK_AREA_Z_INDEX,
+  GOOGLE_CLOUD_IMAGE_URL,
 } from "../utils/GlobalConstants";
 import { Link, WorldMapData } from "../types/dataTypes";
 
@@ -28,6 +29,13 @@ export default function LinkArea(props: Props) {
 
   const worldMapData = props.worldMapsData[props.link.linksTo];
   const parentWorld = worldMapData?.parentWorld;
+  let linkImageName = `${props.link.linksTo}.webp`;
+  if (
+    props.link.linksTo === "WorldMap170" &&
+    props.currentWorldMap === "WorldMap"
+  ) {
+    linkImageName = "WorldMap170a.webp";
+  }
 
   return (
     <span
@@ -40,7 +48,7 @@ export default function LinkArea(props: Props) {
       onClick={handleClick}
     >
       <img
-        src={`data:image/png;base64,${props.link.imageBase64} `}
+        src={`${GOOGLE_CLOUD_IMAGE_URL}/linkImages/${linkImageName}`}
         alt={`${props.link.linksTo}`}
       />
     </span>
