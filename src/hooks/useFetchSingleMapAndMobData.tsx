@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { MapData, MobData } from "../types/dataTypes";
+import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
 
 export const useFetchSingleMapAndMobData = (
   id: number,
@@ -18,38 +19,22 @@ export const useFetchSingleMapAndMobData = (
     } else {
       const fetchData = async () => {
         try {
-          const mapReq = new Request(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                reqType: "mapsData",
-                mapIds: [id],
-                secret: import.meta.env.VITE_SECRET,
-              }),
-            },
-          );
+          const mapData: Record<number, MapData> =
+            await fetchMongoDbConstructor({
+              reqType: "mapsData",
+              dataQuery: [id],
+              dataQueryKey: "mapIds",
+            });
 
-          const mapResponse = await fetch(mapReq);
-          const mapData: Record<number, MapData> = await mapResponse.json();
           const mapDataValue = mapData[id];
           const mobIds = mapDataValue.mobIds;
+          const mobData: Record<number, MobData> =
+            await fetchMongoDbConstructor({
+              reqType: "mobsData",
+              dataQuery: mobIds,
+              dataQueryKey: "mobIds",
+            });
 
-          const mobReq = new Request(
-            "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                reqType: "mobsData",
-                mobIds: mobIds,
-                secret: import.meta.env.VITE_SECRET,
-              }),
-            },
-          );
-          const mobResponse = await fetch(mobReq);
-          const mobData: Record<number, MobData> = await mobResponse.json();
           const mobsDataArray = Object.values(mobData);
           setMapData(mapDataValue);
           setMobData(mobsDataArray);

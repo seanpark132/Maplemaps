@@ -5,6 +5,7 @@ import {
   GRANDIS_WORLD_MAPS,
   MAPLE_WORLD_MAPS,
 } from "../utils/GlobalConstants";
+import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
 
 export const useFetchMapsAndMobsData = (
   worldMap: string | null,
@@ -40,41 +41,25 @@ export const useFetchMapsAndMobsData = (
 
     const fetchMapsAndMobsData = async () => {
       try {
-        const mapsReq = new Request(
-          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
+        const mapsData: Record<number, MapData> = await fetchMongoDbConstructor(
           {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              reqType: "mapsData",
-              mapIds: uniqueRegionMapIds,
-              secret: import.meta.env.VITE_SECRET,
-            }),
+            reqType: "mapsData",
+            dataQuery: uniqueRegionMapIds,
+            dataQueryKey: "mapIds",
           },
         );
-
-        const mapsResponse = await fetch(mapsReq);
-        const mapsData: Record<number, MapData> = await mapsResponse.json();
         const mapsDataArray = Object.values(mapsData);
         const mobIds = mapsDataArray.reduce((acc: number[], item: MapData) => {
           return [...acc, ...item.mobIds];
         }, []);
 
-        const mobsReq = new Request(
-          "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
+        const mobsData: Record<number, MobData> = await fetchMongoDbConstructor(
           {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              reqType: "mobsData",
-              mobIds: mobIds,
-              secret: import.meta.env.VITE_SECRET,
-            }),
+            reqType: "mobsData",
+            dataQuery: mobIds,
+            dataQueryKey: "mobIds",
           },
         );
-
-        const mobsResponse = await fetch(mobsReq);
-        const mobsData: Record<number, MobData> = await mobsResponse.json();
 
         setMapsData((prev) => ({ ...prev, ...mapsData }));
         setMobsData((prev) => ({ ...prev, ...mobsData }));
