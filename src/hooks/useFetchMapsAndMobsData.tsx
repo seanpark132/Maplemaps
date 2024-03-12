@@ -73,19 +73,19 @@ export const useFetchMapsAndMobsData = (
     fetchMapsAndMobsData();
 
     // Add all ids from the current region to visitedWorldMaps
-    if (worldMap in ARCANE_RIVER_WORLD_MAPS) {
+    if (ARCANE_RIVER_WORLD_MAPS.includes(worldMap)) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         ARCANE_RIVER_WORLD_MAPS.forEach((id) => newSet.add(id));
         return newSet;
       });
-    } else if (worldMap in GRANDIS_WORLD_MAPS) {
+    } else if (GRANDIS_WORLD_MAPS.includes(worldMap)) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         GRANDIS_WORLD_MAPS.forEach((id) => newSet.add(id));
         return newSet;
       });
-    } else {
+    } else if (MAPLE_WORLD_MAPS.includes(worldMap)) {
       setVisitedWorldMaps((prev) => {
         const newSet = new Set(prev);
         MAPLE_WORLD_MAPS.forEach((id) => newSet.add(id));
