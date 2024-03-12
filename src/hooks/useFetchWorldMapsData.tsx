@@ -35,6 +35,7 @@ export const useFetchWorldMapsData = (
               body: JSON.stringify({
                 reqType: "worldMapsData",
                 worldMapNames: worldMapNames,
+                secret: import.meta.env.VITE_SECRET,
               }),
             },
           );

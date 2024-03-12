@@ -10,8 +10,13 @@ export const useFetchMapIds = (
           "https://v66rewn65j.execute-api.us-west-2.amazonaws.com/prod/fetch-mongodb",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ reqType: "mapIds" }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              reqType: "mapIds",
+              secret: import.meta.env.VITE_SECRET,
+            }),
           },
         );
 

@@ -48,6 +48,7 @@ export const useFetchMapsAndMobsData = (
             body: JSON.stringify({
               reqType: "mapsData",
               mapIds: uniqueRegionMapIds,
+              secret: import.meta.env.VITE_SECRET,
             }),
           },
         );
@@ -64,7 +65,11 @@ export const useFetchMapsAndMobsData = (
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
+            body: JSON.stringify({
+              reqType: "mobsData",
+              mobIds: mobIds,
+              secret: import.meta.env.VITE_SECRET,
+            }),
           },
         );
 

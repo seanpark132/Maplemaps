@@ -23,7 +23,11 @@ export const useFetchSingleMapAndMobData = (
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ reqType: "mapsData", mapIds: [id] }),
+              body: JSON.stringify({
+                reqType: "mapsData",
+                mapIds: [id],
+                secret: import.meta.env.VITE_SECRET,
+              }),
             },
           );
 
@@ -37,7 +41,11 @@ export const useFetchSingleMapAndMobData = (
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ reqType: "mobsData", mobIds: mobIds }),
+              body: JSON.stringify({
+                reqType: "mobsData",
+                mobIds: mobIds,
+                secret: import.meta.env.VITE_SECRET,
+              }),
             },
           );
           const mobResponse = await fetch(mobReq);
