@@ -29,6 +29,13 @@ export default function LinkArea(props: Props) {
 
   const worldMapData = props.worldMapsData[props.link.linksTo];
   const parentWorld = worldMapData?.parentWorld;
+  let linkImageName = `${props.link.linksTo}.webp`;
+  if (
+    props.link.linksTo === "WorldMap170" &&
+    props.currentWorldMap === "WorldMap"
+  ) {
+    linkImageName = "WorldMap170a.webp";
+  }
 
   return (
     <span
@@ -41,7 +48,7 @@ export default function LinkArea(props: Props) {
       onClick={handleClick}
     >
       <img
-        src={`${GOOGLE_CLOUD_IMAGE_URL}/linkImages/${props.link.linksTo}.webp`}
+        src={`${GOOGLE_CLOUD_IMAGE_URL}/linkImages/${linkImageName}`}
         alt={`${props.link.linksTo}`}
       />
     </span>
