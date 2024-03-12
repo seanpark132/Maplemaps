@@ -4,6 +4,7 @@ import {
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
   LINK_AREA_Z_INDEX,
+  GOOGLE_CLOUD_IMAGE_URL,
 } from "../utils/GlobalConstants";
 import { Link, WorldMapData } from "../types/dataTypes";
 
@@ -40,7 +41,7 @@ export default function LinkArea(props: Props) {
       onClick={handleClick}
     >
       <img
-        src={`data:image/png;base64,${props.link.imageBase64} `}
+        src={`${GOOGLE_CLOUD_IMAGE_URL}/linkImages/${props.link.linksTo}.webp`}
         alt={`${props.link.linksTo}`}
       />
     </span>

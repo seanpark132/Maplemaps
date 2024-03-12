@@ -7,7 +7,6 @@ export type WorldMapData = {
 
 export type Link = {
   linksTo: string;
-  imageBase64: string;
   x: number;
   y: number;
 };
