@@ -5,6 +5,7 @@ import {
   WORLD_MAP_OFFSETS,
   LINK_AREA_Z_INDEX,
   GOOGLE_CLOUD_IMAGE_URL,
+  LINK_IMAGE_EDGE_CASES,
 } from "../utils/GlobalConstants";
 import { Link, WorldMapData } from "../types/dataTypes";
 
@@ -31,12 +32,15 @@ export default function LinkArea(props: Props) {
   const parentWorld = worldMapData?.parentWorld;
   let linkImageName = `${props.link.linksTo}.webp`;
   if (
-    props.link.linksTo === "WorldMap170" &&
-    props.currentWorldMap === "WorldMap"
+    props.link.linksTo in LINK_IMAGE_EDGE_CASES &&
+    LINK_IMAGE_EDGE_CASES[props.link.linksTo].worldMap === props.currentWorldMap
   ) {
-    linkImageName = "WorldMap170a.webp";
+    if (LINK_IMAGE_EDGE_CASES[props.link.linksTo].imageName) {
+      linkImageName = LINK_IMAGE_EDGE_CASES[props.link.linksTo].imageName!;
+    } else {
+      return;
+    }
   }
-
   return (
     <span
       className="absolute opacity-0 hover:opacity-100"

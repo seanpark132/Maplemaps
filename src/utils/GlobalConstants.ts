@@ -104,25 +104,6 @@ const ARCANE_RIVER_WORLD_MAP_NAME: string = "WorldMap082";
 const GRANDIS_WORLD_MAP_NAME: string = "GWorldMap";
 const MAPLE_WORLD_MAP_NAME: string = "WorldMap";
 
-const ORIGIN_X: number = 320;
-const ORIGIN_Y: number = 235;
-
-const WORLD_MAP_OFFSETS = {
-  GWorldMap: { x: 0, y: 2 },
-  WorldMap290: { x: 0, y: 2 },
-  WorldMap033: { x: 6, y: 6 },
-  WorldMap0121: { x: 6, y: 8 },
-};
-
-const MAP_DOT_NUMBERS: number[] = [
-  0, 1, 2, 3, 8, 9, 10, 11, 12, 28, 29, 47, 48, 49,
-];
-
-const LINK_AREA_Z_INDEX: string[] = ["WorldMap030", "WorldMap170"];
-
-const GOOGLE_CLOUD_IMAGE_URL: string =
-  "https://storage.googleapis.com/maplemaps-2ab75.appspot.com";
-
 const LEVEL_EXP_MULTIPLIER: Record<string, number> = {
   "40": 0.7,
   "39": 0.71,
@@ -283,6 +264,36 @@ const LEVEL_MESO_MULTIPLIER: Record<string, number> = {
   "-34": 0.0,
 };
 
+const ORIGIN_X: number = 320;
+const ORIGIN_Y: number = 235;
+
+const WORLD_MAP_OFFSETS = {
+  GWorldMap: { x: 0, y: 2 },
+  WorldMap290: { x: 0, y: 2 },
+  WorldMap033: { x: 6, y: 6 },
+  WorldMap0121: { x: 6, y: 8 },
+};
+
+const MAP_DOT_NUMBERS: number[] = [
+  0, 1, 2, 3, 8, 9, 10, 11, 12, 28, 29, 47, 48, 49,
+];
+
+const LINK_AREA_Z_INDEX: string[] = ["WorldMap030", "WorldMap170"];
+
+const GOOGLE_CLOUD_IMAGE_URL: string =
+  "https://storage.googleapis.com/maplemaps-2ab75.appspot.com";
+
+const LINK_IMAGE_EDGE_CASES: Record<
+  string,
+  { worldMap: string; imageName?: string }
+> = {
+  WorldMap170: { worldMap: "WorldMap", imageName: "WorldMap170a.webp" },
+  WorldMap230: { worldMap: "CGWorldMap", imageName: "WorldMap230a.webp" },
+  WorldMap240: { worldMap: "CGWorldMap" },
+  WorldMap270: { worldMap: "CGWorldMap", imageName: "WorldMap270a.webp" },
+  WorldMap290: { worldMap: "CGWorldMap" },
+};
+
 export {
   ARCANE_RIVER_WORLD_MAPS,
   GRANDIS_WORLD_MAPS,
@@ -299,4 +310,5 @@ export {
   LEVEL_EXP_MULTIPLIER,
   BASE_MESO_DROP_MULTIPLIER,
   LEVEL_MESO_MULTIPLIER,
+  LINK_IMAGE_EDGE_CASES,
 };
