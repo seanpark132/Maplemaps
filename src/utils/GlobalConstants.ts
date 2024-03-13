@@ -292,6 +292,8 @@ const LINK_IMAGE_EDGE_CASES: Record<
   WorldMap240: { worldMap: "CGWorldMap" },
   WorldMap270: { worldMap: "CGWorldMap", imageName: "WorldMap270a.webp" },
   WorldMap290: { worldMap: "CGWorldMap" },
+  WorldMap130: { worldMap: "GWorldMap", imageName: "WorldMap130a.webp" },
+  WorldMap140: { worldMap: "GWorldMap", imageName: "WorldMap140a.webp" },
 };
 
 export {
