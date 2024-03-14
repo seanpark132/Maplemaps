@@ -39,25 +39,25 @@ export default function PersonalConfigGrid(props: Props) {
         {Object.keys(props.configInputs)
           .slice(0, 3)
           .map((name: string) => (
-            <li key={name} className="grid-padding border font-semibold">
+            <li key={name} className="grid-item font-semibold">
               <label htmlFor={name}>{name}:</label>
             </li>
           ))}
-        <li className="grid-padding border bg-green-300 font-semibold dark:bg-green-700">
+        <li className="grid-item bg-green-300 font-semibold dark:bg-green-700">
           Total Bonus Exp %:
         </li>
-        <li className="grid-padding border font-semibold ">
+        <li className="grid-item font-semibold ">
           <label htmlFor="Average Rune Exp">Average Rune Exp:</label>
         </li>
         {Object.keys(props.configInputs)
           .slice(3)
           .map((name: string) => (
-            <li key={name} className="grid-padding border font-semibold">
+            <li key={name} className="grid-item font-semibold">
               <label htmlFor={name}>{name}:</label>
             </li>
           ))}
         {Object.keys(props.configCheckboxes).map((name: string) => (
-          <li key={name} className="grid-padding border font-semibold ">
+          <li key={name} className="grid-item font-semibold ">
             <label htmlFor={name}>{name}:</label>
           </li>
         ))}
@@ -68,7 +68,7 @@ export default function PersonalConfigGrid(props: Props) {
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
-                className="grid-padding w-28 border"
+                className="grid-item w-28 xl:w-32 2xl:w-44"
                 type="number"
                 id={name}
                 name={name}
@@ -78,13 +78,13 @@ export default function PersonalConfigGrid(props: Props) {
               />
             </li>
           ))}
-        <li className="grid-padding border bg-green-300 dark:bg-green-700">
+        <li className="grid-item bg-green-300 dark:bg-green-700">
           {props.totalBonusExpPercent}
         </li>
-        <li className="grid-padding w-28 border">
+        <li className="grid-item w-28 xl:w-32 2xl:w-44">
           <select
             id="Average Rune Exp"
-            className="w-full"
+            className="w-full overflow-ellipsis"
             onChange={(e) => handleSelectChange(e)}
             value={props.selectedRuneValue}
           >
@@ -100,7 +100,7 @@ export default function PersonalConfigGrid(props: Props) {
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
-                className="grid-padding w-28 border"
+                className="grid-item w-28 xl:w-32 2xl:w-44"
                 type="number"
                 id={name}
                 name={name}
@@ -112,11 +112,11 @@ export default function PersonalConfigGrid(props: Props) {
           ))}
         {Object.entries(props.configCheckboxes).map(
           ([name, value]: [string, boolean]) => (
-            <li key={name} className="grid-padding border">
+            <li key={name} className="grid-item">
               <input
                 type="checkbox"
                 name={name}
-                className="grid-padding border"
+                className="grid-item"
                 checked={value}
                 onChange={(e) => handleCheckboxChange(e)}
               />
