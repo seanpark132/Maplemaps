@@ -3,11 +3,13 @@ import { useEffect } from "react";
 export const usePersonalConfig = (
   configInputs: Record<string, number>,
   configCheckboxes: Record<string, boolean>,
+  selectedRuneValue: number,
   setConfigInputs: React.Dispatch<React.SetStateAction<Record<string, number>>>,
   setConfigCheckboxes: React.Dispatch<
     React.SetStateAction<Record<string, boolean>>
   >,
   setTotalBonusExpPercent: React.Dispatch<React.SetStateAction<number>>,
+  setSelectedRuneValue: React.Dispatch<React.SetStateAction<number>>,
 ) => {
   const expValues = {
     "2x Coupon": 100,
@@ -30,6 +32,11 @@ export const usePersonalConfig = (
         }
       }
       setConfigInputs(parsed);
+    }
+
+    const storedRuneValue = localStorage.getItem("selectedRuneValue");
+    if (storedRuneValue) {
+      setSelectedRuneValue(parseInt(storedRuneValue));
     }
 
     const storedCheckboxes = localStorage.getItem("configCheckboxes");
@@ -55,6 +62,6 @@ export const usePersonalConfig = (
       return acc;
     }, 0);
 
-    setTotalBonusExpPercent(inputSum + boolSum);
-  }, [configInputs, configCheckboxes]);
+    setTotalBonusExpPercent(inputSum + boolSum + selectedRuneValue);
+  }, [configInputs, configCheckboxes, selectedRuneValue]);
 };

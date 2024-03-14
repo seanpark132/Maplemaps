@@ -28,7 +28,7 @@
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 
 li {
@@ -49,6 +49,11 @@ h2 {
   font-weight: 600;
 }
 
+input[type="checkbox"] {
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #242424;
@@ -60,9 +65,9 @@ h2 {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 48rem) {
   p {
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 
   li {
@@ -75,5 +80,10 @@ h2 {
 
   h2 {
     font-size: 1.75rem;
+  }
+
+  input[type="checkbox"] {
+    width: 0.75rem;
+    height: 0.75rem;
   }
 }

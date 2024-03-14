@@ -22,7 +22,7 @@ export default function RatesPersonal(props: Props) {
     "Character Level": 0,
     "Meso Obtained %": 0,
     "Custom mobs/hr": props.hourlyMobs,
-    Burning: 0,
+    "Burning %": 0,
     "Legion Exp ": 0,
     "Zero Legion Block": 0,
     "Hyper Stat": 0,
@@ -31,6 +31,9 @@ export default function RatesPersonal(props: Props) {
     "Pendant of Spirit": 0,
     "Other Exp Bonuses": 0,
   });
+
+  const [selectedRuneValue, setSelectedRuneValue] = useState<number>(0);
+
   const [configCheckboxes, setConfigCheckboxes] = useState<
     Record<string, boolean>
   >({
@@ -83,26 +86,25 @@ export default function RatesPersonal(props: Props) {
   usePersonalConfig(
     configInputs,
     configCheckboxes,
+    selectedRuneValue,
     setConfigInputs,
     setConfigCheckboxes,
     setTotalBonusExpPercent,
+    setSelectedRuneValue,
   );
 
   const descriptions = [
-    "Level Exp Multi",
-    "Level Meso Multi",
-    "Mobs/hr",
     "Exp/hr",
     "Meso/hr",
     "Meso/hr (Reboot)",
+    "Mobs/hr",
+    "Level Exp Multi",
+    "Level Meso Multi",
   ];
 
   const hourlyMobsMulti = configInputs["Custom mobs/hr"] / props.hourlyMobs;
 
   const values = [
-    levelExpMulti,
-    levelMesoMulti,
-    configInputs["Custom mobs/hr"].toLocaleString("US"),
     Math.round(
       (props.expRate *
         levelExpMulti *
@@ -125,13 +127,16 @@ export default function RatesPersonal(props: Props) {
         6) /
         100,
     ).toLocaleString("US"),
+    configInputs["Custom mobs/hr"].toLocaleString("US"),
+    levelExpMulti,
+    levelMesoMulti,
   ];
 
   return (
     <article className="h-fit w-fit rounded-lg border-2 p-4 md:p-6 xl:ml-8 2xl:p-8">
       <h2>Personal Rates:</h2>
       <button
-        className="mb-4 mt-2 rounded border p-2 text-green-700 dark:text-green-400"
+        className="mb-5 mt-2.5 rounded border p-2 text-green-700 dark:text-green-400"
         onClick={() => setIsConfigOpen((prev) => !prev)}
       >
         {isConfigOpen
@@ -143,8 +148,10 @@ export default function RatesPersonal(props: Props) {
           totalBonusExpPercent={totalBonusExpPercent}
           configInputs={configInputs}
           configCheckboxes={configCheckboxes}
+          selectedRuneValue={selectedRuneValue}
           setConfigInputs={setConfigInputs}
           setConfigCheckboxes={setConfigCheckboxes}
+          setSelectedRuneValue={setSelectedRuneValue}
         />
       ) : (
         <InfoGrid descriptions={descriptions} values={values} />
