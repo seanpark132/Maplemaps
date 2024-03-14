@@ -12,12 +12,12 @@ type Props = {
 
 export default function RatesBase(props: Props) {
   const descriptions = [
-    "Mobs/hr",
-    ...(props.mapData.sacredForce ? ["Mobs/hr (Instanced)"] : []),
-    "Mobs/hr (Frenzy)",
     "Exp/hr",
     "Meso/hr",
     "Meso/hr (Reboot)",
+    "Mobs/hr",
+    ...(props.mapData.sacredForce ? ["Mobs/hr (Instanced)"] : []),
+    "Mobs/hr (Frenzy)",
     "Capacity/gen",
     "Capacity",
     "Spawn Points",
@@ -27,14 +27,15 @@ export default function RatesBase(props: Props) {
   ];
 
   const values = [
+    props.expRate.toLocaleString("US"),
+    props.mesoRate.toLocaleString("US"),
+    (props.mesoRate * 6).toLocaleString("US"),
     props.hourlyMobs.toLocaleString("US"),
     ...(props.mapData.sacredForce
       ? [props.hourlyMobsInstanced.toLocaleString("US")]
       : []),
     props.hourlyMobsFrenzy.toLocaleString("US"),
-    props.expRate.toLocaleString("US"),
-    props.mesoRate.toLocaleString("US"),
-    (props.mesoRate * 6).toLocaleString("US"),
+
     props.mapData.capacityPerGen,
     props.mapData.capacity,
     props.mapData.numMobs,
