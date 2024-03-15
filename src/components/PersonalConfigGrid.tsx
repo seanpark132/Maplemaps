@@ -68,7 +68,7 @@ export default function PersonalConfigGrid(props: Props) {
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
-                className="grid-item w-28 xl:w-32 2xl:w-44"
+                className="grid-item w-28 xl:w-32"
                 type="number"
                 id={name}
                 name={name}
@@ -81,7 +81,7 @@ export default function PersonalConfigGrid(props: Props) {
         <li className="grid-item bg-green-300 dark:bg-green-700">
           {props.totalBonusExpPercent}
         </li>
-        <li className="grid-item w-28 xl:w-32 2xl:w-44">
+        <li className="grid-item w-28 xl:w-32">
           <select
             id="Average Rune Exp"
             className="w-full overflow-ellipsis"
