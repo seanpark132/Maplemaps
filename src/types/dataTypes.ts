@@ -1,5 +1,5 @@
 export type WorldMapData = {
-  worldMapName?: string;
+  worldMapName: string;
   parentWorld?: string;
   links: Link[];
   maps: Map[];
