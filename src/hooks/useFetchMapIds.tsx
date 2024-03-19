@@ -8,7 +8,9 @@ export const useFetchMapIds = (
   useEffect(() => {
     const fetchMapIds = async () => {
       try {
-        const mapIds = await fetchMongoDbConstructor({ reqType: "mapIds" });
+        const mapIds: number[] = await fetchMongoDbConstructor({
+          reqType: "mapIds",
+        });
         setMapIds(mapIds);
       } catch (error) {
         console.error(error);

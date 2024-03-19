@@ -16,9 +16,7 @@ function App() {
   const [worldMapsData, setWorldMapsData] = useState<
     Record<string, WorldMapData>
   >({});
-  const [visitedWorldMaps, setVisitedWorldMaps] = useState<Set<string>>(
-    new Set(),
-  );
+  const [visitedRegions, setVisitedRegions] = useState<string[]>([]);
   const [mapsData, setMapsData] = useState<Record<number, MapData>>({});
   const [mobsData, setMobsData] = useState<Record<number, MobData>>({});
   const [mapIds, setMapIds] = useState<number[]>([]);
@@ -41,11 +39,11 @@ function App() {
                 element={
                   <WorldMaps
                     worldMapsData={worldMapsData}
-                    visitedWorldMaps={visitedWorldMaps}
+                    visitedRegions={visitedRegions}
                     mapsData={mapsData}
                     mobsData={mobsData}
                     setWorldMapsData={setWorldMapsData}
-                    setVisitedWorldMaps={setVisitedWorldMaps}
+                    setVisitedRegions={setVisitedRegions}
                     setMapsData={setMapsData}
                     setMobsData={setMobsData}
                     setIsError={setIsError}

@@ -3,7 +3,7 @@ import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
 import { useState } from "react";
 import Rates from "../components/Rates";
 import Loading from "./Loading";
-import { useFetchSingleMapAndMobData } from "../hooks/useFetchSingleMapAndMobData";
+import { useFetchSingleMapMobData } from "../hooks/useFetchSingleMapAndMobData";
 import MobsInfo from "../components/MobsInfo";
 
 type Props = {
@@ -18,7 +18,7 @@ export default function MapInfo(props: Props) {
   const [mapData, setMapData] = useState<MapData | undefined>();
   const [mobsData, setMobsData] = useState<MobData[]>([]);
 
-  useFetchSingleMapAndMobData(
+  useFetchSingleMapMobData(
     props.id,
     props.mapsData,
     props.mobsData,

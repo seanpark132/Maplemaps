@@ -100,7 +100,7 @@ export default function PersonalConfigGrid(props: Props) {
           .map(([name, value]: [string, number]) => (
             <li key={name}>
               <input
-                className="grid-item w-28 xl:w-32 2xl:w-44"
+                className="grid-item w-28 xl:w-32"
                 type="number"
                 id={name}
                 name={name}

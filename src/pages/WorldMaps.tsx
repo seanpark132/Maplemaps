@@ -11,18 +11,16 @@ import {
   MapData,
   MobData,
 } from "../types/dataTypes.ts";
-import { useFetchWorldMapsData } from "../hooks/useFetchWorldMapsData.tsx";
-import { useFetchMapsAndMobsData } from "../hooks/useFetchMapsAndMobsData.tsx";
-
+import { useFetchRegionData } from "../hooks/useFetchRegionData.tsx";
 type Props = {
   worldMapsData: Record<string, WorldMapData>;
   mapsData: Record<number, MapData>;
   mobsData: Record<number, MobData>;
-  visitedWorldMaps: Set<string>;
+  visitedRegions: string[];
   setWorldMapsData: React.Dispatch<
     React.SetStateAction<Record<string, WorldMapData>>
   >;
-  setVisitedWorldMaps: React.Dispatch<React.SetStateAction<Set<string>>>;
+  setVisitedRegions: React.Dispatch<React.SetStateAction<string[]>>;
   setMapsData: React.Dispatch<React.SetStateAction<Record<number, MapData>>>;
   setMobsData: React.Dispatch<React.SetStateAction<Record<number, MobData>>>;
   setIsError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,19 +35,13 @@ export default function WorldMaps(props: Props) {
   const parentWorld = searchParams.get("parentWorld");
   const imageName = `${parentWorld ? parentWorld : "None"}_${worldMap}.webp`;
 
-  useFetchWorldMapsData(
+  useFetchRegionData(
     worldMap,
-    props.worldMapsData,
+    props.visitedRegions,
     props.setWorldMapsData,
-    props.setIsError,
-  );
-  useFetchMapsAndMobsData(
-    worldMap,
-    props.worldMapsData,
-    props.visitedWorldMaps,
     props.setMapsData,
     props.setMobsData,
-    props.setVisitedWorldMaps,
+    props.setVisitedRegions,
     props.setIsError,
   );
 
