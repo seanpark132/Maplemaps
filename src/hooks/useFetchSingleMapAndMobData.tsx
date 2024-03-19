@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { MapData, MobData } from "../types/dataTypes";
 import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
 
-export const useFetchSingleMapAndMobData = (
+export const useFetchSingleMapMobData = (
   id: number,
   mapsData: Record<number, MapData>,
   mobsData: Record<number, MobData>,
@@ -15,36 +15,25 @@ export const useFetchSingleMapAndMobData = (
       const alreadyFetchedMapData = mapsData[id];
       const mobIds = alreadyFetchedMapData.mobIds;
       const alreadyFetchedMobsData = mobIds.map((id) => mobsData[id]);
+
       setMapData(alreadyFetchedMapData);
       setMobData(alreadyFetchedMobsData);
     } else {
       const fetchData = async () => {
         try {
-          const mapData: Record<number, MapData> =
+          const singleMapMobData: { mapData: MapData; mobsData: MobData[] } =
             await fetchMongoDbConstructor({
-              reqType: "mapsData",
-              dataQuery: [id],
-              dataQueryKey: "mapIds",
+              reqType: "singleMapMobData",
+              mapId: id,
             });
 
-          const mapDataValue = mapData[id];
-          const mobIds = mapDataValue.mobIds;
-          const mobData: Record<number, MobData> =
-            await fetchMongoDbConstructor({
-              reqType: "mobsData",
-              dataQuery: mobIds,
-              dataQueryKey: "mobIds",
-            });
-
-          const mobsDataArray = Object.values(mobData);
-          setMapData(mapDataValue);
-          setMobData(mobsDataArray);
+          setMapData(singleMapMobData.mapData);
+          setMobData(singleMapMobData.mobsData);
         } catch (error) {
           console.error(error);
           setIsError(true);
         }
       };
-
       fetchData();
     }
   }, []);
