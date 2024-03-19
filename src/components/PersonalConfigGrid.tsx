@@ -78,7 +78,7 @@ export default function PersonalConfigGrid(props: Props) {
               />
             </li>
           ))}
-        <li className="grid-item bg-green-300 dark:bg-green-700">
+        <li className="grid-item w-28 overflow-hidden overflow-ellipsis bg-green-300 xl:w-32 dark:bg-green-700">
           {props.totalBonusExpPercent}
         </li>
         <li className="grid-item w-28 xl:w-32">
