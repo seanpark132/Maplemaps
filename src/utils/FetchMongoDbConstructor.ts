@@ -1,7 +1,7 @@
 type Options = {
   reqType: string;
-  dataQuery?: any;
-  dataQueryKey?: string;
+  region?: string;
+  mapId?: number;
 };
 
 export const fetchMongoDbConstructor = async (options: Options) => {
@@ -14,12 +14,17 @@ export const fetchMongoDbConstructor = async (options: Options) => {
       },
       body: JSON.stringify({
         reqType: options.reqType,
-        [options.dataQueryKey ? options.dataQueryKey : ""]: options.dataQuery
-          ? options.dataQuery
-          : "",
+        region: options.region,
+        mapId: options.mapId,
       }),
     },
   );
+
+  if (response.status !== 200) {
+    throw new Error("Failed to fetch data.");
+  }
+
   const data = await response.json();
+
   return data;
 };
