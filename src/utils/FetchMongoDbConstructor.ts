@@ -11,6 +11,7 @@ export const fetchMongoDbConstructor = async (options: Options) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept-Encoding": "br, gzip",
       },
       body: JSON.stringify({
         reqType: options.reqType,
