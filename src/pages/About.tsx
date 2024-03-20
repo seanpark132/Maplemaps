@@ -72,7 +72,7 @@ export default function About() {
         </ul>
       </div>
       <div className="xl:w-1/3 xl:px-12">
-        <img src="/about.webp" className=" hidden max-h-180 xl:block" />
+        {/* <img src="/about.webp" className=" hidden max-h-180 xl:block" /> */}
       </div>
     </main>
   );
