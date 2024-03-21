@@ -40,3 +40,10 @@ export type MobData = {
   maxHP: number | { $numberLong: string };
   exp: number;
 };
+
+export type ConfigState = {
+  level: number;
+  mesoObtained: number;
+  expMulti: Record<string, number>;
+  expAdditive: Record<string, number>;
+};

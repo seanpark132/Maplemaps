@@ -11,6 +11,7 @@ import { useFetchMapIds } from "./hooks/useFetchMapIds";
 import About from "./pages/About";
 import Error from "./pages/Error";
 import MapInfo from "./pages/MapInfo";
+import RatesConfig from "./pages/RatesConfig";
 
 function App() {
   const [worldMapsData, setWorldMapsData] = useState<
@@ -51,6 +52,7 @@ function App() {
                 }
               />
               <Route path="/about" element={<About />} />
+              <Route path="/rates-config" element={<RatesConfig />} />
               {mapIds.map((id) => (
                 <Route
                   key={id}
