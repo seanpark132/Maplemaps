@@ -1,4 +1,4 @@
-import { MapData, MobData } from "../types/dataTypes";
+import { MapData, MobData } from "../../types/dataTypes";
 import RatesBase from "./RatesBase";
 import RatesPersonal from "./RatesPersonal";
 

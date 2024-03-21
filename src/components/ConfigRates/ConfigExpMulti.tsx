@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import InputSelect from "./InputSelect";
-import { CASH_SHOP_OPTIONS, USE_COUPON_OPTIONS } from "../utils/ratesConstants";
-import { ConfigState } from "../types/dataTypes";
+import {
+  CASH_SHOP_OPTIONS,
+  USE_COUPON_OPTIONS,
+} from "../../utils/ratesConstants";
+import { ConfigState } from "../../types/dataTypes";
 
 type Props = {
   ratesConfig: ConfigState;

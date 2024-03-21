@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapData, MobData } from "../types/dataTypes";
+import { MapData, MobData } from "../../types/dataTypes";
 import MapForceText from "./MapForceText";
 
 type Props = {

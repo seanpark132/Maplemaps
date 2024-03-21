@@ -1,7 +1,7 @@
 import InfoGrid from "./InfoGrid";
 import { useState } from "react";
-import { useConfig } from "../context/ConfigContext";
-import { useLevelMultipliers } from "../hooks/useLevelMultipliers";
+import { useConfig } from "../../context/ConfigContext";
+import { useLevelMultipliers } from "../../hooks/useLevelMultipliers";
 import { Link } from "react-router-dom";
 
 type Props = {

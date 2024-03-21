@@ -1,5 +1,5 @@
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
-import { MobData } from "../types/dataTypes";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../../utils/globalConstants";
+import { MobData } from "../../types/dataTypes";
 import InfoGrid from "./InfoGrid";
 
 type Props = {

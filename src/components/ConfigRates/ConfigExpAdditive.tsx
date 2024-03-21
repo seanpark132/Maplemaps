@@ -5,8 +5,8 @@ import {
   ADDITIVE_CHECKBOXES,
   ADDITIVE_SELECTS,
   ADDITIVE_NUMBERS,
-} from "../utils/ratesConstants";
-import { ConfigState } from "../types/dataTypes";
+} from "../../utils/ratesConstants";
+import { ConfigState } from "../../types/dataTypes";
 
 type Props = {
   ratesConfig: ConfigState;

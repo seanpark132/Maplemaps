@@ -3,8 +3,8 @@ import { WorldMapData, MapData, MobData } from "../types/dataTypes";
 import {
   ARCANE_RIVER_WORLD_MAPS,
   GRANDIS_WORLD_MAPS,
-} from "../utils/GlobalConstants";
-import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
+} from "../utils/globalConstants";
+import { fetchMongoDbConstructor } from "../utils/fetchMongoDbConstructor";
 
 export const useFetchRegionData = (
   worldMap: string | null,

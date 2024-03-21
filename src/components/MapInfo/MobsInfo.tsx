@@ -1,5 +1,5 @@
 import MobInfo from "./MobInfo";
-import { MobData } from "../types/dataTypes";
+import { MobData } from "../../types/dataTypes";
 
 type Props = {
   mobsData: MobData[];

@@ -1,4 +1,4 @@
-import { ConfigState } from "../types/dataTypes";
+import { ConfigState } from "../../types/dataTypes";
 import { useState, useEffect } from "react";
 
 type Props = {

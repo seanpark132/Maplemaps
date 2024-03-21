@@ -7,11 +7,10 @@ import NoPage from "./pages/NoPage";
 import Loading from "./pages/Loading";
 import { WorldMapData, MapData, MobData } from "./types/dataTypes";
 import { useFetchMapIds } from "./hooks/useFetchMapIds";
-
 import About from "./pages/About";
 import Error from "./pages/Error";
 import MapInfo from "./pages/MapInfo";
-import RatesConfig from "./pages/RatesConfig";
+import ConfigRates from "./pages/ConfigRates";
 
 function App() {
   const [worldMapsData, setWorldMapsData] = useState<
@@ -52,7 +51,7 @@ function App() {
                 }
               />
               <Route path="/about" element={<About />} />
-              <Route path="/rates-config" element={<RatesConfig />} />
+              <Route path="/rates-config" element={<ConfigRates />} />
               {mapIds.map((id) => (
                 <Route
                   key={id}

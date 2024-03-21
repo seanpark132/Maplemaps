@@ -1,5 +1,5 @@
 import InputNumber from "./InputNumber";
-import { ConfigState } from "../types/dataTypes";
+import { ConfigState } from "../../types/dataTypes";
 
 type Props = {
   totalMulti: number;

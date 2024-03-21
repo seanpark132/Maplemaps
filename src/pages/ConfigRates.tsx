@@ -1,12 +1,12 @@
 import { useState } from "react";
-import ConfigExpMulti from "../components/ConfigExpMulti";
-import ConfigExpAdditive from "../components/ConfigExpAdditive";
+import ConfigExpMulti from "../components/ConfigRates/ConfigExpMulti";
+import ConfigExpAdditive from "../components/ConfigRates/ConfigExpAdditive";
 import { ConfigState } from "../types/dataTypes";
-import ConfigInfo from "../components/ConfigInfo";
+import ConfigInfo from "../components/ConfigRates/ConfigInfo";
 import { useConfig } from "../context/ConfigContext";
 import { useConfigEffects } from "../hooks/useConfigEffects";
 
-export default function RatesConfig() {
+export default function ConfigRates() {
   // need to override default object if it exists in localStorage,
   // so that checked inputs can know if checked should be true on first render
   const [ratesConfig, setRatesConfig] = useState<ConfigState>(

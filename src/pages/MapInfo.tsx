@@ -1,10 +1,10 @@
 import { MapData, MobData } from "../types/dataTypes";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/globalConstants";
 import { useState } from "react";
-import Rates from "../components/Rates";
+import Rates from "../components/MapInfo/Rates";
 import Loading from "./Loading";
 import { useFetchSingleMapMobData } from "../hooks/useFetchSingleMapAndMobData";
-import MobsInfo from "../components/MobsInfo";
+import MobsInfo from "../components/MapInfo/MobsInfo";
 
 type Props = {
   id: number;
