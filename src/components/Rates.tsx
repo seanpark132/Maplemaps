@@ -51,7 +51,7 @@ export default function Rates(props: Props) {
       />
       <RatesPersonal
         mobLevels={props.mobsData.map((mob) => mob.level)}
-        hourlyMobs={hourlyMobs}
+        hourlyMobs={hourlyMobsInstanced ? hourlyMobsInstanced : hourlyMobs}
         expRate={expRate}
         mesoRate={mesoRate}
         arcaneForce={props.mapData.arcaneForce}

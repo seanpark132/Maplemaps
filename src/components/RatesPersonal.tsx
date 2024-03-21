@@ -1,11 +1,10 @@
-import PersonalConfigGrid from "./PersonalConfigGrid";
 import InfoGrid from "./InfoGrid";
 import { useState, useMemo } from "react";
 import {
   LEVEL_EXP_MULTIPLIER,
   LEVEL_MESO_MULTIPLIER,
 } from "../utils/ratesConstants";
-import { usePersonalConfig } from "../hooks/usePersonalConfig";
+import { useConfig } from "../context/ConfigContext";
 
 type Props = {
   mobLevels: number[];
@@ -18,39 +17,21 @@ type Props = {
 };
 
 export default function RatesPersonal(props: Props) {
-  const [configInputs, setConfigInputs] = useState<Record<string, number>>({
-    "Character Level": 0,
-    "Meso Obtained %": 0,
-    "Custom mobs/hr": props.hourlyMobs,
-    "Burning %": 0,
-    "Legion Exp ": 0,
-    "Zero Legion Block": 0,
-    "Hyper Stat": 0,
-    "Mercedes Link": 0,
-    "Event Passive": 0,
-    "Pendant of Spirit": 0,
-    "Other Exp Bonuses": 0,
-  });
+  const [customHourlyMobs, setCustomHourlyMobs] = useState<string>(
+    String(props.hourlyMobs),
+  );
 
-  const [selectedRuneValue, setSelectedRuneValue] = useState<number>(0);
+  let { totalMulti, level, mesoObtained } = useConfig();
 
-  const [configCheckboxes, setConfigCheckboxes] = useState<
-    Record<string, boolean>
-  >({
-    "2x Coupon": false,
-    "3x Coupon": false,
-    "MVP/50% Coupon": false,
-    "MP Gold Potion": false,
-    "Exp Accum Potion": false,
-    "6 Dice": false,
-    "Decent Holy Symbol": false,
-    "Real Holy Symbol": false,
-  });
-  const [totalBonusExpPercent, setTotalBonusExpPercent] = useState<number>(0);
-  const [isConfigOpen, setIsConfigOpen] = useState<boolean>(false);
+  if (typeof level === "string") {
+    level = 0;
+  }
+  if (typeof mesoObtained === "string") {
+    mesoObtained = 0;
+  }
 
   const { levelExpMulti, levelMesoMulti } = useMemo(() => {
-    if (configInputs["Character Level"] === 0) {
+    if (level) {
       return { levelExpMulti: 1, levelMesoMulti: 1 };
     }
 
@@ -62,7 +43,7 @@ export default function RatesPersonal(props: Props) {
     let mesoMultiSum = 0;
 
     props.mobLevels.forEach((mobLevel) => {
-      const levelDiff = configInputs["Character Level"] - mobLevel;
+      const levelDiff = (level as number) - mobLevel;
       if (levelDiff > 40) {
         expMultiSum += 0.7;
       } else if (levelDiff < -36) {
@@ -81,81 +62,72 @@ export default function RatesPersonal(props: Props) {
     const avgMesoMulti =
       Math.round((mesoMultiSum / props.mobLevels.length) * 100) / 100;
     return { levelExpMulti: avgExpMulti, levelMesoMulti: avgMesoMulti };
-  }, [configInputs["Character Level"]]);
-
-  usePersonalConfig(
-    configInputs,
-    configCheckboxes,
-    selectedRuneValue,
-    setConfigInputs,
-    setConfigCheckboxes,
-    setTotalBonusExpPercent,
-    setSelectedRuneValue,
-  );
+  }, [level]);
 
   const descriptions = [
     "Exp/hr",
     "Meso/hr",
-    "Meso/hr (Reboot)",
-    "Mobs/hr",
+    "Character Level",
     "Level Exp Multi",
     "Level Meso Multi",
+    "Config Exp Multi",
+    "Total Exp Multi",
   ];
 
-  const hourlyMobsMulti = configInputs["Custom mobs/hr"] / props.hourlyMobs;
+  let customHourlyMobsNumber: number;
+  if (customHourlyMobs === "") {
+    customHourlyMobsNumber = 0;
+  } else {
+    customHourlyMobsNumber = Number(customHourlyMobs);
+  }
 
+  const hourlyMobsMulti = customHourlyMobsNumber / props.hourlyMobs;
   const values = [
     Math.round(
-      (props.expRate *
-        levelExpMulti *
-        hourlyMobsMulti *
-        (100 + totalBonusExpPercent)) /
-        100,
+      props.expRate * levelExpMulti * hourlyMobsMulti * totalMulti,
     ).toLocaleString("US"),
     Math.round(
       (props.mesoRate *
         levelMesoMulti *
         hourlyMobsMulti *
-        (100 + configInputs["Meso Obtained %"])) /
+        (100 + mesoObtained)) /
         100,
     ).toLocaleString("US"),
-    Math.round(
-      (props.mesoRate *
-        levelMesoMulti *
-        hourlyMobsMulti *
-        (100 + configInputs["Meso Obtained %"]) *
-        6) /
-        100,
-    ).toLocaleString("US"),
-    configInputs["Custom mobs/hr"].toLocaleString("US"),
+    level,
     levelExpMulti,
     levelMesoMulti,
+    totalMulti,
+    levelExpMulti * totalMulti,
   ];
 
   return (
     <article className="h-fit w-fit rounded-lg border-2 p-4 md:p-6 xl:ml-8 2xl:p-8">
-      <h2>Personal Rates:</h2>
-      <button
-        className="mb-5 mt-2.5 rounded border p-2 text-green-700 dark:text-green-400"
-        onClick={() => setIsConfigOpen((prev) => !prev)}
-      >
-        {isConfigOpen
-          ? "View Personal Rates"
-          : "Click to configure personal rates"}
-      </button>
-      {isConfigOpen ? (
-        <PersonalConfigGrid
-          totalBonusExpPercent={totalBonusExpPercent}
-          configInputs={configInputs}
-          configCheckboxes={configCheckboxes}
-          selectedRuneValue={selectedRuneValue}
-          setConfigInputs={setConfigInputs}
-          setConfigCheckboxes={setConfigCheckboxes}
-          setSelectedRuneValue={setSelectedRuneValue}
-        />
-      ) : (
-        <InfoGrid descriptions={descriptions} values={values} />
-      )}
+      <h2 className="mb-4">Personal Rates:</h2>
+      <label className="font-bold" htmlFor="customHourlyMobs">
+        Custom Mobs/hr:
+      </label>
+      <input
+        className="mb-5 ml-4 w-24 rounded border-2 px-2 py-1"
+        type="number"
+        name="customHourlyMobs"
+        id="customHourlyMobs"
+        max={999999}
+        value={customHourlyMobs}
+        onChange={handleCustomHourlyMobs}
+      />
+      <InfoGrid descriptions={descriptions} values={values} />
     </article>
   );
+
+  function handleCustomHourlyMobs(e: any) {
+    const { value, max } = e.target;
+
+    let parsed: number = Number(value);
+    if (isNaN(parsed)) {
+      parsed = 0;
+    } else if (max && parsed > max) {
+      parsed = max;
+    }
+    setCustomHourlyMobs(String(parsed));
+  }
 }
