@@ -42,6 +42,7 @@ export type MobData = {
 };
 
 export type ConfigState = {
+  totalMulti: number;
   level: number;
   mesoObtained: number;
   expMulti: Record<string, number>;

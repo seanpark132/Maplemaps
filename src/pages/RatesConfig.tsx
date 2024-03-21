@@ -6,6 +6,7 @@ import ConfigInfo from "../components/ConfigInfo";
 
 export default function RatesConfig() {
   const [ratesConfig, setRatesConfig] = useState<ConfigState>({
+    totalMulti: 1,
     level: 0,
     mesoObtained: 0,
     expMulti: { cashShop: 1, useCoupon: 1, torment: 1 },
