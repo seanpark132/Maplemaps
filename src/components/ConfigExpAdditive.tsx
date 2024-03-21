@@ -16,37 +16,41 @@ type Props = {
 
 export default function ConfigExpAdditive(props: Props) {
   return (
-    <section className="flex flex-col">
-      <h2 className="underline">Additive Exp Bonuses </h2>
-      {ADDITIVE_CHECKBOXES.map((obj) => (
-        <InputCheckbox
-          key={obj.name}
-          label={obj.label}
-          exp={obj.exp}
-          name={obj.name}
-          handlerFnc={handleCheckedChange}
-        />
-      ))}
-      {ADDITIVE_SELECTS.map((obj) => (
-        <InputSelect
-          key={obj.name}
-          label={obj.label}
-          name={obj.name}
-          value={props.ratesConfig.expAdditive[obj.name]}
-          options={obj.options}
-          handlerFnc={handleSelectChange}
-        />
-      ))}
-      {ADDITIVE_NUMBERS.map((obj) => (
-        <InputNumber
-          key={obj.name}
-          label={obj.label}
-          name={obj.name}
-          max={obj.max}
-          value={props.ratesConfig.expAdditive[obj.name]}
-          handlerFnc={handleNumberChange}
-        />
-      ))}
+    <section className="flex flex-wrap">
+      <div className="mr-16 flex flex-col">
+        <h2 className="underline">Additive Exp Bonuses </h2>
+        {ADDITIVE_CHECKBOXES.map((obj) => (
+          <InputCheckbox
+            key={obj.name}
+            label={obj.label}
+            exp={obj.exp}
+            name={obj.name}
+            handlerFnc={handleCheckedChange}
+          />
+        ))}
+        {ADDITIVE_SELECTS.map((obj) => (
+          <InputSelect
+            key={obj.name}
+            label={obj.label}
+            name={obj.name}
+            value={props.ratesConfig.expAdditive[obj.name]}
+            options={obj.options}
+            handlerFnc={handleSelectChange}
+          />
+        ))}
+      </div>
+      <div className="flex flex-col sm:mt-10">
+        {ADDITIVE_NUMBERS.map((obj) => (
+          <InputNumber
+            key={obj.name}
+            label={obj.label}
+            name={obj.name}
+            max={obj.max}
+            value={props.ratesConfig.expAdditive[obj.name]}
+            handlerFnc={handleNumberChange}
+          />
+        ))}
+      </div>
     </section>
   );
 
