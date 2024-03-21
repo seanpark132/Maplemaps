@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import {
   LEVEL_EXP_MULTIPLIER,
   LEVEL_MESO_MULTIPLIER,
-} from "../utils/GlobalConstants";
+} from "../utils/ratesConstants";
 import { usePersonalConfig } from "../hooks/usePersonalConfig";
 
 type Props = {
