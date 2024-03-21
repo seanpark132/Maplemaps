@@ -2,7 +2,7 @@ type Props = {
   label: string;
   name: string;
   max?: number;
-  value: number;
+  value: number | string;
   handlerFnc: any;
 };
 

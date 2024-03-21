@@ -3,12 +3,11 @@ import ConfigExpMulti from "../components/ConfigExpMulti";
 import ConfigExpAdditive from "../components/ConfigExpAdditive";
 import { ConfigState } from "../types/dataTypes";
 import ConfigInfo from "../components/ConfigInfo";
+import { useConfig } from "../context/ConfigContext";
+import { useUpdateTotalMulti } from "../hooks/useUpdateTotalMulti";
 
 export default function RatesConfig() {
   const [ratesConfig, setRatesConfig] = useState<ConfigState>({
-    totalMulti: 1,
-    level: 0,
-    mesoObtained: 0,
     expMulti: { cashShop: 1, useCoupon: 1, torment: 1 },
     expAdditive: {
       mvp: 0,
@@ -29,6 +28,17 @@ export default function RatesConfig() {
     },
   });
 
+  const {
+    totalMulti,
+    level,
+    mesoObtained,
+    setTotalMulti,
+    setLevel,
+    setMesoObtained,
+  } = useConfig();
+
+  useUpdateTotalMulti(ratesConfig, setTotalMulti);
+
   return (
     <main className="flex w-full flex-col lg:p-6 lg:pt-0">
       <h3>
@@ -39,7 +49,12 @@ export default function RatesConfig() {
       <form className="mt-6 flex flex-wrap">
         <div className="mr-28 flex flex-col">
           <ConfigInfo
+            totalMulti={totalMulti}
+            level={level}
+            mesoObtained={mesoObtained}
             ratesConfig={ratesConfig}
+            setLevel={setLevel}
+            setMesoObtained={setMesoObtained}
             setRatesConfig={setRatesConfig}
           />
           <ConfigExpMulti
@@ -47,7 +62,6 @@ export default function RatesConfig() {
             setRatesConfig={setRatesConfig}
           />
         </div>
-
         <ConfigExpAdditive
           ratesConfig={ratesConfig}
           setRatesConfig={setRatesConfig}

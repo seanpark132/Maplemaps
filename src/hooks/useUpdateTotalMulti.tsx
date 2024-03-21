@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { ConfigState } from "../types/dataTypes";
 
-export const useRatesConfig = (
+export const useUpdateTotalMulti = (
   ratesConfig: ConfigState,
-  setRatesConfig: React.Dispatch<React.SetStateAction<ConfigState>>,
+  setTotalMulti: React.Dispatch<React.SetStateAction<number>>,
 ) => {
   useEffect(() => {
     const additiveSum = Object.values(ratesConfig.expAdditive).reduce(
@@ -18,6 +18,6 @@ export const useRatesConfig = (
 
     const totalMulti = Math.round(100 * (additiveSum / 100 + multiSum)) / 100;
 
-    setRatesConfig((prev) => ({ ...prev, totalMulti: totalMulti }));
+    setTotalMulti(totalMulti);
   }, [ratesConfig]);
 };
