@@ -4,29 +4,35 @@ import ConfigExpAdditive from "../components/ConfigExpAdditive";
 import { ConfigState } from "../types/dataTypes";
 import ConfigInfo from "../components/ConfigInfo";
 import { useConfig } from "../context/ConfigContext";
-import { useUpdateTotalMulti } from "../hooks/useUpdateTotalMulti";
+import { useConfigEffects } from "../hooks/useConfigEffects";
 
 export default function RatesConfig() {
-  const [ratesConfig, setRatesConfig] = useState<ConfigState>({
-    expMulti: { cashShop: 1, useCoupon: 1, torment: 1 },
-    expAdditive: {
-      mvp: 0,
-      mpGold: 0,
-      expAcc: 0,
-      vip: 0,
-      burning: 0,
-      rune: 0,
-      pendant: 0,
-      merc: 0,
-      zero: 0,
-      dice: 0,
-      legionBoard: 0,
-      event: 0,
-      hyper: 0,
-      holySymbol: 0,
-      other: 0,
-    },
-  });
+  // need to override default object if it exists in localStorage,
+  // so that checked inputs can know if checked should be true on first render
+  const [ratesConfig, setRatesConfig] = useState<ConfigState>(
+    localStorage.getItem("ratesConfig")
+      ? JSON.parse(localStorage.getItem("ratesConfig")!)
+      : null || {
+          expMulti: { cashShop: "1", useCoupon: "1", torment: "1" },
+          expAdditive: {
+            mvp: "0",
+            mpGold: "0",
+            expAcc: "0",
+            vip: "0",
+            burning: "0",
+            rune: "0",
+            pendant: "0",
+            merc: "0",
+            zero: "0",
+            dice: "0",
+            legionBoard: "0",
+            event: "0",
+            hyper: "0",
+            holySymbol: "0",
+            other: "0",
+          },
+        },
+  );
 
   const {
     totalMulti,
@@ -37,7 +43,7 @@ export default function RatesConfig() {
     setMesoObtained,
   } = useConfig();
 
-  useUpdateTotalMulti(ratesConfig, setTotalMulti);
+  useConfigEffects(ratesConfig, setTotalMulti);
 
   return (
     <main className="flex w-full flex-col lg:p-6 lg:pt-0">

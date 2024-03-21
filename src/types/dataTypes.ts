@@ -42,6 +42,6 @@ export type MobData = {
 };
 
 export type ConfigState = {
-  expMulti: Record<string, number>;
-  expAdditive: Record<string, number>;
+  expMulti: Record<string, string>;
+  expAdditive: Record<string, string>;
 };

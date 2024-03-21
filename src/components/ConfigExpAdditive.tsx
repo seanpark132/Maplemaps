@@ -6,7 +6,6 @@ import {
   ADDITIVE_SELECTS,
   ADDITIVE_NUMBERS,
 } from "../utils/ratesConstants";
-
 import { ConfigState } from "../types/dataTypes";
 
 type Props = {
@@ -25,7 +24,8 @@ export default function ConfigExpAdditive(props: Props) {
             label={obj.label}
             exp={obj.exp}
             name={obj.name}
-            handlerFnc={handleCheckedChange}
+            ratesConfig={props.ratesConfig}
+            setRatesConfig={props.setRatesConfig}
           />
         ))}
         {ADDITIVE_SELECTS.map((obj) => (
@@ -54,19 +54,6 @@ export default function ConfigExpAdditive(props: Props) {
     </section>
   );
 
-  function handleCheckedChange(e: any) {
-    const { name, value, checked } = e.target;
-    let newAdditive = 0;
-    if (checked) {
-      newAdditive = value;
-    }
-
-    props.setRatesConfig((prev) => ({
-      ...prev,
-      expAdditive: { ...prev.expAdditive, [name]: newAdditive },
-    }));
-  }
-
   function handleSelectChange(e: any) {
     const { name, value } = e.target;
 
@@ -79,16 +66,16 @@ export default function ConfigExpAdditive(props: Props) {
   function handleNumberChange(e: any) {
     const { name, value, max } = e.target;
 
-    let parsed: number | string = parseInt(value);
-    if (isNaN(parsed)) {
-      parsed = "";
-    } else if (max && parsed > max) {
-      parsed = max;
+    let valAsNum: number | string = Number(value);
+    if (isNaN(valAsNum)) {
+      valAsNum = "";
+    } else if (max && valAsNum > max) {
+      valAsNum = max;
     }
 
     props.setRatesConfig((prev) => ({
       ...prev,
-      expAdditive: { ...prev.expAdditive, [name]: parsed },
+      expAdditive: { ...prev.expAdditive, [name]: String(valAsNum) },
     }));
   }
 }

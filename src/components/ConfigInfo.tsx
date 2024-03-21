@@ -3,11 +3,11 @@ import { ConfigState } from "../types/dataTypes";
 
 type Props = {
   totalMulti: number;
-  level: number | string;
-  mesoObtained: number | string;
+  level: string;
+  mesoObtained: string;
   ratesConfig: ConfigState;
-  setLevel: React.Dispatch<React.SetStateAction<number | string>>;
-  setMesoObtained: React.Dispatch<React.SetStateAction<number | string>>;
+  setLevel: React.Dispatch<React.SetStateAction<string>>;
+  setMesoObtained: React.Dispatch<React.SetStateAction<string>>;
   setRatesConfig: React.Dispatch<React.SetStateAction<ConfigState>>;
 };
 
@@ -20,14 +20,14 @@ export default function ConfigInfo(props: Props) {
           name="level"
           max={300}
           value={props.level}
-          handlerFnc={handleLevelChange}
+          handlerFnc={(e: any) => handleNumberChange(e, "level")}
         />
         <InputNumber
           label="Meso Obtained %"
           name="mesoObtained"
           max={3000}
           value={props.mesoObtained}
-          handlerFnc={handleMesoChange}
+          handlerFnc={(e: any) => handleNumberChange(e, "mesoObtained")}
         />
       </div>
       <div className="flex flex-col items-center rounded-xl border p-4">
@@ -39,25 +39,23 @@ export default function ConfigInfo(props: Props) {
     </section>
   );
 
-  function handleLevelChange(e: any) {
+  function handleNumberChange(e: any, name: string) {
     const { value, max } = e.target;
-    let parsed: number | string = parseInt(value);
-    if (isNaN(parsed)) {
-      parsed = "";
-    } else if (max && parsed > max) {
-      parsed = max;
+    let valAsNum: number | string = Number(value);
+    if (isNaN(valAsNum)) {
+      valAsNum = "";
+    } else if (max && valAsNum > max) {
+      valAsNum = max;
     }
-    props.setLevel(parsed);
-  }
 
-  function handleMesoChange(e: any) {
-    const { value, max } = e.target;
-    let parsed: number | string = parseInt(value);
-    if (isNaN(parsed)) {
-      parsed = "";
-    } else if (max && parsed > max) {
-      parsed = max;
+    const valAsString = String(valAsNum);
+
+    localStorage.setItem(name, valAsString);
+
+    if (name === "level") {
+      props.setLevel(valAsString);
+    } else if (name === "mesoObtained") {
+      props.setMesoObtained(valAsString);
     }
-    props.setMesoObtained(parsed);
   }
 }

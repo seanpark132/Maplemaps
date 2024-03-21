@@ -159,87 +159,87 @@ const LEVEL_MESO_MULTIPLIER: Record<string, number> = {
 };
 
 const CASH_SHOP_OPTIONS = [
-  { label: "2x Exp", exp: 2 },
-  { label: "3x Exp", exp: 3 },
+  { label: "2x Exp", exp: "2" },
+  { label: "3x Exp", exp: "3" },
 ];
 
 const USE_COUPON_OPTIONS = [
-  { label: "Happy Winter", exp: 1.2 },
-  { label: "Enjoyable Winter", exp: 1.5 },
-  { label: "2x Exp", exp: 2 },
-  { label: "3x Exp", exp: 3 },
+  { label: "Happy Winter", exp: "1.2" },
+  { label: "Enjoyable Winter", exp: "1.5" },
+  { label: "2x Exp", exp: "2" },
+  { label: "3x Exp", exp: "3" },
 ];
 
 const ADDITIVE_CHECKBOXES = [
-  { name: "mvp", label: "MVP / 50% exp Buff", exp: 50 },
-  { name: "mpGold", label: "Monster Park Gold Pot", exp: 10 },
-  { name: "expAcc", label: "Exp Accumulation Potion", exp: 10 },
-  { name: "vip", label: "VIP Coupon", exp: 15 },
+  { name: "mvp", label: "MVP / 50% exp Buff", exp: "50" },
+  { name: "mpGold", label: "Monster Park Gold Pot", exp: "10" },
+  { name: "expAcc", label: "Exp Accumulation Potion", exp: "10" },
+  { name: "vip", label: "VIP Coupon", exp: "15" },
 ];
 
 const ADDITIVE_SELECTS = [
   {
     options: [
-      { label: "(Stage 1)", exp: 10 },
-      { label: "(Stage 2)", exp: 20 },
-      { label: "(Stage 3)", exp: 30 },
-      { label: "(Stage 4)", exp: 40 },
-      { label: "(Stage 5)", exp: 50 },
-      { label: "(Stage 6)", exp: 60 },
-      { label: "(Stage 7)", exp: 70 },
-      { label: "(Stage 8)", exp: 80 },
-      { label: "(Stage 9)", exp: 90 },
-      { label: "(Stage 10)", exp: 100 },
+      { label: "(Stage 1)", exp: "10" },
+      { label: "(Stage 2)", exp: "20" },
+      { label: "(Stage 3)", exp: "30" },
+      { label: "(Stage 4)", exp: "40" },
+      { label: "(Stage 5)", exp: "50" },
+      { label: "(Stage 6)", exp: "60" },
+      { label: "(Stage 7)", exp: "70" },
+      { label: "(Stage 8)", exp: "80" },
+      { label: "(Stage 9)", exp: "90" },
+      { label: "(Stage 10)", exp: "100" },
     ],
     name: "burning",
     label: "Burning Field",
   },
   {
     options: [
-      { exp: 20, label: "(Base)" },
-      { exp: 40, label: "(200% Rune Exp Event)" },
-      { exp: 60, label: "(Haste Event)" },
-      { exp: 34, label: "(Base + Evan Link)" },
-      { exp: 68, label: "(200% Rune Exp Event + Evan Link)" },
-      { exp: 102, label: "(Haste Event + Evan Link)" },
+      { exp: "20", label: "(Base)" },
+      { exp: "40", label: "(200% Rune Exp Event)" },
+      { exp: "60", label: "(Haste Event)" },
+      { exp: "34", label: "(Base + Evan Link)" },
+      { exp: "68", label: "(200% Rune Exp Event + Evan Link)" },
+      { exp: "102", label: "(Haste Event + Evan Link)" },
     ],
     name: "rune",
     label: "Average Rune Exp",
   },
   {
     options: [
-      { label: "", exp: 10 },
-      { label: "", exp: 20 },
-      { label: "", exp: 30 },
+      { label: "", exp: "10" },
+      { label: "", exp: "20" },
+      { label: "", exp: "30" },
     ],
     name: "pendant",
     label: "Pendant of Spirit",
   },
   {
     options: [
-      { label: "(Lvl 1)", exp: 10 },
-      { label: "(Lvl 2)", exp: 15 },
-      { label: "(Lvl 3)", exp: 20 },
+      { label: "(Lvl 1)", exp: "10" },
+      { label: "(Lvl 2)", exp: "15" },
+      { label: "(Lvl 3)", exp: "20" },
     ],
     name: "merc",
     label: "Mercedes Link",
   },
   {
     options: [
-      { label: "(B-rank)", exp: 4 },
-      { label: "(A-rank)", exp: 6 },
-      { label: "(S-rank)", exp: 8 },
-      { label: "(SS-rank)", exp: 10 },
-      { label: "(SSS-rank)", exp: 12 },
+      { label: "(B-rank)", exp: "4" },
+      { label: "(A-rank)", exp: "6" },
+      { label: "(S-rank)", exp: "8" },
+      { label: "(SS-rank)", exp: "10" },
+      { label: "(SSS-rank)", exp: "12" },
     ],
     name: "zero",
     label: "Zero Legion Block",
   },
   {
     options: [
-      { label: "", exp: 30 },
-      { label: "", exp: 40 },
-      { label: "", exp: 50 },
+      { label: "", exp: "30" },
+      { label: "", exp: "40" },
+      { label: "", exp: "50" },
     ],
     name: "dice",
     label: "Pirate 6 Dice",

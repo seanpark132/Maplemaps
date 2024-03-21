@@ -2,17 +2,17 @@ import { createContext, useContext, useState } from "react";
 
 type ConfigContextValue = {
   totalMulti: number;
-  level: number | string;
-  mesoObtained: number | string;
+  level: string;
+  mesoObtained: string;
   setTotalMulti: React.Dispatch<React.SetStateAction<number>>;
-  setLevel: React.Dispatch<React.SetStateAction<number | string>>;
-  setMesoObtained: React.Dispatch<React.SetStateAction<number | string>>;
+  setLevel: React.Dispatch<React.SetStateAction<string>>;
+  setMesoObtained: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const defaultConfigContextValue: ConfigContextValue = {
   totalMulti: 1,
-  level: 0,
-  mesoObtained: 0,
+  level: "0",
+  mesoObtained: "0",
   setTotalMulti: () => {},
   setLevel: () => {},
   setMesoObtained: () => {},
@@ -30,8 +30,12 @@ export const ConfigContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [totalMulti, setTotalMulti] = useState<number>(1);
-  const [level, setLevel] = useState<number | string>(0);
-  const [mesoObtained, setMesoObtained] = useState<number | string>(0);
+  const [level, setLevel] = useState<string>(
+    localStorage.getItem("level") || "0",
+  );
+  const [mesoObtained, setMesoObtained] = useState<string>(
+    localStorage.getItem("mesoObtained") || "0",
+  );
 
   return (
     <ConfigContext.Provider

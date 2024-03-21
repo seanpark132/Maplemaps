@@ -1,7 +1,7 @@
 type Props = {
   label: string;
   name: string;
-  value: number;
+  value: string;
   options: any[];
   handlerFnc: any;
   isMulti?: boolean;

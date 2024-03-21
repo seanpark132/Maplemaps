@@ -1,12 +1,10 @@
 import InfoGrid from "./InfoGrid";
-import { useState, useMemo } from "react";
-import {
-  LEVEL_EXP_MULTIPLIER,
-  LEVEL_MESO_MULTIPLIER,
-} from "../utils/ratesConstants";
+import { useState } from "react";
 import { useConfig } from "../context/ConfigContext";
+import { useLevelMultipliers } from "../hooks/useLevelMultipliers";
 
 type Props = {
+  mapId: number;
   mobLevels: number[];
   hourlyMobs: number;
   expRate: number;
@@ -18,51 +16,19 @@ type Props = {
 
 export default function RatesPersonal(props: Props) {
   const [customHourlyMobs, setCustomHourlyMobs] = useState<string>(
-    String(props.hourlyMobs),
+    localStorage.getItem(`${String(props.mapId)}_custom_mobs`) ||
+      String(props.hourlyMobs),
   );
 
   let { totalMulti, level, mesoObtained } = useConfig();
 
-  if (typeof level === "string") {
-    level = 0;
-  }
-  if (typeof mesoObtained === "string") {
-    mesoObtained = 0;
-  }
+  const levelAsNum = Number(level);
+  const mesoObtainedAsNum = Number(mesoObtained);
 
-  const { levelExpMulti, levelMesoMulti } = useMemo(() => {
-    if (level) {
-      return { levelExpMulti: 1, levelMesoMulti: 1 };
-    }
-
-    if (props.mobLevels.some((mobLevel) => mobLevel === undefined)) {
-      return { levelExpMulti: 1, levelMesoMulti: 1 };
-    }
-
-    let expMultiSum = 0;
-    let mesoMultiSum = 0;
-
-    props.mobLevels.forEach((mobLevel) => {
-      const levelDiff = (level as number) - mobLevel;
-      if (levelDiff > 40) {
-        expMultiSum += 0.7;
-      } else if (levelDiff < -36) {
-        expMultiSum += 0.1;
-      } else {
-        expMultiSum += LEVEL_EXP_MULTIPLIER[String(levelDiff)];
-      }
-
-      if (String(levelDiff) in LEVEL_MESO_MULTIPLIER) {
-        mesoMultiSum += LEVEL_MESO_MULTIPLIER[String(levelDiff)];
-      }
-    });
-
-    const avgExpMulti =
-      Math.round((expMultiSum / props.mobLevels.length) * 100) / 100;
-    const avgMesoMulti =
-      Math.round((mesoMultiSum / props.mobLevels.length) * 100) / 100;
-    return { levelExpMulti: avgExpMulti, levelMesoMulti: avgMesoMulti };
-  }, [level]);
+  const { levelExpMulti, levelMesoMulti } = useLevelMultipliers(
+    levelAsNum,
+    props.mobLevels,
+  );
 
   const descriptions = [
     "Exp/hr",
@@ -90,14 +56,14 @@ export default function RatesPersonal(props: Props) {
       (props.mesoRate *
         levelMesoMulti *
         hourlyMobsMulti *
-        (100 + mesoObtained)) /
+        (100 + mesoObtainedAsNum)) /
         100,
     ).toLocaleString("US"),
     level,
     levelExpMulti,
     levelMesoMulti,
     totalMulti,
-    levelExpMulti * totalMulti,
+    Math.round(100 * levelExpMulti * totalMulti) / 100,
   ];
 
   return (
@@ -122,12 +88,16 @@ export default function RatesPersonal(props: Props) {
   function handleCustomHourlyMobs(e: any) {
     const { value, max } = e.target;
 
-    let parsed: number = Number(value);
-    if (isNaN(parsed)) {
-      parsed = 0;
-    } else if (max && parsed > max) {
-      parsed = max;
+    let valAsNumber = Number(value);
+    if (isNaN(valAsNumber)) {
+      valAsNumber = 0;
+    } else if (max && valAsNumber > max) {
+      valAsNumber = max;
     }
-    setCustomHourlyMobs(String(parsed));
+
+    const valAsString = String(valAsNumber);
+
+    localStorage.setItem(`${String(props.mapId)}_custom_mobs`, valAsString);
+    setCustomHourlyMobs(valAsString);
   }
 }

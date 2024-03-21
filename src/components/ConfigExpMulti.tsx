@@ -1,6 +1,6 @@
+import { useState, useEffect } from "react";
 import InputSelect from "./InputSelect";
 import { CASH_SHOP_OPTIONS, USE_COUPON_OPTIONS } from "../utils/ratesConstants";
-
 import { ConfigState } from "../types/dataTypes";
 
 type Props = {
@@ -9,6 +9,14 @@ type Props = {
 };
 
 export default function ConfigExpMulti(props: Props) {
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (props.ratesConfig.expMulti.torment === "1.075") {
+      setIsChecked(true);
+    }
+  }, []);
+
   return (
     <>
       <h2 className="mt-8 underline">Multiplicative Exp Bonuses</h2>
@@ -33,7 +41,8 @@ export default function ConfigExpMulti(props: Props) {
           type="checkbox"
           id="torment"
           name="torment"
-          value={1.075}
+          value="1.075"
+          checked={isChecked}
           onChange={(e) => handleCheckedChange(e)}
         />
         <label className="ml-4 py-1" htmlFor={"torment"}>
@@ -53,8 +62,10 @@ export default function ConfigExpMulti(props: Props) {
   }
 
   function handleCheckedChange(e: any) {
+    setIsChecked((prev) => !prev);
+
     const { name, value, checked } = e.target;
-    let newMulti = 1;
+    let newMulti = "1";
     if (checked) {
       newMulti = value;
     }
