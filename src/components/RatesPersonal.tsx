@@ -2,6 +2,7 @@ import InfoGrid from "./InfoGrid";
 import { useState } from "react";
 import { useConfig } from "../context/ConfigContext";
 import { useLevelMultipliers } from "../hooks/useLevelMultipliers";
+import { Link } from "react-router-dom";
 
 type Props = {
   mapId: number;
@@ -34,6 +35,7 @@ export default function RatesPersonal(props: Props) {
     "Exp/hr",
     "Meso/hr",
     "Character Level",
+    "Meso Obtained %",
     "Level Exp Multi",
     "Level Meso Multi",
     "Config Exp Multi",
@@ -60,6 +62,7 @@ export default function RatesPersonal(props: Props) {
         100,
     ).toLocaleString("US"),
     level,
+    mesoObtained,
     levelExpMulti,
     levelMesoMulti,
     totalMulti,
@@ -82,6 +85,13 @@ export default function RatesPersonal(props: Props) {
         onChange={handleCustomHourlyMobs}
       />
       <InfoGrid descriptions={descriptions} values={values} />
+      <p className="mb-2 mt-4 w-64 text-wrap">
+        * To configure your character level/ meso obtained/ exp multipliers,
+        please visit the{" "}
+        <Link to="/rates-config" className="font-semibold underline">
+          Rates Config Page.
+        </Link>
+      </p>
     </article>
   );
 

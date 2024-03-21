@@ -16,7 +16,7 @@ type Props = {
 export default function ConfigExpAdditive(props: Props) {
   return (
     <section className="flex flex-wrap">
-      <div className="mr-16 flex flex-col">
+      <div className="flex flex-col sm:mr-16">
         <h2 className="underline">Additive Exp Bonuses </h2>
         {ADDITIVE_CHECKBOXES.map((obj) => (
           <InputCheckbox

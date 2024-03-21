@@ -53,7 +53,7 @@ export default function RatesConfig() {
         map.
       </h3>
       <form className="mt-6 flex flex-wrap">
-        <div className="mr-28 flex flex-col">
+        <div className="flex flex-col sm:mr-28">
           <ConfigInfo
             totalMulti={totalMulti}
             level={level}
@@ -63,6 +63,10 @@ export default function RatesConfig() {
             setMesoObtained={setMesoObtained}
             setRatesConfig={setRatesConfig}
           />
+          <p className="mt-4 w-80">
+            * Note that combo orbs, class-specific exp buffs, and event skills
+            that give bonus exp are not included
+          </p>
           <ConfigExpMulti
             ratesConfig={ratesConfig}
             setRatesConfig={setRatesConfig}
