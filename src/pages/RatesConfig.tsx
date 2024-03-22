@@ -6,7 +6,7 @@ import ConfigInfo from "../components/ConfigRates/ConfigInfo";
 import { useConfig } from "../context/ConfigContext";
 import { useConfigEffects } from "../hooks/useConfigEffects";
 
-export default function ConfigRates() {
+export default function RatesConfig() {
   // need to override default object if it exists in localStorage,
   // so that checked inputs can know if checked should be true on first render
   const [ratesConfig, setRatesConfig] = useState<ConfigState>(
