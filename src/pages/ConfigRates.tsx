@@ -13,7 +13,7 @@ export default function ConfigRates() {
     localStorage.getItem("ratesConfig")
       ? JSON.parse(localStorage.getItem("ratesConfig")!)
       : null || {
-          expMulti: { cashShop: "1", useCoupon: "1", torment: "1" },
+          expMulti: { useCoupon: "1", cashShop: "1", torment: "1" },
           expAdditive: {
             mvp: "0",
             mpGold: "0",

@@ -22,20 +22,20 @@ export default function ConfigExpMulti(props: Props) {
 
   return (
     <>
-      <h2 className="mt-8 underline">Multiplicative Exp Bonuses</h2>
-      <InputSelect
-        label="Cash Shop Coupons"
-        name="cashShop"
-        value={props.ratesConfig.expMulti.cashShop}
-        options={CASH_SHOP_OPTIONS}
-        handlerFnc={handleExpMultiChange}
-        isMulti={true}
-      />
+      <h2 className="mb-2 mt-8 underline">Multiplicative Exp Bonuses</h2>
       <InputSelect
         label="Use Coupons"
         name="useCoupon"
         value={props.ratesConfig.expMulti.useCoupon}
         options={USE_COUPON_OPTIONS}
+        handlerFnc={handleExpMultiChange}
+        isMulti={true}
+      />
+      <InputSelect
+        label="Cash Shop Coupons"
+        name="cashShop"
+        value={props.ratesConfig.expMulti.cashShop}
+        options={CASH_SHOP_OPTIONS}
         handlerFnc={handleExpMultiChange}
         isMulti={true}
       />

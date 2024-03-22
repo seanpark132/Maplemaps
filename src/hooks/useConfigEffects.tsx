@@ -20,6 +20,7 @@ export const useConfigEffects = (
     setTotalMulti(totalMulti);
     if (!isFirstRun.current) {
       localStorage.setItem("ratesConfig", JSON.stringify(ratesConfig));
+      localStorage.setItem("totalMulti", String(totalMulti));
     } else {
       isFirstRun.current = false;
     }

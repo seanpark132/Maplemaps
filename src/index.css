@@ -59,6 +59,12 @@ input[type="checkbox"] {
   height: 1rem;
 }
 
+select:focus,
+input:focus {
+  outline: 1px solid #2688ff;
+  border-color: #2688ff;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #242424;

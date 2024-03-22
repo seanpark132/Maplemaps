@@ -72,11 +72,14 @@ export default function RatesPersonal(props: Props) {
   return (
     <article className="h-fit w-fit rounded-lg border-2 p-4 md:p-6 xl:ml-8 2xl:p-8">
       <h2 className="mb-4">Personal Rates:</h2>
-      <label className="font-bold" htmlFor="customHourlyMobs">
+      <label
+        className="font-bold text-green-700 dark:text-green-400"
+        htmlFor="customHourlyMobs"
+      >
         Custom Mobs/hr:
       </label>
       <input
-        className="mb-5 ml-4 w-24 rounded border-2 px-2 py-1"
+        className="mb-5 ml-6 w-24 rounded border-2 px-2 py-1 text-green-700 dark:text-green-400"
         type="number"
         name="customHourlyMobs"
         id="customHourlyMobs"

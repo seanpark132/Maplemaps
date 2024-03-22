@@ -29,7 +29,9 @@ export function useConfig() {
 export const ConfigContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [totalMulti, setTotalMulti] = useState<number>(1);
+  const [totalMulti, setTotalMulti] = useState<number>(
+    Number(localStorage.getItem("totalMulti")) || 1,
+  );
   const [level, setLevel] = useState<string>(
     localStorage.getItem("level") || "0",
   );
