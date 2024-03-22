@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function About() {
   return (
     <main className="flex p-6 xl:p-12">
@@ -6,11 +8,10 @@ export default function About() {
         <p>
           MapleMaps is a website built to give Maplestory players better
           insights on training map rates. <br />
-          The world map for this website was made to function similarly to the
-          one in-game. You can click on different areas to traverse the world
-          map, and right click to go to the previous world map. Hover a map dot
-          to see basic information of the map, and click to go to the map's
-          page.
+          The world map on this website functions similarly to the one in-game.
+          You can click on different areas to traverse the world map, and right
+          click to go to the previous world map. Click a map's dot to go to the
+          map's page.
         </p>
         <p className="my-4">Each map page has the following:</p>
         <ul className="list-disc px-6">
@@ -28,9 +29,12 @@ export default function About() {
           </li>
           <li>
             <p>
-              A customizable personal rates section where you can put your
-              character level, % meso obtained, mobs/hr, and bonus EXP sources
-              to calculate the map's rates for your character
+              A personal rates section. To customize the rates to your setup,
+              visit the{" "}
+              <Link to="/rates-config" className="font-semibold underline">
+                Rates Config Page
+              </Link>{" "}
+              and input your character level, meso obtained %, and exp bonuses.
             </p>
           </li>
         </ul>
@@ -65,9 +69,6 @@ export default function About() {
           </li>
           <li>
             <p>Meso/hr: 7.5 * (Mobs/hr) * (Average mob level)</p>
-          </li>
-          <li>
-            <p>Meso/hr (reboot): 6 * (Meso/hr)</p>
           </li>
         </ul>
       </div>

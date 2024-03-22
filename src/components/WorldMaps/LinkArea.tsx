@@ -6,8 +6,8 @@ import {
   LINK_AREA_Z_INDEX,
   GOOGLE_CLOUD_IMAGE_URL,
   LINK_IMAGE_EDGE_CASES,
-} from "../utils/GlobalConstants";
-import { Link, WorldMapData } from "../types/dataTypes";
+} from "../../utils/globalConstants";
+import { Link, WorldMapData } from "../../types/dataTypes";
 
 type Props = {
   worldMapsData: Record<string, WorldMapData>;

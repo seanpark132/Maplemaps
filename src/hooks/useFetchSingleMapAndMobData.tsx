@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { MapData, MobData } from "../types/dataTypes";
-import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
+import { fetchMongoDbConstructor } from "../utils/fetchMongoDbConstructor";
 
 export const useFetchSingleMapMobData = (
   id: number,

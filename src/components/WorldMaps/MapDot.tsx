@@ -5,9 +5,9 @@ import {
   ORIGIN_Y,
   WORLD_MAP_OFFSETS,
   MAP_DOT_NUMBERS,
-} from "../utils/GlobalConstants";
+} from "../../utils/globalConstants";
 import MapDotHover from "./MapDotHover";
-import { Map, MapData, MobData } from "../types/dataTypes";
+import { Map, MapData, MobData } from "../../types/dataTypes";
 import { Link } from "react-router-dom";
 
 type Props = {

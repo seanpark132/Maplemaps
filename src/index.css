@@ -49,9 +49,20 @@ h2 {
   font-weight: 600;
 }
 
+h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
 input[type="checkbox"] {
-  width: 0.625rem;
-  height: 0.625rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+select:focus,
+input:focus {
+  outline: 1px solid #2688ff;
+  border-color: #2688ff;
 }
 
 @media (prefers-color-scheme: light) {
@@ -82,8 +93,12 @@ input[type="checkbox"] {
     font-size: 1.75rem;
   }
 
+  h3 {
+    font-size: 1.25rem;
+  }
+
   input[type="checkbox"] {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }

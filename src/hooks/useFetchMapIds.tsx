@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchMongoDbConstructor } from "../utils/FetchMongoDbConstructor";
+import { fetchMongoDbConstructor } from "../utils/fetchMongoDbConstructor";
 
 export const useFetchMapIds = (
   setMapIds: React.Dispatch<React.SetStateAction<number[]>>,

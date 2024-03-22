@@ -1,4 +1,4 @@
-import { MapData } from "../types/dataTypes";
+import { MapData } from "../../types/dataTypes";
 import InfoGrid from "./InfoGrid";
 
 type Props = {
@@ -14,7 +14,6 @@ export default function RatesBase(props: Props) {
   const descriptions = [
     "Exp/hr",
     "Meso/hr",
-    "Meso/hr (Reboot)",
     "Mobs/hr",
     ...(props.mapData.sacredForce ? ["Mobs/hr (Instanced)"] : []),
     "Mobs/hr (Frenzy)",
@@ -29,7 +28,6 @@ export default function RatesBase(props: Props) {
   const values = [
     props.expRate.toLocaleString("US"),
     props.mesoRate.toLocaleString("US"),
-    (props.mesoRate * 6).toLocaleString("US"),
     props.hourlyMobs.toLocaleString("US"),
     ...(props.mapData.sacredForce
       ? [props.hourlyMobsInstanced.toLocaleString("US")]
@@ -48,7 +46,7 @@ export default function RatesBase(props: Props) {
     <article className="mb-8 h-fit w-fit rounded-lg border-2 p-4 md:p-6 xl:ml-8 2xl:p-8">
       <h2>Base Rates:</h2>
       <p className="mb-4 mt-2 w-64 text-wrap">
-        **Some capacity/gen and capacity numbers may be incorrect
+        * Some capacity/gen and capacity numbers may be incorrect
       </p>
       <InfoGrid descriptions={descriptions} values={values} />
     </article>

@@ -1,4 +1,4 @@
-import { MapData, MobData } from "../types/dataTypes";
+import { MapData, MobData } from "../../types/dataTypes";
 import RatesBase from "./RatesBase";
 import RatesPersonal from "./RatesPersonal";
 
@@ -50,6 +50,7 @@ export default function Rates(props: Props) {
         mesoRate={mesoRate}
       />
       <RatesPersonal
+        mapId={props.mapData.map_id}
         mobLevels={props.mobsData.map((mob) => mob.level)}
         hourlyMobs={hourlyMobs}
         expRate={expRate}

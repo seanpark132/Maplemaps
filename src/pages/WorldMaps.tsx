@@ -1,9 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import Loading from "./Loading.tsx";
-import LinkArea from "../components/LinkArea";
-import MapDot from "../components/MapDot.tsx";
-import RegionSelect from "../components/RegionSelect";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/GlobalConstants.ts";
+import LinkArea from "../components/WorldMaps/LinkArea.tsx";
+import MapDot from "../components/WorldMaps/MapDot.tsx";
+import RegionSelect from "../components/WorldMaps/RegionSelect.tsx";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/globalConstants.ts";
 import {
   Link,
   Map,
