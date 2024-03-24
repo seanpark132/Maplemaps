@@ -31,13 +31,19 @@ export default function MapInfo(props: Props) {
     return <Loading />;
   }
 
+  const mapSrcLg = `${GOOGLE_CLOUD_IMAGE_URL}/maps/lg/${mapData.map_id}.webp`;
+  const mapSrcMd = `${GOOGLE_CLOUD_IMAGE_URL}/maps/md/${mapData.map_id}.webp`;
+  const mapSrcSm = `${GOOGLE_CLOUD_IMAGE_URL}/maps/sm/${mapData.map_id}.webp`;
+
   return (
     <main className="flex w-full flex-col lg:p-6 lg:pt-0">
       <h2 className="mb-4">
         {mapData.streetName} : {mapData.name}
       </h2>
       <img
-        src={`${GOOGLE_CLOUD_IMAGE_URL}/maps/${mapData.map_id}.webp`}
+        src={mapSrcLg}
+        srcSet={`${mapSrcSm} 600w, ${mapSrcMd} 1200w, ${mapSrcLg} 1932w`}
+        sizes="90vw"
         className="image-max-height mb-8 rounded-lg border-2 object-contain"
       />
       {mobsData && mobsData.length > 0 && (
