@@ -1,20 +1,30 @@
 import { Link } from "react-router-dom";
+import Search from "./Search/Search";
+import { MapIdsNames } from "../types/dataTypes";
 
-export default function Navbar() {
+type Props = {
+  mapIdsNames: MapIdsNames[];
+};
+
+export default function Navbar(props: Props) {
   return (
-    <nav className="flex items-center border-b px-4 py-2">
-      <Link to="/" className="mr-8 text-base font-semibold xl:text-xl">
+    <nav className="relative flex items-center px-4 py-3">
+      <Link to="/" className="mr-6 text-base font-semibold xl:mr-8 xl:text-xl">
         Home
       </Link>
-      <Link to="/about" className="mr-8 text-base font-semibold xl:text-xl">
+      <Link
+        to="/about"
+        className="mr-6 text-base font-semibold xl:mr-8 xl:text-xl"
+      >
         About
       </Link>
       <Link
         to="/rates-config"
-        className="mr-8  text-base font-semibold xl:text-xl"
+        className="mr-6 text-base font-semibold xl:mr-8 xl:text-xl"
       >
-        Rates Config
+        Config
       </Link>
+      <Search mapIdsNames={props.mapIdsNames} />
     </nav>
   );
 }

@@ -5,8 +5,8 @@ import "./App.css";
 import WorldMaps from "./pages/WorldMaps";
 import NoPage from "./pages/NoPage";
 import Loading from "./pages/Loading";
-import { WorldMapData, MapData, MobData } from "./types/dataTypes";
-import { useFetchMapIds } from "./hooks/useFetchMapIds";
+import { WorldMapData, MapData, MobData, MapIdsNames } from "./types/dataTypes";
+import { useFetchMapIdsNames } from "./hooks/useFetchMapIdsNames.tsx";
 import About from "./pages/About";
 import Error from "./pages/Error";
 import MapInfo from "./pages/MapInfo";
@@ -21,18 +21,23 @@ function App() {
   const [visitedRegions, setVisitedRegions] = useState<string[]>([]);
   const [mapsData, setMapsData] = useState<Record<number, MapData>>({});
   const [mobsData, setMobsData] = useState<Record<number, MobData>>({});
-  const [mapIds, setMapIds] = useState<number[]>([]);
+  const [mapIdsNames, setMapIdsNames] = useState<MapIdsNames[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
 
-  useFetchMapIds(setMapIds, setIsError);
+  useFetchMapIdsNames(setMapIdsNames, setIsError);
 
   if (isError) {
-    return <Error />;
+    return (
+      <>
+        <Navbar mapIdsNames={mapIdsNames} />
+        <Error />
+      </>
+    );
   }
 
   return (
     <>
-      <Navbar />
+      <Navbar mapIdsNames={mapIdsNames} />
       <div className="flex w-full flex-col justify-center">
         <ErrorBoundary fallback={<Error />}>
           <Suspense fallback={<Loading />}>
@@ -56,14 +61,15 @@ function App() {
               />
               <Route path="/about" element={<About />} />
               <Route path="/rates-config" element={<RatesConfig />} />
-              {mapIds.map((id) => (
+              {mapIdsNames.map((obj) => (
                 <Route
-                  key={id}
-                  path={`/map/${id}`}
+                  key={obj.map_id}
+                  path={`/map/${obj.map_id}`}
                   element={
                     <MapInfo
-                      id={id}
-                      mapIds={mapIds}
+                      key={obj.map_id}
+                      map_id={obj.map_id}
+                      mapIdsNames={mapIdsNames}
                       mapsData={mapsData}
                       mobsData={mobsData}
                       setIsError={setIsError}
@@ -71,7 +77,7 @@ function App() {
                   }
                 />
               ))}
-              {mapIds.length === 0 ? (
+              {mapIdsNames.length === 0 ? (
                 <Route path="*" element={<Loading />} />
               ) : (
                 <Route path="*" element={<NoPage />} />
