@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="flex w-full flex-col justify-center p-4 lg:p-6">
+      <div className="flex w-full flex-col justify-center">
         <ErrorBoundary fallback={<Error />}>
           <Suspense fallback={<Loading />}>
             <Routes>

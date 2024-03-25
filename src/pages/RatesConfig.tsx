@@ -46,7 +46,7 @@ export default function RatesConfig() {
   useConfigEffects(ratesConfig, setTotalMulti);
 
   return (
-    <main className="flex w-full flex-col lg:p-6 lg:pt-0">
+    <main className="flex w-full flex-col">
       <h3>
         Input your character level, meso obtained %, and bonus exp sources on
         this page. They will be applied to the personal rates section for each

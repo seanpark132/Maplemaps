@@ -36,7 +36,7 @@ export default function MapInfo(props: Props) {
   const mapSrcSm = `${GOOGLE_CLOUD_IMAGE_URL}/maps/sm/${mapData.map_id}.webp`;
 
   return (
-    <main className="flex w-full flex-col lg:p-6 lg:pt-0">
+    <main className="flex w-full flex-col xl:px-10">
       <h2 className="mb-4">
         {mapData.streetName} : {mapData.name}
       </h2>
