@@ -3,7 +3,7 @@ import { MapData, MobData } from "../types/dataTypes";
 import { fetchMongoDbConstructor } from "../utils/fetchMongoDbConstructor";
 
 export const useFetchSingleMapMobData = (
-  id: number,
+  map_id: number,
   mapsData: Record<number, MapData>,
   mobsData: Record<number, MobData>,
   setMapData: React.Dispatch<React.SetStateAction<MapData | undefined>>,
@@ -11,8 +11,8 @@ export const useFetchSingleMapMobData = (
   setIsError: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   useEffect(() => {
-    if (mapsData[id]) {
-      const alreadyFetchedMapData = mapsData[id];
+    if (mapsData[map_id]) {
+      const alreadyFetchedMapData = mapsData[map_id];
       const mobIds = alreadyFetchedMapData.mobIds;
       const alreadyFetchedMobsData = mobIds.map((id) => mobsData[id]);
 
@@ -24,7 +24,7 @@ export const useFetchSingleMapMobData = (
           const singleMapMobData: { mapData: MapData; mobsData: MobData[] } =
             await fetchMongoDbConstructor({
               reqType: "singleMapMobData",
-              mapId: id,
+              mapId: map_id,
             });
 
           setMapData(singleMapMobData.mapData);

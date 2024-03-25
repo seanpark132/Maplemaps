@@ -3,7 +3,12 @@ import Loading from "./Loading.tsx";
 import LinkArea from "../components/WorldMaps/LinkArea.tsx";
 import MapDot from "../components/WorldMaps/MapDot.tsx";
 import RegionSelect from "./RegionSelect.tsx";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/globalConstants.ts";
+import {
+  ARCANE_RIVER_WORLD_MAPS,
+  GOOGLE_CLOUD_IMAGE_URL,
+  GRANDIS_WORLD_MAPS,
+  MAPLE_WORLD_MAPS,
+} from "../utils/globalConstants.ts";
 import {
   Link,
   Map,
@@ -45,7 +50,12 @@ export default function WorldMaps(props: Props) {
     props.setIsError,
   );
 
-  if (!worldMap) {
+  if (
+    !worldMap ||
+    (!ARCANE_RIVER_WORLD_MAPS.includes(worldMap) &&
+      !GRANDIS_WORLD_MAPS.includes(worldMap) &&
+      !MAPLE_WORLD_MAPS.includes(worldMap))
+  ) {
     return <RegionSelect />;
   }
 
