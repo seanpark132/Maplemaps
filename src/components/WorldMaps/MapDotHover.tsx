@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { MapData, MobData } from "../../types/dataTypes";
 import MapForceText from "./MapForceText";
 
@@ -35,12 +34,6 @@ export default function MapDotHover(props: Props) {
           );
         }
       })}
-      <Link
-        to={`/map/${props.mapNumber}`}
-        className="text-nowrap text-white hover:text-green-400"
-      >
-        See map details
-      </Link>
     </span>
   );
 }
