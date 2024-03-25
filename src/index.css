@@ -27,6 +27,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+nav {
+  z-index: 110;
+}
+
+main {
+  padding: 1rem;
+  border-top-width: 1px;
+}
+
 p {
   font-size: 0.875rem;
 }
@@ -77,6 +86,10 @@ input:focus {
 }
 
 @media (min-width: 48rem) {
+  main {
+    padding: 1.5rem;
+  }
+
   p {
     font-size: 1rem;
   }

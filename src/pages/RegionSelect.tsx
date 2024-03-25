@@ -1,21 +1,12 @@
-import { useSearchParams } from "react-router-dom";
-import {
-  ARCANE_RIVER_WORLD_MAP_NAME,
-  GOOGLE_CLOUD_IMAGE_URL,
-  GRANDIS_WORLD_MAP_NAME,
-  MAPLE_WORLD_MAP_NAME,
-} from "../../utils/globalConstants";
+import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/globalConstants";
+import { Link } from "react-router-dom";
 
-type Props = {
-  setSearchParams: ReturnType<typeof useSearchParams>[1];
-};
-
-export default function RegionSelect(props: Props) {
+export default function RegionSelect() {
   return (
     <main className="w-full">
       <h1 className="text-center">Select a Region:</h1>
       <div className="flex flex-wrap justify-center">
-        <button onClick={() => handleClick(ARCANE_RIVER_WORLD_MAP_NAME, "")}>
+        <Link to={`/world-map/?worldMap=WorldMap082&parentWorld=`}>
           <img
             className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap082.webp`}
@@ -23,8 +14,8 @@ export default function RegionSelect(props: Props) {
             height={470}
             alt="Arcane River Region"
           />
-        </button>
-        <button onClick={() => handleClick(GRANDIS_WORLD_MAP_NAME, "")}>
+        </Link>
+        <Link to={`/world-map/?worldMap=GWorldMap&parentWorld=`}>
           <img
             className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_GWorldMap.webp`}
@@ -32,8 +23,8 @@ export default function RegionSelect(props: Props) {
             height={470}
             alt="Grandis Region"
           />
-        </button>
-        <button onClick={() => handleClick(MAPLE_WORLD_MAP_NAME, "")}>
+        </Link>
+        <Link to={`/world-map/?worldMap=WorldMap&parentWorld=`}>
           <img
             className="p-2"
             src={`${GOOGLE_CLOUD_IMAGE_URL}/world_maps/None_WorldMap.webp`}
@@ -41,16 +32,8 @@ export default function RegionSelect(props: Props) {
             height={470}
             alt="Maple World Region"
           />
-        </button>
+        </Link>
       </div>
     </main>
   );
-
-  function handleClick(worldMap: string, parentWorld: string) {
-    props.setSearchParams((prev) => {
-      prev.set("worldMap", worldMap);
-      prev.set("parentWorld", parentWorld);
-      return prev;
-    });
-  }
 }

@@ -45,3 +45,5 @@ export type ConfigState = {
   expMulti: Record<string, string>;
   expAdditive: Record<string, string>;
 };
+
+export type MapIdsNames = { map_id: number; name: string };

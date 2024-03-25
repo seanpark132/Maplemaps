@@ -2,8 +2,13 @@ import { useSearchParams } from "react-router-dom";
 import Loading from "./Loading.tsx";
 import LinkArea from "../components/WorldMaps/LinkArea.tsx";
 import MapDot from "../components/WorldMaps/MapDot.tsx";
-import RegionSelect from "../components/WorldMaps/RegionSelect.tsx";
-import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/globalConstants.ts";
+import RegionSelect from "./RegionSelect.tsx";
+import {
+  ARCANE_RIVER_WORLD_MAPS,
+  GOOGLE_CLOUD_IMAGE_URL,
+  GRANDIS_WORLD_MAPS,
+  MAPLE_WORLD_MAPS,
+} from "../utils/globalConstants.ts";
 import {
   Link,
   Map,
@@ -45,8 +50,13 @@ export default function WorldMaps(props: Props) {
     props.setIsError,
   );
 
-  if (!worldMap) {
-    return <RegionSelect setSearchParams={setSearchParams} />;
+  if (
+    !worldMap ||
+    (!ARCANE_RIVER_WORLD_MAPS.includes(worldMap) &&
+      !GRANDIS_WORLD_MAPS.includes(worldMap) &&
+      !MAPLE_WORLD_MAPS.includes(worldMap))
+  ) {
+    return <RegionSelect />;
   }
 
   const worldMapData = props.worldMapsData[worldMap];
@@ -54,7 +64,7 @@ export default function WorldMaps(props: Props) {
   const parentParentWorld = parentWorldData?.parentWorld;
 
   return worldMapData ? (
-    <main className="flex min-w-[40rem] flex-col items-center pt-8">
+    <main className="flex min-w-[40rem] flex-col items-center pt-12">
       <h1 className="mb-2">Select a map/area:</h1>
       <div
         className="relative"
