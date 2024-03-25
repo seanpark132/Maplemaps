@@ -26,7 +26,10 @@ export default function Navbar(props: Props) {
   return (
     <>
       {viewportWidth < 768 ? (
-        <NavbarUnder768 mapIdsNames={props.mapIdsNames} />
+        <NavbarUnder768
+          mapIdsNames={props.mapIdsNames}
+          viewportWidth={viewportWidth}
+        />
       ) : (
         <nav className="relative flex items-center px-4 py-3">
           <Link
