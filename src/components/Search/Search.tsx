@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 type Props = {
   mapIdsNames: MapIdsNames[];
+  setIsSearchOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Search(props: Props) {
@@ -41,6 +42,7 @@ export default function Search(props: Props) {
         searchResults={searchResults}
         handleInputChange={handleInputChange}
         setShowResults={setShowResults}
+        setIsSearchOpen={props.setIsSearchOpen}
       />
       {showResults && (
         <SearchResults

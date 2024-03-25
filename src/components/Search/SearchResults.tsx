@@ -14,7 +14,7 @@ export default function SearchResults(props: Props) {
   const resultContainer = useRef<HTMLAnchorElement>(null);
 
   return (
-    <div className="absolute flex w-80 flex-col rounded-b-lg bg-slate-200 py-4 opacity-100 dark:bg-slate-700">
+    <div className="absolute flex w-72 flex-col rounded-b-lg bg-slate-200 py-4 opacity-100 sm:w-80 lg:w-96 dark:bg-slate-700">
       {props.searchResults.map((result, index) => (
         <Link
           key={result.map_id}

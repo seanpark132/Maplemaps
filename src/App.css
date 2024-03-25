@@ -27,14 +27,6 @@
   fill: currentColor;
 }
 
-.search-results {
-  display: none;
-}
-
-.search-results.visible {
-  display: flex;
-}
-
 @media (min-width: 85.5rem) {
   .grid-item {
     padding-left: 0.625rem;
