@@ -1,5 +1,8 @@
+import { MapIdsNames } from "../../types/dataTypes";
+
 type Props = {
   searchInput: string;
+  searchResults: MapIdsNames[];
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setShowResults: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -13,6 +16,9 @@ export default function SearchBar(props: Props) {
         placeholder="Search by map name"
         onChange={(e) => props.handleInputChange(e)}
         value={props.searchInput}
+        onClick={() => {
+          if (props.searchResults.length > 0) props.setShowResults(true);
+        }}
       />
       <button className="flex items-center rounded-r-lg border border-l-0 px-2">
         <svg className="icon">
