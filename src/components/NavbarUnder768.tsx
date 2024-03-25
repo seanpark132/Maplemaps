@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import Search from "./Search/Search";
 import { MapIdsNames } from "../types/dataTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   mapIdsNames: MapIdsNames[];
+  viewportWidth: number;
 };
 
 export default function NavbarUnder768(props: Props) {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsSearchOpen(false);
+  }, [props.viewportWidth]);
 
   return (
     <nav className="relative flex min-h-[3.375rem] items-center px-4 py-3">
