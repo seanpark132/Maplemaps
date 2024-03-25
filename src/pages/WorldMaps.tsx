@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import Loading from "./Loading.tsx";
 import LinkArea from "../components/WorldMaps/LinkArea.tsx";
 import MapDot from "../components/WorldMaps/MapDot.tsx";
-import RegionSelect from "../components/WorldMaps/RegionSelect.tsx";
+import RegionSelect from "./RegionSelect.tsx";
 import { GOOGLE_CLOUD_IMAGE_URL } from "../utils/globalConstants.ts";
 import {
   Link,
@@ -46,7 +46,7 @@ export default function WorldMaps(props: Props) {
   );
 
   if (!worldMap) {
-    return <RegionSelect setSearchParams={setSearchParams} />;
+    return <RegionSelect />;
   }
 
   const worldMapData = props.worldMapsData[worldMap];

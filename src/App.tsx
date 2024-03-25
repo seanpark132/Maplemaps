@@ -11,6 +11,8 @@ import About from "./pages/About";
 import Error from "./pages/Error";
 import MapInfo from "./pages/MapInfo";
 import RatesConfig from "./pages/RatesConfig";
+import Navbar from "./components/Navbar.tsx";
+import RegionSelect from "./pages/RegionSelect.tsx";
 
 function App() {
   const [worldMapsData, setWorldMapsData] = useState<
@@ -30,12 +32,14 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <div className="flex w-full flex-col justify-center p-4 lg:p-6">
         <ErrorBoundary fallback={<Error />}>
           <Suspense fallback={<Loading />}>
             <Routes>
+              <Route index element={<RegionSelect />} />
               <Route
-                index
+                path="/world-map"
                 element={
                   <WorldMaps
                     worldMapsData={worldMapsData}
