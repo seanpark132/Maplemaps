@@ -65,7 +65,7 @@ export default function RatesConfig() {
           />
           <p className="mt-4 w-80">
             * Note that combo orbs, class-specific exp buffs, and event skills
-            that give bonus exp are not included
+            that give bonus exp are not accounted for.
           </p>
           <ConfigExpMulti
             ratesConfig={ratesConfig}

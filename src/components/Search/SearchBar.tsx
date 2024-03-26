@@ -21,7 +21,10 @@ export default function SearchBar(props: Props) {
           if (props.searchResults.length > 0) props.setShowResults(true);
         }}
       />
-      <button className="hidden items-center rounded-r-lg border border-l-0 px-2 py-1 md:flex">
+      <button
+        className="hidden items-center rounded-r-lg border border-l-0 px-2 py-1 md:flex"
+        aria-label="search button"
+      >
         <svg className="icon">
           <use xlinkHref="#icon-search"></use>
         </svg>

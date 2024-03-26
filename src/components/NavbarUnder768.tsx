@@ -44,6 +44,7 @@ export default function NavbarUnder768(props: Props) {
         <button
           className="ml-auto mr-2 flex items-center px-2 py-1.5"
           onClick={() => setIsSearchOpen((prev) => !prev)}
+          aria-label="open searchbar"
         >
           <svg className="icon">
             <use xlinkHref="#icon-search"></use>
